@@ -1,4 +1,4 @@
-import { act, fireEvent, render } from "@testing-library/react";
+import { fireEvent, render, waitFor } from "@testing-library/react";
 import React from "react";
 import { TEXT } from "src/constants/contents";
 import LoginForm from "./LoginForm";
@@ -23,15 +23,13 @@ describe("# LoginForm", () => {
     expect(container).toHaveTextContent(TEXT.REQUIRED_MESSAGE);
   });
 
-  it("should focus empty field when submit form given empty form", () => {
-    const { getByText, getByPlaceholderText } = render(<LoginForm />);
+  it("should display all error field and focus empty field when submit form given empty form", () => {
+    const {container, getByText, getByPlaceholderText } = render(<LoginForm />);
     const submitButton = getByText("Login");
     const usernameInput = getByPlaceholderText("Username");
 
-    act(() => {
     fireEvent.click(submitButton);
-
-    })
-    expect(document.activeElement).toEqual(usernameInput);
+    expect(container.querySelectorAll('.error.field')).toHaveLength(2)
+    return waitFor(() => expect(document.activeElement).toEqual(usernameInput));
   });
 });

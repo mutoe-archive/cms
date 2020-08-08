@@ -26,34 +26,38 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
     setForm(form => ({ ...form, [name]: { value, error: "" } }));
   };
 
-  const checkField = (field: LoginFormFieldKey) => {
-    if (!form[field].value) {
-      setForm(_.set({ ...form }, [field, "error"], TEXT.REQUIRED_MESSAGE));
-      return false;
-    }
-    return true;
+  const checkAndUpdateField = (field: LoginFormFieldKey) => {
+    if (form[field].value) return true;
+    setForm(_.set({ ...form }, [field, "error"], TEXT.REQUIRED_MESSAGE));
+    return false;
   };
 
   const onSubmit = () => {
-    if (Object.keys(form).some((field) => checkField(field as LoginFormFieldKey))) {
-      focusErrorField()
-      return
-    };
+    let hasError = false;
+    Object.keys(form).forEach((field) => {
+      const isValid = checkAndUpdateField(field as LoginFormFieldKey);
+      if (!isValid) hasError = true;
+    });
+    if (hasError) return focusErrorField();
     props.onSubmit?.(form);
   };
 
-  return <Form onSubmit={onSubmit} noValidate>
-    <Form.Input label="Username"
-      name="username"
-      placeholder="Username"
-      data-testid="username-input"
-      type="text"
+  const renderInputField = (type: string, key: LoginFormFieldKey, label: string) => (
+    <Form.Input label={label}
+      name={key}
+      placeholder={label}
+      data-testid={`${key}-input`}
+      type={type}
       required
-      value={form.username.value}
-      onBlur={() => checkField("username")}
-      error={form.username.error || undefined}
+      value={form[key].value}
+      error={form[key].error || undefined}
+      onBlur={() => checkAndUpdateField(key)}
       onChange={onFieldChange} />
-    <Form.Input label="Password" type="password" required value={form.password.value} onChange={onFieldChange} />
+  );
+
+  return <Form onSubmit={onSubmit} noValidate>
+    {renderInputField("text", "username", "Username")}
+    {renderInputField("password", "password", "Password")}
     <Form.Button content="Login" />
   </Form>;
 };
