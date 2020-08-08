@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { render, waitFor } from "@testing-library/react";
 import React from "react";
 import focusErrorField from "src/utils/focusErrorField";
 
@@ -11,6 +11,6 @@ describe("# focus error field util", () => {
     const { getByTestId } = render(<Wrapper />);
     focusErrorField();
 
-    expect(document.activeElement).toEqual(getByTestId("input"));
+    return waitFor(() => expect(document.activeElement).toEqual(getByTestId("input")));
   });
 });
