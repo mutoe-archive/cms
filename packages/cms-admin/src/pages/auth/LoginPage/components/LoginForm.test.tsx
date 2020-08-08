@@ -24,12 +24,22 @@ describe("# LoginForm", () => {
   });
 
   it("should display all error field and focus empty field when submit form given empty form", () => {
-    const {container, getByText, getByPlaceholderText } = render(<LoginForm />);
+    const { container, getByText, getByPlaceholderText } = render(<LoginForm />);
     const submitButton = getByText("Login");
     const usernameInput = getByPlaceholderText("Username");
 
     fireEvent.click(submitButton);
-    expect(container.querySelectorAll('.error.field')).toHaveLength(2)
+    expect(container.querySelectorAll(".error.field")).toHaveLength(2);
     return waitFor(() => expect(document.activeElement).toEqual(usernameInput));
+  });
+
+  it("should call onSubmit prop when passed a valid form", () => {
+    const onSubmit = jest.fn();
+    const { getByText, getByPlaceholderText } = render(<LoginForm onSubmit={onSubmit} />);
+    fireEvent.change(getByPlaceholderText("Username"), { target: { value: "foo" } });
+    fireEvent.change(getByPlaceholderText("Password"), { target: { value: "bar" } });
+    fireEvent.click(getByText("Login"));
+
+    expect(onSubmit).toBeCalledTimes(1);
   });
 });
