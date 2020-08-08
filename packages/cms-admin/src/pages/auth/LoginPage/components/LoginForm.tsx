@@ -1,4 +1,4 @@
-import _ from "lodash";
+import { set } from "lodash";
 import React, { ChangeEvent, useState } from "react";
 import { Form, InputOnChangeData } from "semantic-ui-react";
 import { TEXT } from "src/constants/contents";
@@ -28,7 +28,7 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
 
   const checkAndUpdateField = (field: LoginFormFieldKey) => {
     if (form[field].value) return true;
-    setForm(_.set({ ...form }, [field, "error"], TEXT.REQUIRED_MESSAGE));
+    setForm(set({ ...form }, [field, "error"], TEXT.REQUIRED_MESSAGE));
     return false;
   };
 
