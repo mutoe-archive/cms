@@ -13,7 +13,7 @@ type LoginFormFieldKey = "username" | "password"
 type LoginFormFields = Record<LoginFormFieldKey, Field>
 
 interface LoginFormProps {
-  onSubmit?: (form: LoginFormFields) => void
+  onSubmit?: (form: LoginFormFields) => void;
 }
 
 const LoginForm: React.FC<LoginFormProps> = (props) => {
