@@ -1,6 +1,11 @@
+import { JwtService } from '@nestjs/jwt'
 import { Test, TestingModule } from '@nestjs/testing'
-import { AppController } from './app.controller'
-import { AppService } from './app.service'
+import { getRepositoryToken } from '@nestjs/typeorm'
+import { AppController } from 'src/app.controller'
+import { AuthService } from 'src/auth/auth.service'
+import { UserEntity } from 'src/user/user.entity'
+import { UserService } from 'src/user/user.service'
+import { Repository } from 'typeorm'
 
 describe('AppController', () => {
   let appController: AppController
@@ -8,15 +13,26 @@ describe('AppController', () => {
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
       controllers: [AppController],
-      providers: [AppService],
+      providers: [
+        UserService,
+        AuthService,
+        {
+          provide: getRepositoryToken(UserEntity),
+          useClass: Repository,
+        },
+        {
+          provide: JwtService,
+          useValue: {},
+        },
+      ],
     }).compile()
 
-    appController = app.get<AppController>(AppController)
+    appController = app.get(AppController)
   })
 
-  describe('root', () => {
+  describe('Hello', () => {
     it('should return "Hello World!"', () => {
-      expect(appController.getHello()).toBe('Hello World!')
+      expect(appController.healthCheck()).toBe('Hello world!')
     })
   })
 })

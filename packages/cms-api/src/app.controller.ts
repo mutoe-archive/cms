@@ -1,12 +1,11 @@
-import { Controller, Get } from '@nestjs/common'
-import { AppService } from './app.service'
+import { Controller, Get, Query } from '@nestjs/common'
+import { ApiQuery } from '@nestjs/swagger'
 
 @Controller()
 export class AppController {
-  constructor (private readonly appService: AppService) {}
-
-  @Get()
-  getHello (): string {
-    return this.appService.getHello()
+  @Get('/hello')
+  @ApiQuery({ name: 'name', required: false })
+  healthCheck (@Query('name') name?: string): string {
+    return `Hello ${name || 'world'}!`
   }
 }
