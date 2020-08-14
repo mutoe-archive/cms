@@ -1,0 +1,22 @@
+name: Test CMS API
+
+on:
+  push:
+    paths: [ 'packages/cms-api/*' ]
+    branches: [ master ]
+  pull_request:
+    paths: [ 'packages/cms-api/*' ]
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - run: yarn workspace cms-api install
+      - run: yarn workspace cms-api test
+      - run: yarn workspace cms-api test:e2e
