@@ -7,20 +7,34 @@
   "workspaces": [
     "packages/*"
   ],
+  "dependencies": {
+    "lodash": "^4.17.20"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^9.1.1",
+    "@commitlint/config-conventional": "^9.1.1",
+    "@types/lodash": "^4.14.159",
+    "commitizen": "^4.1.2",
+    "cz-lerna-changelog": "^2.0.3",
+    "eslint": "^7.6.0",
+    "husky": "^4.2.5",
+    "lerna": "^3.22.1",
+    "lint-staged": "^10.2.11",
+    "typescript": "^3.9.7"
+  },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-lerna-changelog"
     }
   },
-  "dependencies": {
-    "lodash": "^4.17.20"
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
   },
-  "devDependencies": {
-    "@types/lodash": "^4.14.159",
-    "commitizen": "^4.1.2",
-    "cz-lerna-changelog": "^2.0.3",
-    "eslint": "^7.6.0",
-    "lerna": "^3.22.1",
-    "typescript": "^3.9.7"
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
   }
 }
