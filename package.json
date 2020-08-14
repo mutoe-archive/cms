@@ -1,7 +1,26 @@
 {
   "name": "root",
   "private": true,
+  "scripts": {
+    "cz": "git-cz"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-lerna-changelog"
+    }
+  },
+  "dependencies": {
+    "lodash": "^4.17.20"
+  },
   "devDependencies": {
-    "lerna": "^3.22.1"
+    "@types/lodash": "^4.14.159",
+    "commitizen": "^4.1.2",
+    "cz-lerna-changelog": "^2.0.3",
+    "eslint": "^7.6.0",
+    "lerna": "^3.22.1",
+    "typescript": "^3.9.7"
   }
 }
