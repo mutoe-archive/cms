@@ -3,7 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import { AppController } from 'src/app.controller'
 import { AuthModule } from 'src/auth/auth.module'
 import { UserModule } from 'src/user/user.module'
-import request from 'supertest'
+import * as request from 'supertest'
 import ormConfig from './orm-config'
 
 describe('Auth Module Integration', () => {
