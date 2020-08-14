@@ -1,14 +1,15 @@
-import React from "react";
-import LoginPage from "src/pages/auth/LoginPage/LoginPage";
-import logo from "./logo.svg";
-import "./App.css";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import React from 'react'
+import LoginPage from 'src/pages/auth/LoginPage/LoginPage'
+import logo from './logo.svg'
+import './App.css'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
-function App () {
-  return (
-    <BrowserRouter>
-      <Switch>
-        <Route exact path="/login" component={LoginPage} />
+const App: React.FC = () => (
+  <BrowserRouter>
+    <Switch>
+      <Route exact path="/login" component={LoginPage} />
+
+      <Route>
 
         <div className="App">
           <header className="App-header">
@@ -26,10 +27,10 @@ function App () {
             </a>
           </header>
         </div>
-      </Switch>
-    </BrowserRouter>
+      </Route>
+    </Switch>
+  </BrowserRouter>
 
-  );
-}
+)
 
-export default App;
+export default App
