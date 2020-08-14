@@ -68,5 +68,10 @@
         "always-multiline"
       ]
     }
+  },
+  "jest": {
+    "projects": [
+      "<rootDir>/packages/*"
+    ]
   }
 }
