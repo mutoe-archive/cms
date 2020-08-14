@@ -1,4 +1,4 @@
-name: Test & Build
+name: Test CMS admin client
 
 on:
   push:
