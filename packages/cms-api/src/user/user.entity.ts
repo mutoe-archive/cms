@@ -27,7 +27,7 @@ export class UserEntity {
 
   @BeforeUpdate()
   @BeforeInsert()
-  hashPassword () {
+  hashPassword ():void {
     this.password = cryptoPassword(this.password)
   }
 

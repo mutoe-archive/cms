@@ -115,13 +115,13 @@
       }
     },
     "extends": [
+      "standard",
       "react-app",
       "plugin:react/recommended",
       "plugin:import/errors",
       "eslint:recommended",
       "plugin:@typescript-eslint/recommended",
-      "plugin:jest/recommended",
-      "standard"
+      "plugin:jest/recommended"
     ],
     "rules": {
       "comma-dangle": [
