@@ -105,13 +105,6 @@
     ]
   },
   "eslintConfig": {
-    "root": true,
-    "extends": [
-      "react-app",
-      "plugin:react/recommended",
-      "plugin:@typescript-eslint/recommended",
-      "plugin:import/errors"
-    ],
     "parserOptions": {
       "ecmaVersion": 2018,
       "sourceType": "module",
@@ -119,6 +112,11 @@
         "jsx": false
       }
     },
+    "extends": [
+      "react-app",
+      "plugin:react/recommended",
+      "plugin:import/errors"
+    ],
     "rules": {
       "@typescript-eslint/explicit-function-return-type": "off",
       "import/no-unresolved": "off",

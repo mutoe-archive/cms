@@ -71,36 +71,29 @@
     "coverageDirectory": "<rootDir>/../coverage"
   },
   "eslintConfig": {
-    "root": true,
-    "parser": "@typescript-eslint/parser",
     "parserOptions": {
       "project": "tsconfig.json",
       "sourceType": "module",
       "tsconfigRootDir": "./"
     },
-    "plugins": [
-      "@typescript-eslint/eslint-plugin",
-      "jest"
-    ],
-    "extends": [
-      "plugin:@typescript-eslint/eslint-recommended",
-      "plugin:@typescript-eslint/recommended",
-      "plugin:jest/recommended",
-      "standard"
-    ],
     "env": {
-      "node": true,
-      "jest": true
+      "node": true
     },
     "rules": {
       "@typescript-eslint/interface-name-prefix": "off",
       "@typescript-eslint/explicit-function-return-type": "off",
       "@typescript-eslint/no-explicit-any": "off",
-      "no-useless-constructor": "off",
-      "comma-dangle": [
-        "error",
-        "always-multiline"
-      ]
-    }
+      "no-useless-constructor": "off"
+    },
+    "overrides": [
+      {
+        "files": [
+          "**/*.{spec,test}.ts"
+        ],
+        "env": {
+          "jest": true
+        }
+      }
+    ]
   }
 }
