@@ -1,0 +1,22 @@
+name: Test & Build
+
+on:
+  push:
+    paths: [ 'packages/cms-admin/*' ]
+    branches: [ master ]
+  pull_request:
+    paths: [ 'packages/cms-admin/*' ]
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - run: yarn workspace cms-admin install
+      - run: yarn workspace cms-admin test
+      - run: yarn workspace cms-admin build
