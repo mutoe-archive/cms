@@ -27,6 +27,7 @@
     "@nestjs/typeorm": "^7.1.0",
     "class-transformer": "^0.2.3",
     "class-validator": "^0.12.2",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
@@ -88,6 +89,7 @@
       "@typescript-eslint/explicit-function-return-type": "off",
       "@typescript-eslint/interface-name-prefix": "off",
       "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-empty-function": "off",
       "comma-dangle": [
         "error",
         "always-multiline"
@@ -104,5 +106,9 @@
         }
       }
     ]
-  }
+  },
+  "eslintIgnore": [
+    "dist",
+    "node_modules"
+  ]
 }

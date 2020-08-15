@@ -4,8 +4,8 @@ export interface AuthData {
   createdAt: string;
   updatedAt: string;
   email: string;
-  bio: string | null;
-  image: string | null;
+  bio?: string;
+  image?: string;
   token: string;
   // password?: never;
 }

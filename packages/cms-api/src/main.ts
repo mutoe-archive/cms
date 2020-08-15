@@ -2,6 +2,7 @@ import { INestApplication, ValidationPipe } from '@nestjs/common'
 import { NestFactory } from '@nestjs/core'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 import { AppModule } from 'src/app.module'
+import { NEST_PORT } from 'src/config'
 
 function createSwagger (app: INestApplication) {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -25,7 +26,7 @@ async function bootstrap () {
     createSwagger(app)
   }
 
-  await app.listen(3000)
+  await app.listen(NEST_PORT)
 }
 
 bootstrap().catch(err => console.error(err))

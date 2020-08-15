@@ -32,10 +32,10 @@ export class UserEntity {
   }
 
   @Column({ nullable, type: 'text' })
-  bio: null | string
+  bio?: string
 
   @Column({ nullable, type: 'text' })
-  image: null | string
+  image?: string
 
   @CreateDateColumn()
   createdAt: string
