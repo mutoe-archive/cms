@@ -2,10 +2,10 @@
   {
     "mods": [
       {
-        "description": "",
+        "description": "Application",
         "interfaces": [
           {
-            "description": "health check",
+            "description": "Health check",
             "name": "healthCheck",
             "method": "get",
             "path": "/app/hello",
@@ -39,7 +39,7 @@
         "name": "app"
       },
       {
-        "description": "",
+        "description": "Authorization",
         "interfaces": [
           {
             "description": "login",
@@ -48,14 +48,29 @@
             "path": "/auth/login",
             "response": {
               "typeArgs": [],
-              "typeName": "",
-              "isDefsType": false,
+              "typeName": "AuthRO",
+              "isDefsType": true,
               "templateIndex": -1,
               "compileTemplateKeyword": "#/definitions/",
               "enum": [],
               "typeProperties": []
             },
-            "parameters": []
+            "parameters": [
+              {
+                "in": "body",
+                "name": "LoginDto",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "LoginDto",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
           },
           {
             "description": "register",
@@ -64,20 +79,35 @@
             "path": "/auth/register",
             "response": {
               "typeArgs": [],
-              "typeName": "",
-              "isDefsType": false,
+              "typeName": "AuthRO",
+              "isDefsType": true,
               "templateIndex": -1,
               "compileTemplateKeyword": "#/definitions/",
               "enum": [],
               "typeProperties": []
             },
-            "parameters": []
+            "parameters": [
+              {
+                "in": "body",
+                "name": "RegisterDto",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "RegisterDto",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
           }
         ],
         "name": "auth"
       },
       {
-        "description": "",
+        "description": "User",
         "interfaces": [
           {
             "description": "",
@@ -100,6 +130,135 @@
       }
     ],
     "baseClasses": [
+      {
+        "name": "AuthData",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "bio",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "createdAt",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "email",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "id",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "image",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "token",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "updatedAt",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "username",
+            "required": true
+          }
+        ],
+        "templateArgs": []
+      },
+      {
+        "name": "AuthRO",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "AuthData",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "user",
+            "required": true
+          }
+        ],
+        "templateArgs": []
+      },
       {
         "name": "LoginDto",
         "properties": [

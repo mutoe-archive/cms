@@ -1,12 +1,13 @@
 import { Controller, Get, Query } from '@nestjs/common'
-import { ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger'
+import { ApiOkResponse, ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger'
 
 @Controller('app')
 @ApiTags('App')
 export class AppController {
   @Get('/hello')
-  @ApiOperation({ summary: 'health check', operationId: 'healthCheck' })
-  @ApiQuery({ name: 'name', required: false, example: 'foo' })
+  @ApiOperation({ summary: 'Health check', operationId: 'healthCheck' })
+  @ApiQuery({ name: 'name', type: 'string', required: false, example: 'foo' })
+  @ApiOkResponse({ type: 'string', schema: { example: 'Hello world!' } })
   healthCheck (@Query('name') name?: string): string {
     return `Hello ${name || 'world'}!`
   }

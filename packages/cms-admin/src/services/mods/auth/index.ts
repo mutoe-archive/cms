@@ -1,5 +1,5 @@
 /**
- * @description
+ * @description Authorization
  */
 import * as login from './login'
 import * as register from './register'

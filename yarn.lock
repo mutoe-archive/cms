@@ -2392,10 +2392,10 @@
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
 
-"@mutoe/pont-engine@^1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@mutoe/pont-engine/-/pont-engine-1.0.5.tgz#345f7873119922db55a7117ab8597a6c08a5936c"
-  integrity sha512-8p3nAdO49RCowpYOmgh/6iM2FTr1on6U+VWBoUkEIxy9auyQUr/uyhedkCaf/PE2uRZCUI+P3wZNPe0solh6Sw==
+"@mutoe/pont-engine@^1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@mutoe/pont-engine/-/pont-engine-1.0.7.tgz#575cbecf6955e378654007a8c805b8733bb6c880"
+  integrity sha512-J83T8r/fi7UhL6KJ2fvtJWUF/XNWgQ8EsWikaZkBRtcftud/uzHcUItJSxP7A6Dg8bSuYYDy8vVNjtwkBx+Q8Q==
   dependencies:
     chalk "^2.3.0"
     commander "^2.19.0"
@@ -13055,21 +13055,6 @@ pnp-webpack-plugin@^1.6.4:
   integrity sha512-7Wjy+9E3WwLOEL30D+m8TSTF7qJJUJLONBnwQp0518siuMxUQUbgZwssaFX+QKlZkjHZcw/IpZCt/H0srrntSg==
   dependencies:
     ts-pnp "^1.1.6"
-
-pont-engine@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/pont-engine/-/pont-engine-1.0.3.tgz#64acaf42eee072b3f5a7d7077980d9a5e33e8899"
-  integrity sha512-c5ROOfaPIZT07YY6gCMoTRdiDq+YtHZ5KeIG4Ne1AMnd2V7vTLjGClTyMpik2cENql9elEtVl6fRZ71aSKgIrw==
-  dependencies:
-    chalk "^2.3.0"
-    commander "^2.19.0"
-    fs-extra "^5.0.0"
-    inquirer "^7.1.0"
-    lodash "^4.17.5"
-    node-fetch "^1.7.3"
-    prettier "^1.19.1"
-    translation.js "^0.7.5"
-    typescript "^3.5.3"
 
 popper.js@^1.14.4:
   version "1.16.1"

@@ -1,22 +1,24 @@
 /**
- * @desc health check
+ * @desc Health check
  */
 
 import * as SWR from 'swr'
-
 import * as defs from '../../baseClass'
 import * as Hooks from '../../hooks'
 import { PontCore } from '../../pontCore'
 
-export class Params {
+class Params {
   /** name */
   name?: any;
 }
 
+type HooksParams = (() => Params) | Params;
+
 export const method = 'GET'
+export const path = '/app/hello'
 
 export function mutate (
-  params = {},
+  params: HooksParams = {},
   newValue = undefined,
   shouldRevalidate = true,
 ) {
@@ -27,21 +29,20 @@ export function mutate (
   )
 }
 
-export function trigger (params = {}, shouldRevalidate = true) {
+export function trigger (params: HooksParams = {}, shouldRevalidate = true) {
   return SWR.trigger(
     Hooks.getUrlKey('/app/hello', params, 'GET'),
     shouldRevalidate,
   )
 }
 
-export function useRequest (params = {}, swrOptions = {}) {
+export function useRequest (params: HooksParams = {}, swrOptions = {}) {
   return Hooks.useRequest('/app/hello', params, swrOptions)
 }
 
-export function request (params: Params, options?: any) {
-  return PontCore.fetch(PontCore.getUrl('/app/hello', params, 'GET'), {
+export function request (params: Params, fetchOptions: RequestInit = {}) {
+  return PontCore.fetch(PontCore.getUrl('/app/hello', params), {
     method: 'GET',
-
-    ...options,
+    ...fetchOptions,
   })
 }

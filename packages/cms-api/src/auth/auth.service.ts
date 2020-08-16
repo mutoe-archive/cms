@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import { omit } from 'lodash'
-import { AuthData } from 'src/auth/auth.interface'
+import { AuthData } from 'src/auth/ro/auth.ro'
 import { LoginDto } from 'src/auth/dto/login.dto'
 import { RegisterDto } from 'src/auth/dto/register.dto'
 import { UserEntity } from 'src/user/user.entity'

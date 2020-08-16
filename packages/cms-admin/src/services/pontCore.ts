@@ -18,7 +18,7 @@ class PontCoreManager {
    * @param url 请求url
    * @param options fetch 请求配置
    */
-  fetch (url: string, options = {}) {
+  fetch (url: string, options: RequestInit = {}) {
     return fetch(url, options).then(res => {
       return res.json()
     })
@@ -36,10 +36,8 @@ class PontCoreManager {
     this.fetch = fetch
   }
 
-  getUrl (path: string, queryParams: any, method: string) {
-    const params = {
-      ...(queryParams || ({} as any)),
-    }
+  getUrl (path: string, queryParams: any = {}, method?: string) {
+    const params = { ...queryParams }
 
     const url = path.replace(/\{([^\\}]*(?:\\.[^\\}]*)*)\}/gm, (match, key) => {
       // eslint-disable-next-line no-param-reassign

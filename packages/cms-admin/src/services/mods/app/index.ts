@@ -1,5 +1,5 @@
 /**
- * @description
+ * @description Application
  */
 import * as healthCheck from './healthCheck'
 
