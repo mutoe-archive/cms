@@ -6,7 +6,8 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
-    "lint": "eslint 'src/**/*.ts?(x)' --fix"
+    "lint": "eslint 'src/**/*.ts?(x)' --fix",
+    "pont:sync": "rm -f src/services/api-lock.json && pont && eslint 'src/services/**/*.ts?(x)' --fix"
   },
   "dependencies": {
     "lodash": "^4.17.19",
@@ -15,7 +16,8 @@
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
     "semantic-ui-css": "^2.4.1",
-    "semantic-ui-react": "^1.1.1"
+    "semantic-ui-react": "^1.1.1",
+    "swr": "^0.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.11.1",
@@ -56,6 +58,8 @@
     "mini-css-extract-plugin": "^0.9.0",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "pnp-webpack-plugin": "^1.6.4",
+    "pont-engine": "^1.0.3",
+    "@mutoe/pont-engine": "^1.0.5",
     "postcss-flexbugs-fixes": "^4.2.1",
     "postcss-loader": "^3.0.0",
     "postcss-normalize": "^9.0.0",
@@ -129,6 +133,7 @@
         "always-multiline"
       ],
       "@typescript-eslint/explicit-function-return-type": "off",
+      "@typescript-eslint/no-explicit-any": "off",
       "import/no-unresolved": "off",
       "import/named": "off",
       "react/prop-types": "off"
@@ -141,10 +146,19 @@
     "overrides": [
       {
         "files": [
-          "src/**/*.content.ts",
-          "src/constants/contents.ts"
+          "src/constants/contents.ts",
+          "src/**/*.content.ts"
         ],
         "rules": {
+          "@typescript-eslint/explicit-module-boundary-types": "off"
+        }
+      },
+      {
+        "files": [
+          "src/services/**"
+        ],
+        "rules": {
+          "@typescript-eslint/no-unused-vars": "off",
           "@typescript-eslint/explicit-module-boundary-types": "off"
         }
       }
@@ -178,6 +192,7 @@
       "src/**/*.{js,jsx,ts,tsx}",
       "!src/**/*.d.ts",
       "!src/constants/**",
+      "!src/services/**",
       "!src/serviceWorker.ts",
       "!src/index.tsx",
       "!src/App.tsx"

@@ -10,6 +10,9 @@ function createSwagger (app: INestApplication) {
     .setTitle('CMS')
     .setVersion(version)
     .addBearerAuth()
+    .addTag('App')
+    .addTag('Auth')
+    .addTag('User')
     .build()
 
   const document = SwaggerModule.createDocument(app, options)

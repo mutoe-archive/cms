@@ -1,0 +1,183 @@
+[
+  {
+    "mods": [
+      {
+        "description": "",
+        "interfaces": [
+          {
+            "description": "health check",
+            "name": "healthCheck",
+            "method": "get",
+            "path": "/app/hello",
+            "response": {
+              "typeArgs": [],
+              "typeName": "",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "in": "query",
+                "name": "name",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
+          }
+        ],
+        "name": "app"
+      },
+      {
+        "description": "",
+        "interfaces": [
+          {
+            "description": "login",
+            "name": "login",
+            "method": "post",
+            "path": "/auth/login",
+            "response": {
+              "typeArgs": [],
+              "typeName": "",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": []
+          },
+          {
+            "description": "register",
+            "name": "register",
+            "method": "post",
+            "path": "/auth/register",
+            "response": {
+              "typeArgs": [],
+              "typeName": "",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": []
+          }
+        ],
+        "name": "auth"
+      },
+      {
+        "description": "",
+        "interfaces": [
+          {
+            "description": "",
+            "name": "profile",
+            "method": "get",
+            "path": "/user",
+            "response": {
+              "typeArgs": [],
+              "typeName": "",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": []
+          }
+        ],
+        "name": "user"
+      }
+    ],
+    "baseClasses": [
+      {
+        "name": "LoginDto",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "email",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "password",
+            "required": true
+          }
+        ],
+        "templateArgs": []
+      },
+      {
+        "name": "RegisterDto",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "email",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "password",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "username",
+            "required": true
+          }
+        ],
+        "templateArgs": []
+      }
+    ],
+    "name": ""
+  }
+]
