@@ -134,6 +134,7 @@
       ],
       "@typescript-eslint/explicit-function-return-type": "off",
       "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/explicit-module-boundary-types": "off",
       "import/no-unresolved": "off",
       "import/named": "off",
       "react/prop-types": "off"
@@ -146,20 +147,10 @@
     "overrides": [
       {
         "files": [
-          "src/constants/contents.ts",
-          "src/**/*.content.ts"
-        ],
-        "rules": {
-          "@typescript-eslint/explicit-module-boundary-types": "off"
-        }
-      },
-      {
-        "files": [
           "src/services/**"
         ],
         "rules": {
-          "@typescript-eslint/no-unused-vars": "off",
-          "@typescript-eslint/explicit-module-boundary-types": "off"
+          "@typescript-eslint/no-unused-vars": "off"
         }
       }
     ]

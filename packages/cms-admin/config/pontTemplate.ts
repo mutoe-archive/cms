@@ -22,9 +22,9 @@ export default class MyGenerator extends CodeGenerator {
 
       export type Response = ${inter.responseType}
 
-      export function mutate(${isEmptyParams ? '' : 'params?: HooksParams, '} newValue?: any, shouldRevalidate = true)
+      export function mutate(${isEmptyParams ? '' : 'params?: HooksParams, '} newValue?: any, shouldRevalidate?: boolean)
   
-      export function trigger(${isEmptyParams ? '' : 'params?: HooksParams, '} shouldRevalidate = true)
+      export function trigger(${isEmptyParams ? '' : 'params?: HooksParams, '} shouldRevalidate?: boolean)
 
       export function useRequest(${isEmptyParams ? '' : 'params?: HooksParams, '} options?: SwrConfig): { isLoading: boolean; data: Response, error: Error };
 

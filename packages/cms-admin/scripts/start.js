@@ -33,7 +33,7 @@ const useYarn = fs.existsSync(paths.yarnLockFile)
 const isInteractive = process.stdout.isTTY
 
 // Warn and crash if required files are missing
-if (!checkRequiredFiles([ paths.appHtml, paths.appIndexJs ])) {
+if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
   process.exit(1)
 }
 
@@ -50,7 +50,7 @@ if (process.env.HOST) {
     ),
   )
   console.log(
-    `If this was unintentional, check that you haven't mistakenly set it in your shell.`,
+    'If this was unintentional, check that you haven\'t mistakenly set it in your shell.',
   )
   console.log(
     `Learn more here: ${chalk.yellow('https://bit.ly/CRA-advanced-config')}`,
@@ -84,7 +84,7 @@ checkBrowsers(paths.appPath, isInteractive)
       port,
       paths.publicUrlOrPath.slice(0, -1),
     )
-    let devServer = undefined;
+    let devServer
     const devSocket = {
       warnings: warnings =>
         devServer.sockWrite(devServer.sockets, 'warnings', warnings),
@@ -139,7 +139,7 @@ checkBrowsers(paths.appPath, isInteractive)
       console.log(chalk.cyan('Starting the development server...\n'))
     });
 
-    [ 'SIGINT', 'SIGTERM' ].forEach(function (sig) {
+    ['SIGINT', 'SIGTERM'].forEach(function (sig) {
       process.on(sig, function () {
         devServer.close()
         process.exit()
