@@ -3,6 +3,7 @@ type ObjectMap<Key extends string | number | symbol = any, Value = any> = {
 };
 
 declare type SwrConfig = import('swr').ConfigInterface;
+declare type AxiosRequestConfig = import('axios').AxiosRequestConfig;
 
 declare namespace defs {
   export class AuthRo {
@@ -88,7 +89,7 @@ declare namespace API {
 
       export function request(
         params: Params,
-        fetchOptions?: RequestInit,
+        axiosOption?: AxiosRequestConfig,
       ): Promise<Response>;
     }
   }
@@ -117,7 +118,7 @@ declare namespace API {
 
       export function request(
         body: defs.LoginDto,
-        fetchOptions?: RequestInit,
+        axiosOption?: AxiosRequestConfig,
       ): Promise<Response>;
     }
 
@@ -141,7 +142,7 @@ declare namespace API {
 
       export function request(
         body: defs.RegisterDto,
-        fetchOptions?: RequestInit,
+        axiosOption?: AxiosRequestConfig,
       ): Promise<Response>;
     }
   }
@@ -168,7 +169,9 @@ declare namespace API {
       export const method: string
       export const path: string
 
-      export function request(fetchOptions?: RequestInit): Promise<Response>;
+      export function request(
+        axiosOption?: AxiosRequestConfig,
+      ): Promise<Response>;
     }
   }
 }

@@ -7,7 +7,7 @@ import * as defs from '../../baseClass'
 import * as Hooks from '../../hooks'
 import { PontCore } from '../../pontCore'
 
-class Params {
+interface Params {
   /** name */
   name?: any;
 }
@@ -22,27 +22,22 @@ export function mutate (
   newValue = undefined,
   shouldRevalidate = true,
 ) {
-  return SWR.mutate(
-    Hooks.getUrlKey('/api/app/hello', params, 'GET'),
-    newValue,
-    shouldRevalidate,
-  )
+  return SWR.mutate(Hooks.getUrlKey(path, params), newValue, shouldRevalidate)
 }
 
 export function trigger (params: HooksParams = {}, shouldRevalidate = true) {
-  return SWR.trigger(
-    Hooks.getUrlKey('/api/app/hello', params, 'GET'),
-    shouldRevalidate,
-  )
+  return SWR.trigger(Hooks.getUrlKey(path, params), shouldRevalidate)
 }
 
 export function useRequest (params: HooksParams = {}, swrOptions = {}) {
-  return Hooks.useRequest('/api/app/hello', params, swrOptions)
+  return Hooks.useRequest(path, params, swrOptions)
 }
 
-export function request (params: Params, fetchOptions: RequestInit = {}) {
-  return PontCore.fetch(PontCore.getUrl('/api/app/hello', params), {
+export function request (params: Params, axiosOption: AxiosRequestConfig = {}) {
+  return PontCore.fetch({
+    url: PontCore.getUrl(path, params),
     method: 'GET',
-    ...fetchOptions,
+
+    ...axiosOption,
   })
 }

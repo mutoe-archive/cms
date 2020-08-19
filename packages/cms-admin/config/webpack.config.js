@@ -136,7 +136,7 @@ module.exports = function (webpackEnv) {
       ? shouldUseSourceMap
         ? 'source-map'
         : false
-      : isEnvDevelopment && 'cheap-module-source-map',
+      : isEnvDevelopment && 'eval-cheap-module-source-map',
     // These are the "entry points" to our application.
     // This means they will be the "root" imports that are included in JS bundle.
     entry: [
@@ -326,7 +326,7 @@ module.exports = function (webpackEnv) {
 
         // First, run the linter.
         // It's important to do this before Babel processes the JS.
-        {
+        isEnvDevelopment ? {} : {
           test: /\.(js|mjs|jsx|ts|tsx)$/,
           enforce: 'pre',
           use: [

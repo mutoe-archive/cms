@@ -10,7 +10,7 @@ export default class MyGenerator extends CodeGenerator {
     const requestArgs = []
     !isEmptyParams && requestArgs.push('params: Params')
     bodyParamsCode && requestArgs.push(`body: ${bodyParamsCode}`)
-    requestArgs.push('fetchOptions?: RequestInit')
+    requestArgs.push('axiosOption?: AxiosRequestConfig')
     const requestParams: string = requestArgs.join(', ')
 
     if (!isEmptyParams) {
@@ -38,21 +38,22 @@ export default class MyGenerator extends CodeGenerator {
   getCommonDeclaration (): string {
     return `
     declare type SwrConfig = import("swr").ConfigInterface;
+    declare type AxiosRequestConfig = import("axios").AxiosRequestConfig;
     `
   }
 
   getInterfaceContent (inter: Interface): string {
     const method = inter.method.toUpperCase()
     const relativePath = this.usingMultipleOrigins ? '../../../' : '../../'
-    let paramsCode = inter.getParamsCode('Params', this.surrounding)
-    const isEmptyParams = paramsCode.replace(/\s/g, '') === 'classParams{}'
+    let paramsCode = inter.getParamsCode('Params', this.surrounding).replace(/class/, 'interface')
+    const isEmptyParams = paramsCode.replace(/\s/g, '') === 'interfaceParams{}'
 
     const bodyParamsCode = inter.getBodyParamsCode()
 
     const requestArgs = []
     !isEmptyParams && requestArgs.push('params: Params')
-    bodyParamsCode && requestArgs.push(`body: ${inter.getBodyParamsCode()}`)
-    requestArgs.push('fetchOptions: RequestInit = {}')
+    bodyParamsCode && requestArgs.push(`data: ${inter.getBodyParamsCode()}`)
+    requestArgs.push('axiosOption: AxiosRequestConfig  = {}')
     const requestParams: string = requestArgs.join(', ')
 
     if (!isEmptyParams) {
@@ -67,30 +68,31 @@ export default class MyGenerator extends CodeGenerator {
     import * as SWR from 'swr';
     import * as defs from '${relativePath}baseClass';
     import * as Hooks from '${relativePath}hooks';
-    import { PontCore } from '${relativePath}pontCore'` + (isEmptyParams ? '' : `
+    import { PontCore } from '${relativePath}pontCore'
     
-    ${paramsCode}`) + `
+    ${isEmptyParams ? '' : paramsCode}
     
     export const method = "${method}";
     export const path = "${inter.path}"
 
     export function mutate(${isEmptyParams ? '' : 'params: HooksParams = {}, '} newValue = undefined, shouldRevalidate = true) {
-      return SWR.mutate(Hooks.getUrlKey("${inter.path}", ${isEmptyParams ? '{}' : 'params'}, "${method}"), newValue, shouldRevalidate);
+      return SWR.mutate(Hooks.getUrlKey(path, ${isEmptyParams ? '{}' : 'params'}), newValue, shouldRevalidate);
     }
 
     export function trigger(${isEmptyParams ? '' : 'params: HooksParams = {}, '} shouldRevalidate = true) {
-      return SWR.trigger(Hooks.getUrlKey("${inter.path}", ${isEmptyParams ? '{}' : 'params'}, "${method}"), shouldRevalidate);
+      return SWR.trigger(Hooks.getUrlKey(path, ${isEmptyParams ? '{}' : 'params'}), shouldRevalidate);
     }
 
     export function useRequest(${isEmptyParams ? '' : 'params: HooksParams = {}, '} swrOptions = {}) {
-      return Hooks.useRequest("${inter.path}", ${isEmptyParams ? '{}' : 'params'}, swrOptions);
+      return Hooks.useRequest(path, ${isEmptyParams ? '{}' : 'params'}, swrOptions);
     };
 
     export function request(${requestParams}) {
-      return PontCore.fetch(PontCore.getUrl("${inter.path}"${isEmptyParams ? '' : ', params'}), {
-        method: '${method}',${bodyParamsCode ? `
-        body: JSON.stringify(body),` : ''}
-        ...fetchOptions,
+      return PontCore.fetch({
+        url: PontCore.getUrl(path ${isEmptyParams ? '' : ', params'}),
+        method: '${method}',
+        ${bodyParamsCode ? 'data,' : ''}
+        ...axiosOption,
       });
     }`
   }

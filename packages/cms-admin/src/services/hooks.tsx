@@ -25,29 +25,17 @@ export const SWRProvider: React.FC<ConfigInterface> = props => {
   )
 }
 
-/**
- * 基于 swr 的取数 hooks
- * @param url 请求地址
- * @param params 请求参数
- * @param swrOptions SWR 配置信息
- * @param fetchOptions fetch 配置信息
- */
 export function useRequest (
-  url: any,
-  params = {} as any,
-  swrOptions = {} as any,
-  fetchOptions = {} as any,
+  url: string,
+  params: any = {},
+  swrOptions: SwrConfig = {},
+  axiosOption: AxiosRequestConfig = {},
 ) {
-  const fetcher = (requestUrl: string) =>
-    PontCore.fetch(requestUrl, fetchOptions)
-  const method = fetchOptions?.method || 'GET'
+  const method = axiosOption?.method || 'GET'
+  const fetcher = (url: string) => PontCore.fetch({ url, method, ...axiosOption })
 
-  const urlKey = getUrlKey(url, params, method)
-  const { data, error, isValidating, mutate } = useSWR(
-    urlKey,
-    fetcher,
-    swrOptions,
-  )
+  const urlKey = getUrlKey(url, params)
+  const { data, error, isValidating, mutate } = useSWR(urlKey, fetcher, swrOptions)
 
   return {
     data,
@@ -57,14 +45,14 @@ export function useRequest (
   }
 }
 
-export function getUrlKey (url: any, params = {} as any, method: string) {
+export function getUrlKey (url: any, params = {} as any) {
   const urlKey =
     typeof params === 'function'
       ? () => {
-        return params ? PontCore.getUrl(url, params(), method) : null
+        return params ? PontCore.getUrl(url, params()) : null
       }
       : params
-        ? PontCore.getUrl(url, params, method)
+        ? PontCore.getUrl(url, params)
         : null
 
   return urlKey

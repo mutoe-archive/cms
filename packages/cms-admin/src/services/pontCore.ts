@@ -1,47 +1,47 @@
 /**
  * @description pont内置请求单例
  */
+import Axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from 'axios'
+
+export const isAxiosError = (error: any): error is AxiosError => {
+  return 'response' in error
+}
 
 class PontCoreManager {
   static singleInstance = null as unknown as PontCoreManager
+  axios: AxiosInstance = null as unknown as AxiosInstance
 
   static getSingleInstance (): PontCoreManager {
     if (!PontCoreManager.singleInstance) {
       PontCoreManager.singleInstance = new PontCoreManager()
-      return PontCoreManager.singleInstance
     }
     return PontCoreManager.singleInstance
   }
 
-  /**
-   * fetch请求
-   * @param url 请求url
-   * @param options fetch 请求配置
-   */
-  fetch (url: string, options: RequestInit = {}) {
-    const headers = Object.assign({ 'Content-Type': 'application/json' }, options.headers)
+  constructor () {
+    this.axios = Axios.create({
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
 
-    return fetch(url, { ...options, headers }).then(res => {
-      return res.json()
+    this.axios.interceptors.response.use(res => {
+      console.log(res)
+      return res
     })
   }
 
   /**
-   * 使用外部传入的请求方法替换默认的fetch请求
+   * axios 请求
    */
-  useFetch (fetch: (url: string, options?: unknown) => Promise<any>) {
-    if (typeof fetch !== 'function') {
-      console.error('fetch should be a function ')
-      return
-    }
-
-    this.fetch = fetch
+  async fetch (options: AxiosRequestConfig = {}) {
+    return this.axios.request(options)
   }
 
-  getUrl (path: string, queryParams: any = {}, method?: string) {
+  getUrl (path: string, queryParams: any = {}) {
     const params = { ...queryParams }
 
-    const url = path.replace(/\{([^\\}]*(?:\\.[^\\}]*)*)\}/gm, (match, key) => {
+    const url = path.replace(/{([^\\}]*(?:\\.[^\\}]*)*)}/gm, (match, key) => {
       // eslint-disable-next-line no-param-reassign
       key = key.trim()
 

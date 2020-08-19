@@ -11,31 +11,25 @@ export const method = 'POST'
 export const path = '/api/auth/register'
 
 export function mutate (newValue = undefined, shouldRevalidate = true) {
-  return SWR.mutate(
-    Hooks.getUrlKey('/api/auth/register', {}, 'POST'),
-    newValue,
-    shouldRevalidate,
-  )
+  return SWR.mutate(Hooks.getUrlKey(path, {}), newValue, shouldRevalidate)
 }
 
 export function trigger (shouldRevalidate = true) {
-  return SWR.trigger(
-    Hooks.getUrlKey('/api/auth/register', {}, 'POST'),
-    shouldRevalidate,
-  )
+  return SWR.trigger(Hooks.getUrlKey(path, {}), shouldRevalidate)
 }
 
 export function useRequest (swrOptions = {}) {
-  return Hooks.useRequest('/api/auth/register', {}, swrOptions)
+  return Hooks.useRequest(path, {}, swrOptions)
 }
 
 export function request (
-  body: defs.RegisterDto,
-  fetchOptions: RequestInit = {},
+  data: defs.RegisterDto,
+  axiosOption: AxiosRequestConfig = {},
 ) {
-  return PontCore.fetch(PontCore.getUrl('/api/auth/register'), {
+  return PontCore.fetch({
+    url: PontCore.getUrl(path),
     method: 'POST',
-    body: JSON.stringify(body),
-    ...fetchOptions,
+    data,
+    ...axiosOption,
   })
 }

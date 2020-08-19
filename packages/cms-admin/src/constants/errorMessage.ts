@@ -1,5 +1,7 @@
-export const ERROR_MESSAGE = {
-  REQUIRED: 'Please fill in the necessary fields',
-  MIN_LENGTH: (length: number) => `Below the ${length}-character limit`,
-  MAX_LENGTH: (length: number) => `Exceeding the ${length}-character limit`,
+const ERROR_MESSAGE = {
+  REQUIRED: (label: string) => `${label} can't be blank`,
+  MIN_LENGTH: (label: string, length: number) => `${label} is too short (minimum is ${length} characters)`,
+  MAX_LENGTH: (label: string, length: number) => `${label} is too long (maximum is ${length} characters)`,
 }
+
+export default ERROR_MESSAGE

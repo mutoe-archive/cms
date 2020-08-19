@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common'
+import { BadRequestException, UnprocessableEntityException, Injectable } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import { omit } from 'lodash'
 import { AuthRo } from 'src/auth/ro/auth.ro'
@@ -19,11 +19,11 @@ export class AuthService {
     let user: UserEntity
     user = await this.userService.findUser({ username: registerDto.username })
     if (user?.id) {
-      throw new BadRequestException('username is exist')
+      throw new UnprocessableEntityException([{ username: 'username is exist' }])
     }
     user = await this.userService.findUser({ email: registerDto.email })
     if (user?.id) {
-      throw new BadRequestException('email is exist')
+      throw new UnprocessableEntityException([{ email: 'email is exist' }])
     }
     const profile = await this.userService.createUser(registerDto)
     const token = this.generateToken(profile.id, profile.email)
@@ -39,10 +39,10 @@ export class AuthService {
   async validateUser (username: string, password: string): Promise<Omit<UserEntity, 'password'>> {
     const user = await this.userService.findUser({ username }, true)
     if (!user) {
-      throw new BadRequestException('user is not exist')
+      throw new UnprocessableEntityException([{ username: 'user is not exist' }])
     }
     if (user.password !== cryptoPassword(password)) {
-      throw new BadRequestException('password is invalid')
+      throw new UnprocessableEntityException([{ password: 'password is invalid' }])
     }
     return omit(user, 'password')
   }

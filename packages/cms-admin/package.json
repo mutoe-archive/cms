@@ -10,6 +10,7 @@
     "pont:sync": "rm -f src/services/api-lock.json && pont && eslint 'src/services/**/*.ts?(x)' --fix"
   },
   "dependencies": {
+    "axios": "^0.19.2",
     "lodash": "^4.17.19",
     "react": "^16.13.1",
     "react-app-polyfill": "^1.0.6",
@@ -21,7 +22,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.11.1",
-    "@mutoe/pont-engine": "^1.0.8",
+    "@mutoe/pont-engine": "^1.0.10",
     "@svgr/webpack": "^5.4.0",
     "@testing-library/dom": "^7.22.0",
     "@testing-library/jest-dom": "^5.11.2",
@@ -69,6 +70,7 @@
     "react-test-renderer": "^16.13.1",
     "resolve": "^1.17.0",
     "resolve-url-loader": "^3.1.1",
+    "sass": "^1.26.10",
     "sass-loader": "^9.0.3",
     "semver": "^7.3.2",
     "style-loader": "^1.2.1",

@@ -1,7 +1,7 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import React from 'react'
 import FormRenderer, { FieldConfig } from 'src/components/FormRenderer'
-import { ERROR_MESSAGE } from 'src/constants/contents'
+import ERROR_MESSAGE from 'src/constants/errorMessage'
 
 describe('# Form Renderer Component', () => {
   let fields: FieldConfig<string>[]
@@ -18,11 +18,13 @@ describe('# Form Renderer Component', () => {
       {
         type: 'input',
         name: 'username',
+        label: 'Username',
         placeholder: 'Username',
         required: true,
       }, {
         type: 'password',
         name: 'password',
+        label: 'Username',
         placeholder: 'Password',
       },
     ]
@@ -36,22 +38,22 @@ describe('# Form Renderer Component', () => {
     it('should display required error when submit an empty form given a required field', () => {
       fireEvent.submit(form)
 
-      waitFor(() => expect(screen.getAllByText(ERROR_MESSAGE.REQUIRED)).toHaveLength(1))
+      waitFor(() => expect(screen.getAllByText(ERROR_MESSAGE.REQUIRED('Username'))).toHaveLength(1))
     })
 
     it('should display required error when blur given a required field', () => {
       fireEvent.blur(username)
 
-      waitFor(() => expect(container).toHaveTextContent(ERROR_MESSAGE.REQUIRED))
+      waitFor(() => expect(container).toHaveTextContent(ERROR_MESSAGE.REQUIRED('Username')))
     })
 
     it('should clear error message when change field', async () => {
       fireEvent.blur(username)
-      await waitFor(() => expect(container).toHaveTextContent(ERROR_MESSAGE.REQUIRED))
+      await waitFor(() => expect(container).toHaveTextContent(ERROR_MESSAGE.REQUIRED('Username')))
 
       fireEvent.change(username, { target: { value: 'foo' } })
 
-      return waitFor(() => expect(screen.queryAllByText(ERROR_MESSAGE.REQUIRED)).toHaveLength(0))
+      return waitFor(() => expect(screen.queryAllByText(ERROR_MESSAGE.REQUIRED('Username'))).toHaveLength(0))
     })
 
     it('should call props.onSubmit when submit a valid form', () => {

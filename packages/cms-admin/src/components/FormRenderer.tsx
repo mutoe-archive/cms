@@ -1,11 +1,12 @@
 import { pick } from 'lodash'
 import React, { useState } from 'react'
 import { Form } from 'semantic-ui-react'
-import { ERROR_MESSAGE } from 'src/constants/contents'
+import ERROR_MESSAGE from 'src/constants/errorMessage'
+import focusErrorField from 'src/utils/focusErrorField'
 
 interface FieldBasicConfig<T> {
   name: T;
-  label?: string;
+  label: string;
   placeholder?: string;
   required?: boolean;
   disabled?: boolean;
@@ -30,7 +31,7 @@ interface FormRendererProps<K extends string, F extends Form<K>> {
   fields: FieldConfig<K>[];
   initForm?: F;
   submitText?: string
-  onSubmit?: (form: F) => void;
+  onSubmit?: (form: F) => Promise<Record<string, string> | void>;
   submitting?: boolean;
   className?: string;
 }
@@ -51,12 +52,12 @@ function FormRenderer<K extends string, F extends Form<K> = Form<K>> (props: For
 
   const validateField = (field: FieldConfig<K>, newValue?: FormValue): boolean => {
     const value = newValue ?? form[field.name]
-    if (field.required && !value) return setError(field, ERROR_MESSAGE.REQUIRED)
+    if (field.required && !value) return setError(field, ERROR_MESSAGE.REQUIRED(field.label))
     switch (field.type) {
       case 'input':
       case 'password': {
         const inputValue = value as string
-        if (field.minLength && inputValue.length < field.minLength) return setError(field, ERROR_MESSAGE.MIN_LENGTH(field.minLength))
+        if (field.minLength && inputValue.length < field.minLength) return setError(field, ERROR_MESSAGE.MIN_LENGTH(field.label, field.minLength))
       }
     }
 
@@ -65,7 +66,7 @@ function FormRenderer<K extends string, F extends Form<K> = Form<K>> (props: For
 
   const onSubmit = async () => {
     const validateResults = props.fields.map(field => validateField(field))
-    if (!validateResults.every(valid => valid)) return
+    if (!validateResults.every(valid => valid)) return focusErrorField()
 
     props.onSubmit?.(form)
   }
@@ -91,9 +92,9 @@ function FormRenderer<K extends string, F extends Form<K> = Form<K>> (props: For
     return null
   })
 
-  return <Form data-testid='form' className={props.className} onSubmit={onSubmit} loading={props.submitting} noValidate>
+  return <Form data-testid="form" className={props.className} onSubmit={onSubmit} loading={props.submitting} noValidate>
     {renderFields}
-    <Form.Button data-testid='submit' type='submit' primary content={props.submitText ?? 'Submit'} />
+    <Form.Button data-testid="submit" type="submit" primary content={props.submitText ?? 'Submit'} />
   </Form>
 }
 
