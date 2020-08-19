@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/packages/cms-admin/cms-admin.iml" filepath="$PROJECT_DIR$/packages/cms-admin/cms-admin.iml" />
-      <module fileurl="file://$PROJECT_DIR$/packages/cms-api/cms-api.iml" filepath="$PROJECT_DIR$/packages/cms-api/cms-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/cms.iml" filepath="$PROJECT_DIR$/.idea/cms.iml" />
     </modules>
   </component>
 </project>
