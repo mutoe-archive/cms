@@ -4,8 +4,9 @@ import { loginForm, loginFormFields } from 'src/pages/auth/LoginPage/form/loginF
 import styles from './LoginPage.module.css'
 
 const LoginPage: React.FC = () => {
-  const onLogin = (form: typeof loginForm) => {
-    console.log(form)
+  const onLogin = async (form: typeof loginForm) => {
+    const { token } = await API.auth.login.request(form)
+    console.log(token)
   }
 
   return <div className={styles.root}>

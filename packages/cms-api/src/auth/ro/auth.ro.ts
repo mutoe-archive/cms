@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger'
 
-export class AuthData {
+export class AuthRo {
   @ApiProperty({ example: 1 })
   id: number
 
@@ -24,9 +24,4 @@ export class AuthData {
 
   @ApiProperty({ example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImVtYWlsIjoiZm9vQGV4YW1wbGUuY29tIiwiaWF0IjoxNTk3NTY1MDk5fQ.qRFuw88Zw7l5KY3TSuyr8hpan0fzH9HcDtkKYrLvQRQ' })
   token: string
-}
-
-export class AuthRO {
-  @ApiProperty()
-  user: AuthData
 }

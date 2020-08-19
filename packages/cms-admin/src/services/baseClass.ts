@@ -1,4 +1,4 @@
-export class AuthData {
+export class AuthRo {
   /** bio */
   bio = '';
 
@@ -24,17 +24,12 @@ export class AuthData {
   username = '';
 }
 
-export class AuthRO {
-  /** user */
-  user = new AuthData();
-}
-
 export class LoginDto {
-  /** email */
-  email = '';
-
   /** password */
   password = '';
+
+  /** username */
+  username = '';
 }
 
 export class RegisterDto {

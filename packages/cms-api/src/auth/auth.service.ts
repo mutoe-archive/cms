@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import { omit } from 'lodash'
-import { AuthData } from 'src/auth/ro/auth.ro'
+import { AuthRo } from 'src/auth/ro/auth.ro'
 import { LoginDto } from 'src/auth/dto/login.dto'
 import { RegisterDto } from 'src/auth/dto/register.dto'
 import { UserEntity } from 'src/user/user.entity'
@@ -15,7 +15,7 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async register (registerDto: RegisterDto): Promise<AuthData> {
+  async register (registerDto: RegisterDto): Promise<AuthRo> {
     let user: UserEntity
     user = await this.userService.findUser({ username: registerDto.username })
     if (user?.id) {
@@ -30,14 +30,14 @@ export class AuthService {
     return { ...profile, token }
   }
 
-  async login (loginDto: LoginDto): Promise<AuthData> {
-    const user = await this.validateUser(loginDto.email, loginDto.password)
+  async login (loginDto: LoginDto): Promise<AuthRo> {
+    const user = await this.validateUser(loginDto.username, loginDto.password)
     const token = this.generateToken(user.id, user.email)
     return { ...user, token }
   }
 
-  async validateUser (email: string, password: string): Promise<Omit<UserEntity, 'password'>> {
-    const user = await this.userService.findUser({ email }, true)
+  async validateUser (username: string, password: string): Promise<Omit<UserEntity, 'password'>> {
+    const user = await this.userService.findUser({ username }, true)
     if (!user) {
       throw new BadRequestException('user is not exist')
     }

@@ -1,15 +1,8 @@
 import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common'
-import {
-  ApiBadRequestResponse,
-  ApiCreatedResponse,
-  ApiOkResponse,
-  ApiOperation,
-  ApiResponse,
-  ApiTags,
-} from '@nestjs/swagger'
-import { AuthRO } from 'src/auth/ro/auth.ro'
+import { ApiBadRequestResponse, ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger'
 import { LoginDto } from 'src/auth/dto/login.dto'
 import { RegisterDto } from 'src/auth/dto/register.dto'
+import { AuthRo } from 'src/auth/ro/auth.ro'
 import { UserService } from 'src/user/user.service'
 import { AuthService } from './auth.service'
 
@@ -24,24 +17,20 @@ export class AuthController {
   @Post('/register')
   @HttpCode(HttpStatus.CREATED)
   @ApiOperation({ summary: 'register', operationId: 'register' })
-  @ApiCreatedResponse({ type: AuthRO })
+  @ApiCreatedResponse({ type: AuthRo })
   @ApiBadRequestResponse()
-  async register (@Body() registerDto: RegisterDto): Promise<AuthRO> {
+  async register (@Body() registerDto: RegisterDto): Promise<AuthRo> {
     const userProfile = await this.authService.register(registerDto)
-    return {
-      user: userProfile,
-    }
+    return userProfile
   }
 
   @Post('/login')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'login', operationId: 'login' })
-  @ApiOkResponse({ type: AuthRO })
-  @ApiBadRequestResponse()
-  async login (@Body() loginDto: LoginDto): Promise<AuthRO> {
+  @ApiOkResponse({ type: AuthRo })
+  // @ApiBadRequestResponse()
+  async login (@Body() loginDto: LoginDto): Promise<AuthRo> {
     const userProfile = await this.authService.login(loginDto)
-    return {
-      user: userProfile,
-    }
+    return userProfile
   }
 }

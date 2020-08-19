@@ -6,7 +6,7 @@ import useSWR, { SWRConfig, ConfigInterface } from 'swr'
 import * as React from 'react'
 import { PontCore } from './pontCore'
 
-const defaultOptions = {
+const defaultOptions: ConfigInterface = {
   /** 错误重试，默认关闭 */
   shouldRetryOnError: false,
   /** 获取焦点时，不重新请求 */
@@ -29,7 +29,8 @@ export const SWRProvider: React.FC<ConfigInterface> = props => {
  * 基于 swr 的取数 hooks
  * @param url 请求地址
  * @param params 请求参数
- * @param options 配置信息
+ * @param swrOptions SWR 配置信息
+ * @param fetchOptions fetch 配置信息
  */
 export function useRequest (
   url: any,
@@ -37,7 +38,8 @@ export function useRequest (
   swrOptions = {} as any,
   fetchOptions = {} as any,
 ) {
-  const fetcher = requestUrl => PontCore.fetch(requestUrl, fetchOptions)
+  const fetcher = (requestUrl: string) =>
+    PontCore.fetch(requestUrl, fetchOptions)
   const method = fetchOptions?.method || 'GET'
 
   const urlKey = getUrlKey(url, params, method)

@@ -5,7 +5,7 @@ type ObjectMap<Key extends string | number | symbol = any, Value = any> = {
 declare type SwrConfig = import('swr').ConfigInterface;
 
 declare namespace defs {
-  export class AuthData {
+  export class AuthRo {
     /** bio */
     bio: string;
 
@@ -31,17 +31,12 @@ declare namespace defs {
     username: string;
   }
 
-  export class AuthRO {
-    /** user */
-    user: defs.AuthData;
-  }
-
   export class LoginDto {
-    /** email */
-    email: string;
-
     /** password */
     password: string;
+
+    /** username */
+    username: string;
   }
 
   export class RegisterDto {
@@ -63,7 +58,7 @@ declare namespace API {
   export namespace app {
     /**
      * Health check
-     * /app/hello
+     * /api/app/hello
      */
     export namespace healthCheck {
       class Params {
@@ -78,10 +73,10 @@ declare namespace API {
       export function mutate(
         params?: HooksParams,
         newValue?: any,
-        shouldRevalidate = true,
+        shouldRevalidate?: boolean,
       );
 
-      export function trigger(params?: HooksParams, shouldRevalidate = true);
+      export function trigger(params?: HooksParams, shouldRevalidate?: boolean);
 
       export function useRequest(
         params?: HooksParams,
@@ -104,14 +99,14 @@ declare namespace API {
   export namespace auth {
     /**
      * login
-     * /auth/login
+     * /api/auth/login
      */
     export namespace login {
-      export type Response = defs.AuthRO;
+      export type Response = defs.AuthRo;
 
-      export function mutate(newValue?: any, shouldRevalidate = true);
+      export function mutate(newValue?: any, shouldRevalidate?: boolean);
 
-      export function trigger(shouldRevalidate = true);
+      export function trigger(shouldRevalidate?: boolean);
 
       export function useRequest(
         options?: SwrConfig,
@@ -128,14 +123,14 @@ declare namespace API {
 
     /**
      * register
-     * /auth/register
+     * /api/auth/register
      */
     export namespace register {
-      export type Response = defs.AuthRO;
+      export type Response = defs.AuthRo;
 
-      export function mutate(newValue?: any, shouldRevalidate = true);
+      export function mutate(newValue?: any, shouldRevalidate?: boolean);
 
-      export function trigger(shouldRevalidate = true);
+      export function trigger(shouldRevalidate?: boolean);
 
       export function useRequest(
         options?: SwrConfig,
@@ -157,14 +152,14 @@ declare namespace API {
   export namespace user {
     /**
      *
-     * /user
+     * /api/user
      */
     export namespace profile {
       export type Response = any;
 
-      export function mutate(newValue?: any, shouldRevalidate = true);
+      export function mutate(newValue?: any, shouldRevalidate?: boolean);
 
-      export function trigger(shouldRevalidate = true);
+      export function trigger(shouldRevalidate?: boolean);
 
       export function useRequest(
         options?: SwrConfig,

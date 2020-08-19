@@ -8,7 +8,7 @@
             "description": "Health check",
             "name": "healthCheck",
             "method": "get",
-            "path": "/app/hello",
+            "path": "/api/app/hello",
             "response": {
               "typeArgs": [],
               "typeName": "",
@@ -45,10 +45,10 @@
             "description": "login",
             "name": "login",
             "method": "post",
-            "path": "/auth/login",
+            "path": "/api/auth/login",
             "response": {
               "typeArgs": [],
-              "typeName": "AuthRO",
+              "typeName": "AuthRo",
               "isDefsType": true,
               "templateIndex": -1,
               "compileTemplateKeyword": "#/definitions/",
@@ -76,10 +76,10 @@
             "description": "register",
             "name": "register",
             "method": "post",
-            "path": "/auth/register",
+            "path": "/api/auth/register",
             "response": {
               "typeArgs": [],
-              "typeName": "AuthRO",
+              "typeName": "AuthRo",
               "isDefsType": true,
               "templateIndex": -1,
               "compileTemplateKeyword": "#/definitions/",
@@ -113,7 +113,7 @@
             "description": "",
             "name": "profile",
             "method": "get",
-            "path": "/user",
+            "path": "/api/user",
             "response": {
               "typeArgs": [],
               "typeName": "",
@@ -131,7 +131,7 @@
     ],
     "baseClasses": [
       {
-        "name": "AuthData",
+        "name": "AuthRo",
         "properties": [
           {
             "dataType": {
@@ -241,25 +241,6 @@
         "templateArgs": []
       },
       {
-        "name": "AuthRO",
-        "properties": [
-          {
-            "dataType": {
-              "typeArgs": [],
-              "typeName": "AuthData",
-              "isDefsType": true,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "user",
-            "required": true
-          }
-        ],
-        "templateArgs": []
-      },
-      {
         "name": "LoginDto",
         "properties": [
           {
@@ -272,7 +253,7 @@
               "enum": [],
               "typeProperties": []
             },
-            "name": "email",
+            "name": "password",
             "required": true
           },
           {
@@ -285,7 +266,7 @@
               "enum": [],
               "typeProperties": []
             },
-            "name": "password",
+            "name": "username",
             "required": true
           }
         ],

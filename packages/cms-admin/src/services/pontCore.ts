@@ -3,9 +3,9 @@
  */
 
 class PontCoreManager {
-  static singleInstance = null as unknown as PontCoreManager;
+  static singleInstance = null as unknown as PontCoreManager
 
-  static getSignleInstance () {
+  static getSingleInstance (): PontCoreManager {
     if (!PontCoreManager.singleInstance) {
       PontCoreManager.singleInstance = new PontCoreManager()
       return PontCoreManager.singleInstance
@@ -19,7 +19,9 @@ class PontCoreManager {
    * @param options fetch 请求配置
    */
   fetch (url: string, options: RequestInit = {}) {
-    return fetch(url, options).then(res => {
+    const headers = Object.assign({ 'Content-Type': 'application/json' }, options.headers)
+
+    return fetch(url, { ...options, headers }).then(res => {
       return res.json()
     })
   }
@@ -27,7 +29,7 @@ class PontCoreManager {
   /**
    * 使用外部传入的请求方法替换默认的fetch请求
    */
-  useFetch (fetch: (url: string, options?: any) => Promise<any>) {
+  useFetch (fetch: (url: string, options?: unknown) => Promise<any>) {
     if (typeof fetch !== 'function') {
       console.error('fetch should be a function ')
       return
@@ -67,4 +69,4 @@ class PontCoreManager {
   }
 }
 
-export const PontCore = PontCoreManager.getSignleInstance()
+export const PontCore = PontCoreManager.getSingleInstance()

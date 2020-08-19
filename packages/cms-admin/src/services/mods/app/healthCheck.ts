@@ -15,7 +15,7 @@ class Params {
 type HooksParams = (() => Params) | Params;
 
 export const method = 'GET'
-export const path = '/app/hello'
+export const path = '/api/app/hello'
 
 export function mutate (
   params: HooksParams = {},
@@ -23,7 +23,7 @@ export function mutate (
   shouldRevalidate = true,
 ) {
   return SWR.mutate(
-    Hooks.getUrlKey('/app/hello', params, 'GET'),
+    Hooks.getUrlKey('/api/app/hello', params, 'GET'),
     newValue,
     shouldRevalidate,
   )
@@ -31,17 +31,17 @@ export function mutate (
 
 export function trigger (params: HooksParams = {}, shouldRevalidate = true) {
   return SWR.trigger(
-    Hooks.getUrlKey('/app/hello', params, 'GET'),
+    Hooks.getUrlKey('/api/app/hello', params, 'GET'),
     shouldRevalidate,
   )
 }
 
 export function useRequest (params: HooksParams = {}, swrOptions = {}) {
-  return Hooks.useRequest('/app/hello', params, swrOptions)
+  return Hooks.useRequest('/api/app/hello', params, swrOptions)
 }
 
 export function request (params: Params, fetchOptions: RequestInit = {}) {
-  return PontCore.fetch(PontCore.getUrl('/app/hello', params), {
+  return PontCore.fetch(PontCore.getUrl('/api/app/hello', params), {
     method: 'GET',
     ...fetchOptions,
   })
