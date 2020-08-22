@@ -159,6 +159,12 @@
       "import/named": "off",
       "import/no-unresolved": "off",
       "jest/no-disabled-tests": "off",
+      "no-empty": [
+        "error",
+        {
+          "allowEmptyCatch": true
+        }
+      ],
       "react/prop-types": "off",
       "semi": "off"
     },
@@ -209,7 +215,8 @@
       "!src/services/**",
       "!src/serviceWorker.ts",
       "!src/index.tsx",
-      "!src/App.tsx"
+      "!src/App.tsx",
+      "!src/utils/axios.ts"
     ],
     "coverageThreshold": {
       "global": {

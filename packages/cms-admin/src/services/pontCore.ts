@@ -2,7 +2,7 @@
  * @description pont内置请求单例
  */
 import { AxiosInstance, AxiosRequestConfig } from 'axios'
-import { axios } from 'src/utils/axios'
+import axios from 'src/utils/axios'
 
 class PontCoreManager {
   static singleInstance = null as unknown as PontCoreManager
