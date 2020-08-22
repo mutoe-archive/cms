@@ -2,6 +2,7 @@
  * @description pont内置请求单例
  */
 import { AxiosInstance, AxiosRequestConfig } from 'axios'
+import { authorizationTokenStorage } from 'src/contexts/authorization.context'
 import axios from 'src/utils/axios'
 
 class PontCoreManager {
@@ -23,6 +24,11 @@ class PontCoreManager {
    * axios 请求
    */
   async fetch (options: AxiosRequestConfig = {}) {
+    const token = authorizationTokenStorage.get()
+    if (token) {
+      (options.headers ?? (options.headers = {})).Authorization = `Bearer ${token}`
+    }
+
     return await this.axios.request(options)
   }
 

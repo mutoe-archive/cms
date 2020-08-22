@@ -10,14 +10,14 @@ const LoginPage: React.FC = () => {
   const formRef = useRef<React.ElementRef<typeof FormRenderer>>(null)
   const { submitting, onLogin } = useSubmitLogin(formRef)
   const history = useHistory()
-  const { auth, mountAuthorization } = useAuthorizationContext()
+  const { profile, mountAuthorization } = useAuthorizationContext()
 
   const redirectToFrom = () => {
     // TODO: redirect to from URI
     history.replace('/')
   }
 
-  if (auth) {
+  if (profile) {
     redirectToFrom()
     return null
   }
@@ -27,9 +27,7 @@ const LoginPage: React.FC = () => {
       const authRo = await onLogin(form)
       mountAuthorization(authRo)
       redirectToFrom()
-    } catch (e) {
-      console.error(e)
-    }
+    } catch (e) {}
   }
 
   return <div className={styles.root}>

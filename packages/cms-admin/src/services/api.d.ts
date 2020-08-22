@@ -40,6 +40,29 @@ declare namespace defs {
     username: string
   }
 
+  export class ProfileRo {
+    /** bio */
+    bio: string
+
+    /** createdAt */
+    createdAt: string
+
+    /** email */
+    email: string
+
+    /** id */
+    id: number
+
+    /** image */
+    image: string
+
+    /** updatedAt */
+    updatedAt: string
+
+    /** username */
+    username: string
+  }
+
   export class RegisterDto {
     /** email */
     email: string
@@ -71,15 +94,15 @@ declare namespace API {
 
       export type Response = any
 
-      export function mutate (
+      export function mutate(
         params?: HooksParams,
         newValue?: any,
         shouldRevalidate?: boolean,
       )
 
-      export function trigger (params?: HooksParams, shouldRevalidate?: boolean)
+      export function trigger(params?: HooksParams, shouldRevalidate?: boolean)
 
-      export function useRequest (
+      export function useRequest(
         params?: HooksParams,
         options?: SwrConfig,
       ): { isLoading: boolean; data: Response; error: Error }
@@ -87,7 +110,7 @@ declare namespace API {
       export const method: string
       export const path: string
 
-      export function request (
+      export function request(
         params: Params,
         axiosOption?: AxiosRequestConfig,
       ): Promise<Response>
@@ -105,18 +128,18 @@ declare namespace API {
     export namespace login {
       export type Response = defs.AuthRo
 
-      export function mutate (newValue?: any, shouldRevalidate?: boolean)
+      export function mutate(newValue?: any, shouldRevalidate?: boolean)
 
-      export function trigger (shouldRevalidate?: boolean)
+      export function trigger(shouldRevalidate?: boolean)
 
-      export function useRequest (
+      export function useRequest(
         options?: SwrConfig,
       ): { isLoading: boolean; data: Response; error: Error }
 
       export const method: string
       export const path: string
 
-      export function request (
+      export function request(
         body: defs.LoginDto,
         axiosOption?: AxiosRequestConfig,
       ): Promise<Response>
@@ -129,18 +152,18 @@ declare namespace API {
     export namespace register {
       export type Response = defs.AuthRo
 
-      export function mutate (newValue?: any, shouldRevalidate?: boolean)
+      export function mutate(newValue?: any, shouldRevalidate?: boolean)
 
-      export function trigger (shouldRevalidate?: boolean)
+      export function trigger(shouldRevalidate?: boolean)
 
-      export function useRequest (
+      export function useRequest(
         options?: SwrConfig,
       ): { isLoading: boolean; data: Response; error: Error }
 
       export const method: string
       export const path: string
 
-      export function request (
+      export function request(
         body: defs.RegisterDto,
         axiosOption?: AxiosRequestConfig,
       ): Promise<Response>
@@ -156,20 +179,20 @@ declare namespace API {
      * /api/user
      */
     export namespace profile {
-      export type Response = any
+      export type Response = defs.ProfileRo
 
-      export function mutate (newValue?: any, shouldRevalidate?: boolean)
+      export function mutate(newValue?: any, shouldRevalidate?: boolean)
 
-      export function trigger (shouldRevalidate?: boolean)
+      export function trigger(shouldRevalidate?: boolean)
 
-      export function useRequest (
+      export function useRequest(
         options?: SwrConfig,
       ): { isLoading: boolean; data: Response; error: Error }
 
       export const method: string
       export const path: string
 
-      export function request (
+      export function request(
         axiosOption?: AxiosRequestConfig,
       ): Promise<Response>
     }

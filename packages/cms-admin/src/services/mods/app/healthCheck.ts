@@ -3,6 +3,7 @@
  */
 
 import * as SWR from 'swr'
+import * as defs from '../../baseClass'
 import * as Hooks from '../../hooks'
 import { PontCore } from '../../pontCore'
 

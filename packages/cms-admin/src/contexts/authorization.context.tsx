@@ -1,31 +1,48 @@
-import React, { createContext, useContext, useState } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import StorageUtil from 'src/utils/storage.util'
 
 interface AuthState {
-  auth: defs.AuthRo | null
+  profile: defs.ProfileRo | null
   mountAuthorization: (authRo: defs.AuthRo) => void
   unmountAuthorization: () => void
 }
 
 const AuthorizationContext = createContext<AuthState>({} as AuthState)
 
-const authorizationTokenStorage = new StorageUtil<string>('auth_token')
+export const authorizationTokenStorage = new StorageUtil<string>('auth_token')
 
 export const AuthorizationProvider: React.FC = props => {
-  const [auth, setAuth] = useState<defs.AuthRo | null>(null)
+  const [profile, setProfile] = useState<defs.ProfileRo | null>(null)
+  const localToken = authorizationTokenStorage.get()
+  const history = useHistory()
 
   const mountAuthorization = (authRo: defs.AuthRo) => {
     authorizationTokenStorage.set(authRo.token)
-    setAuth(authRo)
+    setProfile(authRo)
   }
 
   const unmountAuthorization = () => {
     authorizationTokenStorage.remove()
-    setAuth(null)
+    setProfile(null)
   }
 
+  const retrieveUserProfile = async () => {
+    try {
+      const profile = await API.user.profile.request()
+      setProfile(profile)
+    } catch (e) {
+      unmountAuthorization()
+      history.replace('/login')
+    }
+  }
+
+  useEffect(() => {
+    localToken && retrieveUserProfile()
+  }, [])
+
   const value = {
-    auth,
+    profile,
     mountAuthorization,
     unmountAuthorization,
   }

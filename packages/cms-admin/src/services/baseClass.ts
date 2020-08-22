@@ -32,6 +32,29 @@ export class LoginDto {
   username = ''
 }
 
+export class ProfileRo {
+  /** bio */
+  bio = ''
+
+  /** createdAt */
+  createdAt = ''
+
+  /** email */
+  email = ''
+
+  /** id */
+  id = undefined
+
+  /** image */
+  image = ''
+
+  /** updatedAt */
+  updatedAt = ''
+
+  /** username */
+  username = ''
+}
+
 export class RegisterDto {
   /** email */
   email = ''

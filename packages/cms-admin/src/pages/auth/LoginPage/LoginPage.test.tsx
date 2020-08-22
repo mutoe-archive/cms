@@ -21,7 +21,7 @@ describe('# Login page', () => {
     jest.clearAllMocks()
 
     mockUseAuthorizationContext.mockReturnValue({
-      auth: null,
+      profile: null,
       mountAuthorization: mockMountAuthorization,
       unmountAuthorization: jest.fn(),
     })
@@ -35,7 +35,7 @@ describe('# Login page', () => {
 
   it('should redirect to home page when user is already logged in', () => {
     mockUseAuthorizationContext.mockReturnValue({
-      auth: { username: 'admin', token: 'token' } as defs.AuthRo,
+      profile: { username: 'admin' } as defs.ProfileRo,
       mountAuthorization: mockMountAuthorization,
       unmountAuthorization: jest.fn(),
     })

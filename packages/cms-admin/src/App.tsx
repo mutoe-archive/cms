@@ -5,6 +5,7 @@ import { SWRProvider } from 'src/services/hooks'
 import './App.css'
 import logo from './logo.svg'
 import { AuthorizationProvider } from './contexts/authorization.context'
+import PortalPage from 'src/pages/PortalPage'
 
 const App: React.FC = () => (
   <SWRProvider>
@@ -15,14 +16,7 @@ const App: React.FC = () => (
           <Route exact path="/login" component={LoginPage} />
 
           <Route>
-
-            <div className="App">
-              <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <p> {"Mutoe's Content Manage System"} </p>
-                <Link className="App-link" to={'/login'}>Login</Link>
-              </header>
-            </div>
+            <PortalPage/>
           </Route>
         </Switch>
       </BrowserRouter>
