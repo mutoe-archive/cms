@@ -1,44 +1,44 @@
 export class AuthRo {
   /** bio */
-  bio = '';
+  bio = ''
 
   /** createdAt */
-  createdAt = '';
+  createdAt = ''
 
   /** email */
-  email = '';
+  email = ''
 
   /** id */
-  id = undefined;
+  id = undefined
 
   /** image */
-  image = '';
+  image = ''
 
   /** token */
-  token = '';
+  token = ''
 
   /** updatedAt */
-  updatedAt = '';
+  updatedAt = ''
 
   /** username */
-  username = '';
+  username = ''
 }
 
 export class LoginDto {
   /** password */
-  password = '';
+  password = ''
 
   /** username */
-  username = '';
+  username = ''
 }
 
 export class RegisterDto {
   /** email */
-  email = '';
+  email = ''
 
   /** password */
-  password = '';
+  password = ''
 
   /** username */
-  username = '';
+  username = ''
 }

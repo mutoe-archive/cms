@@ -2,8 +2,8 @@
  * @description 基于 swr 的取数hooks
  */
 
-import useSWR, { SWRConfig, ConfigInterface } from 'swr'
 import * as React from 'react'
+import useSWR, { ConfigInterface, SWRConfig } from 'swr'
 import { PontCore } from './pontCore'
 
 const defaultOptions: ConfigInterface = {
@@ -20,7 +20,7 @@ export const SWRProvider: React.FC<ConfigInterface> = props => {
 
   return (
     <SWRConfig value={{ ...defaultOptions, ...options }}>
-      {props.children}
+      {children}
     </SWRConfig>
   )
 }

@@ -1,54 +1,54 @@
 type ObjectMap<Key extends string | number | symbol = any, Value = any> = {
   [key in Key]: Value;
-};
+}
 
-declare type SwrConfig = import('swr').ConfigInterface;
-declare type AxiosRequestConfig = import('axios').AxiosRequestConfig;
+declare type SwrConfig = import('swr').ConfigInterface
+declare type AxiosRequestConfig = import('axios').AxiosRequestConfig
 
 declare namespace defs {
   export class AuthRo {
     /** bio */
-    bio: string;
+    bio: string
 
     /** createdAt */
-    createdAt: string;
+    createdAt: string
 
     /** email */
-    email: string;
+    email: string
 
     /** id */
-    id: number;
+    id: number
 
     /** image */
-    image: string;
+    image: string
 
     /** token */
-    token: string;
+    token: string
 
     /** updatedAt */
-    updatedAt: string;
+    updatedAt: string
 
     /** username */
-    username: string;
+    username: string
   }
 
   export class LoginDto {
     /** password */
-    password: string;
+    password: string
 
     /** username */
-    username: string;
+    username: string
   }
 
   export class RegisterDto {
     /** email */
-    email: string;
+    email: string
 
     /** password */
-    password: string;
+    password: string
 
     /** username */
-    username: string;
+    username: string
   }
 }
 
@@ -64,33 +64,33 @@ declare namespace API {
     export namespace healthCheck {
       class Params {
         /** name */
-        name?: any;
+        name?: any
       }
 
-      export type HooksParams = (() => Params) | Params;
+      export type HooksParams = (() => Params) | Params
 
-      export type Response = any;
+      export type Response = any
 
       export function mutate(
         params?: HooksParams,
         newValue?: any,
         shouldRevalidate?: boolean,
-      );
+      )
 
-      export function trigger(params?: HooksParams, shouldRevalidate?: boolean);
+      export function trigger (params?: HooksParams, shouldRevalidate?: boolean)
 
-      export function useRequest(
+      export function useRequest (
         params?: HooksParams,
         options?: SwrConfig,
-      ): { isLoading: boolean; data: Response; error: Error };
+      ): { isLoading: boolean; data: Response; error: Error }
 
       export const method: string
       export const path: string
 
-      export function request(
+      export function request (
         params: Params,
         axiosOption?: AxiosRequestConfig,
-      ): Promise<Response>;
+      ): Promise<Response>
     }
   }
 
@@ -103,23 +103,23 @@ declare namespace API {
      * /api/auth/login
      */
     export namespace login {
-      export type Response = defs.AuthRo;
+      export type Response = defs.AuthRo
 
-      export function mutate(newValue?: any, shouldRevalidate?: boolean);
+      export function mutate (newValue?: any, shouldRevalidate?: boolean)
 
-      export function trigger(shouldRevalidate?: boolean);
+      export function trigger (shouldRevalidate?: boolean)
 
-      export function useRequest(
+      export function useRequest (
         options?: SwrConfig,
-      ): { isLoading: boolean; data: Response; error: Error };
+      ): { isLoading: boolean; data: Response; error: Error }
 
       export const method: string
       export const path: string
 
-      export function request(
+      export function request (
         body: defs.LoginDto,
         axiosOption?: AxiosRequestConfig,
-      ): Promise<Response>;
+      ): Promise<Response>
     }
 
     /**
@@ -127,23 +127,23 @@ declare namespace API {
      * /api/auth/register
      */
     export namespace register {
-      export type Response = defs.AuthRo;
+      export type Response = defs.AuthRo
 
-      export function mutate(newValue?: any, shouldRevalidate?: boolean);
+      export function mutate (newValue?: any, shouldRevalidate?: boolean)
 
-      export function trigger(shouldRevalidate?: boolean);
+      export function trigger (shouldRevalidate?: boolean)
 
-      export function useRequest(
+      export function useRequest (
         options?: SwrConfig,
-      ): { isLoading: boolean; data: Response; error: Error };
+      ): { isLoading: boolean; data: Response; error: Error }
 
       export const method: string
       export const path: string
 
-      export function request(
+      export function request (
         body: defs.RegisterDto,
         axiosOption?: AxiosRequestConfig,
-      ): Promise<Response>;
+      ): Promise<Response>
     }
   }
 
@@ -156,22 +156,22 @@ declare namespace API {
      * /api/user
      */
     export namespace profile {
-      export type Response = any;
+      export type Response = any
 
-      export function mutate(newValue?: any, shouldRevalidate?: boolean);
+      export function mutate (newValue?: any, shouldRevalidate?: boolean)
 
-      export function trigger(shouldRevalidate?: boolean);
+      export function trigger (shouldRevalidate?: boolean)
 
-      export function useRequest(
+      export function useRequest (
         options?: SwrConfig,
-      ): { isLoading: boolean; data: Response; error: Error };
+      ): { isLoading: boolean; data: Response; error: Error }
 
       export const method: string
       export const path: string
 
-      export function request(
+      export function request (
         axiosOption?: AxiosRequestConfig,
-      ): Promise<Response>;
+      ): Promise<Response>
     }
   }
 }

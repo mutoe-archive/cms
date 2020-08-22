@@ -5,18 +5,18 @@ import ERROR_MESSAGE from 'src/constants/errorMessage'
 import focusErrorField from 'src/utils/focusErrorField'
 
 interface FieldBasicConfig<T> {
-  name: T;
-  label: string;
-  placeholder?: string;
-  required?: boolean;
-  disabled?: boolean;
+  name: T
+  label: string
+  placeholder?: string
+  required?: boolean
+  disabled?: boolean
 }
 
 interface InputFieldConfig {
-  type: 'input' | 'password';
-  maxLength?: number;
-  minLength?: number;
-  regexp?: RegExp;
+  type: 'input' | 'password'
+  maxLength?: number
+  minLength?: number
+  regexp?: RegExp
 }
 
 export type FieldConfig<K> = InputFieldConfig & FieldBasicConfig<K>
@@ -28,12 +28,12 @@ type Form<T extends string> = Record<T, FormValue>
 export type FormConfig<TForm extends Form<string>> = FieldConfig<keyof TForm>[]
 
 interface FormRendererProps<K extends string, F extends Form<K>> {
-  fields: FieldConfig<K>[];
-  initForm?: F;
+  fields: FieldConfig<K>[]
+  initForm?: F
   submitText?: string
-  onSubmit?: (form: F) => Promise<Record<string, string> | void>;
-  submitting?: boolean;
-  className?: string;
+  onSubmit?: (form: F) => Promise<Record<string, string> | void>
+  submitting?: boolean
+  className?: string
 }
 
 function FormRenderer<K extends string, F extends Form<K> = Form<K>> (props: FormRendererProps<K, F>): React.ReactElement {

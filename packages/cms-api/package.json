@@ -80,23 +80,46 @@
     "env": {
       "node": true
     },
+    "plugins": [
+      "import"
+    ],
     "extends": [
+      "standard",
       "eslint:recommended",
       "plugin:@typescript-eslint/recommended",
-      "plugin:jest/recommended",
-      "standard"
+      "plugin:jest/recommended"
     ],
     "rules": {
-      "@typescript-eslint/explicit-function-return-type": "off",
-      "@typescript-eslint/interface-name-prefix": "off",
-      "@typescript-eslint/no-explicit-any": "off",
-      "@typescript-eslint/no-empty-function": "off",
+      "@typescript-eslint/consistent-type-definitions": [
+        "error",
+        "interface"
+      ],
       "@typescript-eslint/explicit-module-boundary-types": "off",
+      "@typescript-eslint/member-delimiter-style": [
+        "warn",
+        {
+          "multiline": {
+            "delimiter": "none"
+          },
+          "singleline": {
+            "requireLast": false
+          }
+        }
+      ],
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/semi": [
+        "error",
+        "never"
+      ],
       "comma-dangle": [
         "error",
         "always-multiline"
       ],
-      "no-useless-constructor": "off"
+      "import/named": "off",
+      "import/no-unresolved": "off",
+      "jest/no-disabled-tests": "off",
+      "no-useless-constructor": "off",
+      "semi": "off"
     },
     "overrides": [
       {

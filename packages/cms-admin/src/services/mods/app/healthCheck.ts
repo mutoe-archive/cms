@@ -3,16 +3,15 @@
  */
 
 import * as SWR from 'swr'
-import * as defs from '../../baseClass'
 import * as Hooks from '../../hooks'
 import { PontCore } from '../../pontCore'
 
 interface Params {
   /** name */
-  name?: any;
+  name?: any
 }
 
-type HooksParams = (() => Params) | Params;
+type HooksParams = (() => Params) | Params
 
 export const method = 'GET'
 export const path = '/api/app/hello'

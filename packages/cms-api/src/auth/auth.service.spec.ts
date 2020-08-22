@@ -72,7 +72,7 @@ describe('AuthService', () => {
     it('should return user profile when login successful', async () => {
       jest.spyOn(authService, 'validateUser').mockResolvedValue({ foo: 'bar' } as never)
       jest.spyOn(authService, 'generateToken').mockReturnValue('token')
-      const loginDto: LoginDto = { email: 'foo@bar.com', password: '123456' }
+      const loginDto: LoginDto = { username: 'admin', password: '123456' }
 
       const authData = await authService.login(loginDto)
 
