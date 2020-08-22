@@ -4,7 +4,7 @@ export default class StorageUtil<T> {
   key: string
   storageType: StorageType
 
-  constructor (key: string, storageType: StorageType = 'sessionStorage') {
+  constructor (key: string, storageType: StorageType = 'localStorage') {
     this.key = key
     this.storageType = storageType
   }
@@ -22,5 +22,9 @@ export default class StorageUtil<T> {
 
   set (data: T) {
     window[this.storageType].setItem(this.key, JSON.stringify(data))
+  }
+
+  remove (): void {
+    window[this.storageType].removeItem(this.key)
   }
 }

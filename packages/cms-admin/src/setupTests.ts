@@ -18,4 +18,5 @@ document.createRange = (): any => ({
 beforeEach(() => {
   jest.spyOn(Storage.prototype, 'setItem')
   jest.spyOn(Storage.prototype, 'getItem')
+  jest.spyOn(Storage.prototype, 'removeItem')
 })

@@ -7,7 +7,7 @@ const axios = Axios.create({
 })
 
 axios.interceptors.response.use(res => {
-  return res
+  return res.data
 })
 
 export default axios

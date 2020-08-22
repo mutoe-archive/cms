@@ -46,4 +46,12 @@ describe('# Storage Util', () => {
 
     expect(result).toBe(null)
   })
+
+  it('should remove item when call remove method', () => {
+    const fooStorage = new StorageUtil('storage_foo')
+
+    fooStorage.remove()
+
+    expect(localStorage.removeItem).toBeCalledWith('storage_foo')
+  })
 })

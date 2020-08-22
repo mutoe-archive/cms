@@ -2,6 +2,7 @@ import { fireEvent, render, waitFor } from '@testing-library/react'
 import React from 'react'
 import axios from 'src/utils/axios'
 import LoginPage from './LoginPage'
+import useAuthorizationContext from 'src/contexts/authorization.context'
 
 const mockReplace = jest.fn()
 jest.mock('react-router-dom', () => ({
@@ -10,8 +11,21 @@ jest.mock('react-router-dom', () => ({
   }),
 }))
 
+jest.mock('src/contexts/authorization.context')
+
 describe('# Login page', () => {
-  beforeEach(jest.clearAllMocks)
+  const mockUseAuthorizationContext = useAuthorizationContext as jest.MockedFunction<typeof useAuthorizationContext>
+  const mockMountAuthorization = jest.fn()
+
+  beforeEach(() => {
+    jest.clearAllMocks()
+
+    mockUseAuthorizationContext.mockReturnValue({
+      auth: null,
+      mountAuthorization: mockMountAuthorization,
+      unmountAuthorization: jest.fn(),
+    })
+  })
 
   it('should render correctly', () => {
     const { container } = render(<LoginPage />)
@@ -19,12 +33,22 @@ describe('# Login page', () => {
     expect(container).toBeInTheDocument()
   })
 
+  it('should redirect to home page when user is already logged in', () => {
+    mockUseAuthorizationContext.mockReturnValue({
+      auth: { username: 'admin', token: 'token' } as defs.AuthRo,
+      mountAuthorization: mockMountAuthorization,
+      unmountAuthorization: jest.fn(),
+    })
+
+    render(<LoginPage/>)
+
+    expect(mockReplace).toBeCalledWith('/')
+  })
+
   it('should jump to home page when submit a valid form', async () => {
     jest.spyOn(axios, 'request').mockResolvedValue({
-      data: {
-        username: 'invalid',
-        token: 'token',
-      },
+      username: 'invalid',
+      token: 'token',
     })
     const { getByTestId, getByPlaceholderText } = render(<LoginPage />)
 
@@ -39,6 +63,7 @@ describe('# Login page', () => {
       url: '/api/auth/login',
       data: { username: 'admin', password: '123456' },
     }))
+    expect(mockMountAuthorization).toBeCalledWith({ username: 'invalid', token: 'token' })
     expect(mockReplace).toBeCalledWith('/')
   })
 
