@@ -5,3 +5,17 @@
 import '@testing-library/jest-dom/extend-expect'
 
 import 'src/services'
+
+document.createRange = (): any => ({
+  setStart: jest.fn(),
+  setEnd: jest.fn(),
+  commonAncestorContainer: {
+    nodeName: 'BODY',
+    ownerDocument: document,
+  },
+})
+
+beforeEach(() => {
+  jest.spyOn(Storage.prototype, 'setItem')
+  jest.spyOn(Storage.prototype, 'getItem')
+})
