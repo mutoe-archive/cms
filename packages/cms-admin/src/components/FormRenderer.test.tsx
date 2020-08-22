@@ -4,7 +4,7 @@ import FormRenderer, { FieldConfig } from 'src/components/FormRenderer'
 import ERROR_MESSAGE from 'src/constants/errorMessage'
 
 describe('# Form Renderer Component', () => {
-  let fields: FieldConfig<string>[]
+  let fields: Array<FieldConfig<string>>
   let container: HTMLElement
   let username: HTMLInputElement
   let password: HTMLInputElement
@@ -70,7 +70,7 @@ describe('# Form Renderer Component', () => {
     })
 
     it('should render nothing when passed in invalid field type', () => {
-      const invalidFields = [{ type: 'foo', name: 'foo' }] as unknown as FieldConfig<'foo'>[]
+      const invalidFields = [{ type: 'foo', name: 'foo' }] as unknown as Array<FieldConfig<'foo'>>
 
       const { container } = render(<FormRenderer fields={invalidFields }/>)
 

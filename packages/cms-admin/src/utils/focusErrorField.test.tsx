@@ -1,6 +1,6 @@
 import { render, waitFor } from '@testing-library/react'
 import React from 'react'
-import focusErrorField from 'src/utils/focusErrorField'
+import { focusErrorField } from 'src/utils/form.util'
 
 describe('# focus error field util', () => {
   const Wrapper: React.FC = () => (<div className="error field">

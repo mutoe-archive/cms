@@ -1,11 +1,8 @@
 /**
  * @description pont内置请求单例
  */
-import Axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from 'axios'
-
-export const isAxiosError = (error: any): error is AxiosError => {
-  return 'response' in error
-}
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
+import { axios } from 'src/utils/axios'
 
 class PontCoreManager {
   static singleInstance = null as unknown as PontCoreManager
@@ -19,23 +16,14 @@ class PontCoreManager {
   }
 
   constructor () {
-    this.axios = Axios.create({
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-
-    this.axios.interceptors.response.use(res => {
-      console.log(res)
-      return res
-    })
+    this.axios = axios
   }
 
   /**
    * axios 请求
    */
   async fetch (options: AxiosRequestConfig = {}) {
-    return this.axios.request(options)
+    return await this.axios.request(options)
   }
 
   getUrl (path: string, queryParams: any = {}) {

@@ -1,8 +1,8 @@
 import { pick } from 'lodash'
-import React, { useState } from 'react'
+import React, { useImperativeHandle, useState } from 'react'
 import { Form } from 'semantic-ui-react'
 import ERROR_MESSAGE from 'src/constants/errorMessage'
-import focusErrorField from 'src/utils/focusErrorField'
+import { focusErrorField } from 'src/utils/form.util'
 
 interface FieldBasicConfig<T> {
   name: T
@@ -25,10 +25,14 @@ type FormValue = number | boolean | string | string[] | number[]
 
 type Form<T extends string> = Record<T, FormValue>
 
-export type FormConfig<TForm extends Form<string>> = FieldConfig<keyof TForm>[]
+export type FormConfig<TForm extends Form<string>> = Array<FieldConfig<keyof TForm>>
+
+interface FormRendererHandle {
+  setError: (fieldName: string, errorMessage?: string) => boolean
+}
 
 interface FormRendererProps<K extends string, F extends Form<K>> {
-  fields: FieldConfig<K>[]
+  fields: Array<FieldConfig<K>>
   initForm?: F
   submitText?: string
   onSubmit?: (form: F) => Promise<Record<string, string> | void>
@@ -36,32 +40,36 @@ interface FormRendererProps<K extends string, F extends Form<K>> {
   className?: string
 }
 
-function FormRenderer<K extends string, F extends Form<K> = Form<K>> (props: FormRendererProps<K, F>): React.ReactElement {
+function FormRenderer<K extends string, F extends Form<K>> (props: FormRendererProps<K, F>, forwardedRef: React.Ref<FormRendererHandle>): React.ReactElement {
   const [form, setForm] = useState<F>(props.initForm || {} as F)
   const [errors, setErrors] = useState<Partial<Record<K, string>>>({})
 
-  const setError = (field: FieldConfig<K>, errorMessage?: string) => {
-    setErrors(prev => ({ ...prev, [field.name]: errorMessage }))
+  const setError = (fieldName: string, errorMessage?: string) => {
+    setErrors(prev => ({ ...prev, [fieldName]: errorMessage }))
     return !errorMessage
   }
 
+  useImperativeHandle(forwardedRef, () => ({
+    setError,
+  }))
+
   const onChange = (field: FieldConfig<K>, value: FormValue) => {
     setForm(prev => ({ ...prev, [field.name]: value }))
-    setError(field)
+    setError(field.name)
   }
 
   const validateField = (field: FieldConfig<K>, newValue?: FormValue): boolean => {
     const value = newValue ?? form[field.name]
-    if (field.required && !value) return setError(field, ERROR_MESSAGE.REQUIRED(field.label))
+    if (field.required && !value) return setError(field.name, ERROR_MESSAGE.REQUIRED(field.label))
     switch (field.type) {
       case 'input':
       case 'password': {
         const inputValue = value as string
-        if (field.minLength && inputValue.length < field.minLength) return setError(field, ERROR_MESSAGE.MIN_LENGTH(field.label, field.minLength))
+        if (field.minLength && inputValue.length < field.minLength) return setError(field.name, ERROR_MESSAGE.MIN_LENGTH(field.label, field.minLength))
       }
     }
 
-    return setError(field)
+    return setError(field.name)
   }
 
   const onSubmit = async () => {
@@ -98,4 +106,6 @@ function FormRenderer<K extends string, F extends Form<K> = Form<K>> (props: For
   </Form>
 }
 
-export default FormRenderer
+type ForwardRefFormRenderer = <K extends string, F extends Form<K>>(props: FormRendererProps<K, F> & React.RefAttributes<FormRendererHandle>) => React.ReactElement | null
+
+export default React.forwardRef(FormRenderer) as ForwardRefFormRenderer

@@ -71,7 +71,7 @@ declare namespace API {
 
       export type Response = any
 
-      export function mutate(
+      export function mutate (
         params?: HooksParams,
         newValue?: any,
         shouldRevalidate?: boolean,
