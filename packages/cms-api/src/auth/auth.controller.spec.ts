@@ -52,11 +52,10 @@ describe('Auth Controller', () => {
       jest.spyOn(authService, 'register').mockResolvedValue(mockUserProfile)
 
       const registerDto: RegisterDto = { email: 'foo@bar.com', username: 'foo', password: 'bar' }
-      const res = await controller.register(registerDto)
+      const user = await controller.register(registerDto)
 
-      expect(res).toHaveProperty('user')
-      expect(res.user).not.toHaveProperty('password')
-      expect(res.user).toEqual(mockUserProfile)
+      expect(user).not.toHaveProperty('password')
+      expect(user).toEqual(mockUserProfile)
     })
   })
 
@@ -64,11 +63,10 @@ describe('Auth Controller', () => {
     it('should call login service when call login controller', async () => {
       jest.spyOn(authService, 'login').mockResolvedValue(mockUserProfile)
 
-      const res = await controller.login({ email: 'foo@bar.com', password: '123456' })
+      const user = await controller.login({ username: 'admin', password: '123456' })
 
-      expect(res).toHaveProperty('user')
-      expect(res.user).not.toHaveProperty('password')
-      expect(res.user).toEqual(mockUserProfile)
+      expect(user).not.toHaveProperty('password')
+      expect(user).toEqual(mockUserProfile)
     })
   })
 })

@@ -2,6 +2,8 @@ import { Test, TestingModule } from '@nestjs/testing'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { AppController } from 'src/app.controller'
 import { AuthModule } from 'src/auth/auth.module'
+import { LoginDto } from 'src/auth/dto/login.dto'
+import { RegisterDto } from 'src/auth/dto/register.dto'
 import { UserModule } from 'src/user/user.module'
 import * as request from 'supertest'
 import ormConfig from './orm-config'
@@ -29,10 +31,10 @@ describe('Auth Module Integration', () => {
 
   describe('/auth/register (POST)', () => {
     it('should return 201', async () => {
-      const requestBody = {
-        username: 'mutoe',
-        email: 'mutoe@foxmail.com',
-        password: '12345678',
+      const requestBody: RegisterDto = {
+        username: 'admin',
+        email: 'admin@cms.com',
+        password: '123456',
       }
       const response = await request(app.getHttpServer())
         .post('/auth/register')
@@ -41,40 +43,40 @@ describe('Auth Module Integration', () => {
       expect(response.status).toBe(201)
     })
 
-    it('should return 400 given exist username', async () => {
-      const requestBody = {
-        username: 'mutoe',
-        email: 'foo@bar.com',
-        password: '12345678',
+    it('should return 422 given exist username', async () => {
+      const requestBody: RegisterDto = {
+        username: 'admin',
+        email: 'admin2@cms.com',
+        password: '123456',
       }
       const response = await request(app.getHttpServer())
         .post('/auth/register')
         .send(requestBody)
 
-      expect(response.status).toBe(400)
-      expect(response.body).toHaveProperty('message', 'username is exist')
+      expect(response.status).toBe(422)
+      expect(response.body).toHaveProperty('username', 'username is exist')
     })
 
-    it('should return 400 given exist email', async () => {
-      const requestBody = {
-        username: 'foobar',
-        email: 'mutoe@foxmail.com',
-        password: '12345678',
+    it('should return 422 given exist email', async () => {
+      const requestBody: RegisterDto = {
+        username: 'admin2',
+        email: 'admin@cms.com',
+        password: '123456',
       }
       const response = await request(app.getHttpServer())
         .post('/auth/register')
         .send(requestBody)
 
-      expect(response.status).toBe(400)
-      expect(response.body).toHaveProperty('message', 'email is exist')
+      expect(response.status).toBe(422)
+      expect(response.body).toHaveProperty('email', 'email is exist')
     })
   })
 
   describe('/auth/login (POST)', () => {
     it('should return 200 when login given correct user name and password', async () => {
-      const requestBody = {
-        email: 'mutoe@foxmail.com',
-        password: '12345678',
+      const requestBody: LoginDto = {
+        username: 'admin',
+        password: '123456',
       }
       const response = await request(app.getHttpServer())
         .post('/auth/login')
@@ -83,30 +85,30 @@ describe('Auth Module Integration', () => {
       expect(response.status).toBe(200)
     })
 
-    it('should return 400 when login given incorrect user name', async () => {
-      const requestBody = {
-        email: 'not-exist@example.com',
+    it('should return 422 when login given incorrect user name', async () => {
+      const requestBody: LoginDto = {
+        username: 'foo',
         password: '12345678',
       }
       const response = await request(app.getHttpServer())
         .post('/auth/login')
         .send(requestBody)
 
-      expect(response.status).toBe(400)
-      expect(response.body).toHaveProperty('message', 'user is not exist')
+      expect(response.status).toBe(422)
+      expect(response.body).toHaveProperty('username', 'user is not exist')
     })
 
-    it('should return 400 when login given incorrect password', async () => {
-      const requestBody = {
-        email: 'mutoe@foxmail.com',
+    it('should return 422 when login given incorrect password', async () => {
+      const requestBody: LoginDto = {
+        username: 'admin',
         password: 'invalid',
       }
       const response = await request(app.getHttpServer())
         .post('/auth/login')
         .send(requestBody)
 
-      expect(response.status).toBe(400)
-      expect(response.body).toHaveProperty('message', 'password is invalid')
+      expect(response.status).toBe(422)
+      expect(response.body).toHaveProperty('password', 'password is invalid')
     })
   })
 })

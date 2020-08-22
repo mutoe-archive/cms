@@ -1,7 +1,7 @@
 import { Controller, Get, Query } from '@nestjs/common'
 import { ApiOkResponse, ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger'
 
-@Controller('app')
+@Controller()
 @ApiTags('App')
 export class AppController {
   @Get('/hello')
