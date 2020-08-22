@@ -1,11 +1,10 @@
 import React from 'react'
-import { BrowserRouter, Route, Switch, Link } from 'react-router-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import LoginPage from 'src/pages/auth/LoginPage/LoginPage'
+import PortalPage from 'src/pages/PortalPage'
 import { SWRProvider } from 'src/services/hooks'
 import './App.css'
-import logo from './logo.svg'
 import { AuthorizationProvider } from './contexts/authorization.context'
-import PortalPage from 'src/pages/PortalPage'
 
 const App: React.FC = () => (
   <SWRProvider>

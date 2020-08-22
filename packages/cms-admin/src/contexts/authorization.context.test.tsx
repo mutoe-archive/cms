@@ -1,4 +1,4 @@
-import { act, render, waitFor } from '@testing-library/react'
+import { render, waitFor } from '@testing-library/react'
 import React from 'react'
 import useAuthorizationContext, { AuthorizationProvider } from 'src/contexts/authorization.context'
 import axios from 'src/utils/axios'
