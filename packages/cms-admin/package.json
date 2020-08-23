@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js",
+    "pretest": "yarn pont:sync",
+    "test": "yarn tsc && node scripts/test.js",
     "lint": "eslint 'src/**/*.ts?(x)' --fix",
     "pont:sync": "rm -f src/services/api-lock.json && pont && eslint 'src/services/**/*.ts?(x)' --fix"
   },
@@ -84,15 +85,6 @@
   },
   "resolutions": {
     "lodash": "^4.17.19"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "yarn test"
-    }
-  },
-  "lint-staged": {
-    "src/**/*.ts?(x)": "eslint --fix"
   },
   "babel": {
     "presets": [
