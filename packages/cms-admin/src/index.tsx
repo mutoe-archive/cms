@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
 import 'src/assets/scss/index.scss'
-import 'src/services'
 
 ReactDOM.render(
   <App />,

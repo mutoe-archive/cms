@@ -23,7 +23,7 @@ class PontCoreManager {
   /**
    * axios 请求
    */
-  async fetch (options: AxiosRequestConfig = {}) {
+  async fetch <T = any> (options: AxiosRequestConfig = {}): Promise<T> {
     const token = authorizationTokenStorage.get()
     if (token) {
       (options.headers ?? (options.headers = {})).Authorization = `Bearer ${token}`

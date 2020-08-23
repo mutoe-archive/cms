@@ -1,4 +1,4 @@
 import * as defs from './baseClass'
-import './mods/';
+import { API } from './mods/'
 
-(window as any).defs = defs
+export { defs, API }
