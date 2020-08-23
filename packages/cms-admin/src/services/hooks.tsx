@@ -2,8 +2,10 @@
  * @description 基于 swr 的取数hooks
  */
 
-import { AxiosRequestConfig } from 'axios'
-import * as React from 'react'
+import { AxiosRequestConfig, Method } from 'axios'
+import React, { useState } from 'react'
+import { FormRef } from 'src/components/FormRenderer'
+import { focusErrorField, isFormError } from 'src/utils/form.util'
 import useSWR, { ConfigInterface, SWRConfig } from 'swr'
 import { PontCore } from './pontCore'
 
@@ -43,6 +45,32 @@ export function useRequest<D = any> (
     error,
     mutate,
     loading: data === undefined || isValidating,
+  }
+}
+
+export function useSubmit<Req = any, Res = any> (formRef: FormRef, method: Method, url: string) {
+  const [submitting, setSubmitting] = useState(false)
+
+  const onSubmit = async (data: Req) => {
+    const axiosOption: AxiosRequestConfig = { url, method, data }
+    try {
+      setSubmitting(true)
+      return await PontCore.fetch<Res>(axiosOption)
+    } catch (e) {
+      if (formRef && isFormError(e)) {
+        Object.entries(e.response?.data ?? {})
+          .forEach(([field, message]) => formRef.current?.setError(field, message))
+        focusErrorField()
+      }
+      throw e
+    } finally {
+      setSubmitting(false)
+    }
+  }
+
+  return {
+    submitting,
+    onSubmit,
   }
 }
 

@@ -2,25 +2,16 @@
  * @desc register
  */
 
-import { AxiosRequestConfig } from 'axios'
-import * as SWR from 'swr'
-import * as defs from '../../baseClass'
-import * as Hooks from '../../hooks'
-import { PontCore } from '../../pontCore'
+import { AxiosRequestConfig, Method } from 'axios'
+import { FormRef } from 'src/components/FormRenderer'
+import { defs, Hooks, PontCore, SWR } from 'src/services'
 
-export const method = 'POST'
+export const method: Method = 'POST'
 export const path = '/api/auth/register'
+export const url = PontCore.getUrl(path)
 
-export function mutate (newValue: any = undefined, shouldRevalidate = true) {
-  return SWR.mutate(Hooks.getUrlKey(path, {}), newValue, shouldRevalidate)
-}
-
-export function trigger (shouldRevalidate = true) {
-  return SWR.trigger(Hooks.getUrlKey(path, {}), shouldRevalidate)
-}
-
-export function useRequest (swrOptions: SWR.ConfigInterface = {}) {
-  return Hooks.useRequest(path, {}, swrOptions)
+export function useSubmit (formRef: FormRef = null) {
+  return Hooks.useSubmit<defs.RegisterDto, defs.AuthRo>(formRef, method, url)
 }
 
 export function request (
@@ -28,8 +19,8 @@ export function request (
   axiosOption: AxiosRequestConfig = {},
 ): Promise<defs.AuthRo> {
   return PontCore.fetch({
-    url: PontCore.getUrl(path),
-    method: 'POST',
+    url,
+    method,
     data,
     ...axiosOption,
   })

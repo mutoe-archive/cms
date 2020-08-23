@@ -110,6 +110,8 @@ function FormRenderer<K extends string, F extends Form<K>> (props: FormRendererP
   </Form>
 }
 
+export type FormRef = React.RefObject<FormRendererHandle> | null
+
 type ForwardRefFormRenderer = <K extends string, F extends Form<K>>(props: FormRendererProps<K, F> & React.RefAttributes<FormRendererHandle>) => React.ReactElement | null
 
 export default React.forwardRef(FormRenderer) as ForwardRefFormRenderer
