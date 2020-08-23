@@ -8,13 +8,12 @@ import { defs, Hooks, PontCore, SWR } from 'src/services'
 
 export const method: Method = 'GET'
 export const path = '/api/user'
-export const url = PontCore.getUrl(path)
 
 export function request (
   axiosOption: AxiosRequestConfig = {},
 ): Promise<defs.ProfileRo> {
   return PontCore.fetch({
-    url,
+    url: PontCore.getUrl(path),
     method,
 
     ...axiosOption,

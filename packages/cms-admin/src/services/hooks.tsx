@@ -48,11 +48,11 @@ export function useRequest<D = any> (
   }
 }
 
-export function useSubmit<Req = any, Res = any> (formRef: FormRef, method: Method, url: string) {
+export function useSubmit<Req = any, Res = any> (formRef: FormRef, method: Method, path: string, params?: any) {
   const [submitting, setSubmitting] = useState(false)
 
   const onSubmit = async (data: Req) => {
-    const axiosOption: AxiosRequestConfig = { url, method, data }
+    const axiosOption: AxiosRequestConfig = { url: PontCore.getUrl(path, params), method, data }
     try {
       setSubmitting(true)
       return await PontCore.fetch<Res>(axiosOption)

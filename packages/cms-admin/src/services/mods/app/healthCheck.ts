@@ -8,21 +8,18 @@ import { defs, Hooks, PontCore, SWR } from 'src/services'
 
 export const method: Method = 'GET'
 export const path = '/api/hello'
-export const url = PontCore.getUrl(path, params)
 
 interface Params {
   /** name */
   name?: any
 }
 
-type HooksParams = (() => Params) | Params
-
 export function request (
   params: Params,
   axiosOption: AxiosRequestConfig = {},
 ): Promise<any> {
   return PontCore.fetch({
-    url,
+    url: PontCore.getUrl(path, params),
     method,
 
     ...axiosOption,

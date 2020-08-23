@@ -56,7 +56,7 @@ export default class MyGenerator extends CodeGenerator {
     if (isEmptyParams) {
       paramsCode = ''
     } else {
-      paramsCode += '\n type HooksParams = (() => Params) | Params;'
+      // paramsCode += '\n type HooksParams = (() => Params) | Params;'
     }
 
     const requestArgs = []
@@ -81,8 +81,8 @@ export default class MyGenerator extends CodeGenerator {
       case 'PUT':
       case 'PATCH': {
         hooksCodes.push(`
-          export function useSubmit(formRef: FormRef = null) {
-            return Hooks.useSubmit<${bodyParamsCode}, ${responseType}>(formRef, method, url)
+          export function useSubmit(formRef: FormRef = null ${paramsCode && ', params: Params'}) {
+            return Hooks.useSubmit<${bodyParamsCode}, ${responseType}>(formRef, method, path ${paramsCode && ', params'})
           }
         `)
         break
@@ -100,7 +100,6 @@ export default class MyGenerator extends CodeGenerator {
 
       export const method: Method = "${method}"
       export const path = "${inter.path}"
-      export const url = PontCore.getUrl(${getUrlParams})
 
       ${paramsCode}
 
@@ -108,7 +107,7 @@ export default class MyGenerator extends CodeGenerator {
 
       export function request(${requestParams}): Promise<${responseType}> {
         return PontCore.fetch({
-          url,
+          url: PontCore.getUrl(${getUrlParams}),
           method,
           ${bodyParamsCode ? 'data,' : ''}
           ...axiosOption,
