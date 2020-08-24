@@ -2,8 +2,7 @@ import React, { useRef } from 'react'
 import { useHistory } from 'react-router-dom'
 import FormRenderer, { FormRef } from 'src/components/FormRenderer'
 import useAuthorizationContext from 'src/contexts/authorization.context'
-import { loginForm, loginFormFields } from 'src/pages/auth/LoginPage/form/loginForm.config'
-import styles from 'src/pages/auth/LoginPage/LoginPage.module.scss'
+import { loginForm, loginFormFields } from 'src/pages/auth/LoginPage/LoginPage.form'
 import { API } from 'src/services'
 
 const LoginPage: React.FC = () => {
@@ -30,10 +29,10 @@ const LoginPage: React.FC = () => {
     } catch (e) {}
   }
 
-  return <div className={styles.root}>
+  return <div className='LoginPage'>
     <FormRenderer
       ref={formRef}
-      className={styles.form}
+      className='form'
       submitting={submitting}
       fields={loginFormFields}
       initForm={loginForm}

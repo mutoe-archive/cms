@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import LoginPage from 'src/pages/auth/LoginPage/LoginPage'
 import PortalPage from 'src/pages/PortalPage'
 import { SWRProvider } from 'src/services/hooks'
-import './App.css'
 import { AuthorizationProvider } from './contexts/authorization.context'
 
 const App: React.FC = () => (
@@ -12,10 +11,10 @@ const App: React.FC = () => (
 
       <BrowserRouter>
         <Switch>
-          <Route exact path="/login" component={LoginPage} />
+          <Route exact path='/login' component={LoginPage} />
 
           <Route>
-            <PortalPage/>
+            <PortalPage />
           </Route>
         </Switch>
       </BrowserRouter>

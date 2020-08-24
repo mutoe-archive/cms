@@ -141,20 +141,38 @@
       ],
       "@typescript-eslint/no-explicit-any": "off",
       "@typescript-eslint/semi": [
-        "error",
+        "warn",
         "never"
       ],
       "comma-dangle": [
-        "error",
+        "warn",
         "always-multiline"
       ],
       "import/named": "off",
       "import/no-unresolved": "off",
       "jest/no-disabled-tests": "off",
+      "jsx-quotes": [
+        "warn",
+        "prefer-single"
+      ],
       "no-empty": [
-        "error",
+        "warn",
         {
           "allowEmptyCatch": true
+        }
+      ],
+      "no-multiple-empty-lines": [
+        "warn",
+        {
+          "max": 1,
+          "maxEOF": 1,
+          "maxBOF": 0
+        }
+      ],
+      "react/jsx-tag-spacing": [
+        "warn",
+        {
+          "beforeSelfClosing": "always"
         }
       ],
       "react/prop-types": "off",

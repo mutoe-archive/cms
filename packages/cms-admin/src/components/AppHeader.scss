@@ -1,0 +1,39 @@
+@import "src/assets/scss/variables";
+
+.AppHeader {
+  width: 100%;
+  z-index: 100;
+  background-color: #fff !important;
+  margin-bottom: 0 !important;
+
+  .menuLogo {
+    width: 200px;
+    display: flex;
+    justify-content: center;
+
+    .logoLink {
+      color: $primary;
+      font-weight: 600;
+    }
+  }
+
+  .menuItem {
+    color: $disabled !important;
+    height: 100%;
+
+    &:hover {
+      color: fade-out($primary, 0.9);
+    }
+
+    &.active {
+      color: $primary !important;
+      border-color: $primary !important;
+    }
+  }
+
+  .userTrigger {
+
+  }
+
+}
+
