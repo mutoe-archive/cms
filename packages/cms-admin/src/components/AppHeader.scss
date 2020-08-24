@@ -29,7 +29,18 @@
       color: $primary !important;
       border-color: $primary !important;
     }
+
+    .itemIcon {
+      margin: 0 10px 0 0;
+    }
+
+    .menu.menuDropdown {
+      .item .icon.right.floated {
+        margin-left: 1em !important;
+      }
+    }
   }
+
 
   .userTrigger {
 

@@ -1,11 +1,22 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import { Button } from 'semantic-ui-react'
-import useAuthorizationContext from 'src/contexts/authorization.context'
+import { Link, useHistory } from 'react-router-dom'
+import { Loader } from 'semantic-ui-react'
 import AppHeader from 'src/components/AppHeader'
+import useAuthorizationContext from 'src/contexts/authorization.context'
 
 const PortalPage: React.FC = () => {
-  const { profile, unmountAuthorization } = useAuthorizationContext()
+  const { loading, profile } = useAuthorizationContext()
+
+  const history = useHistory()
+
+  if (loading) {
+    return <Loader />
+  }
+
+  if (!profile) {
+    history.push('/login')
+    return null
+  }
 
   return <div className='App'>
     <AppHeader />
@@ -16,7 +27,6 @@ const PortalPage: React.FC = () => {
       {profile
         ? <>
           <p>Welcome {profile.username} !</p>
-          <Button onClick={unmountAuthorization}>Logout</Button>
         </>
         : <Link className='App-link' to={'/login'}>Login</Link>}
     </header>

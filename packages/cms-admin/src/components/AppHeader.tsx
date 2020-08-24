@@ -1,7 +1,9 @@
 import { noop } from 'lodash'
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { Dropdown, Icon, Menu, SemanticICONS } from 'semantic-ui-react'
+import { DropdownItemProps } from 'semantic-ui-react/dist/commonjs/modules/Dropdown/DropdownItem'
+import useAuthorizationContext from 'src/contexts/authorization.context'
 import Notification from './Notification'
 
 interface AppMenu {
@@ -10,6 +12,8 @@ interface AppMenu {
 }
 
 const AppHeader: React.FC = () => {
+  const { profile, unmountAuthorization } = useAuthorizationContext()
+
   const menu: AppMenu[] = [
     {
       name: 'Dashboard',
@@ -22,16 +26,14 @@ const AppHeader: React.FC = () => {
 
   const [activeItem, setActiveItem] = useState(menu[0].name)
 
-  const iconStyle = {
-    margin: '0 10px 0 0',
+  const history = useHistory()
+  const onLogout = () => {
+    unmountAuthorization()
+    history.push('/login')
   }
 
-  const options = [
-    { key: 'sign-out', text: 'Sign Out' },
-  ]
-
   const userTrigger = <span className='userTrigger'>
-    <Icon name='user' /> user
+    <Icon name='user' /> {profile?.username}
   </span>
 
   return <Menu pointing secondary className='AppHeader'>
@@ -51,7 +53,7 @@ const AppHeader: React.FC = () => {
           active={activeItem === item.name}
           onClick={() => setActiveItem(item.name)}
         >
-          <Icon name={item.icon} size='large' style={iconStyle} />
+          <Icon name={item.icon} size='large' className='itemIcon' />
           <span>{item.name}</span>
         </Menu.Item>)}
     </Menu.Menu>
@@ -62,7 +64,16 @@ const AppHeader: React.FC = () => {
       </Menu.Item>
 
       <Menu.Item className='menuItem' name='setting' onClick={noop}>
-        <Dropdown trigger={userTrigger} options={options} pointing='top right' />
+        <Dropdown trigger={userTrigger} pointing='top right'>
+          <Dropdown.Menu className='menuDropdown'>
+            <Dropdown.Header icon='address card' content='Admin' />
+            <Dropdown.Divider />
+            <Dropdown.Item onClick={onLogout}>
+              <Icon name='sign-out' className='right floated' />
+              Logout
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
       </Menu.Item>
     </Menu.Menu>
   </Menu>

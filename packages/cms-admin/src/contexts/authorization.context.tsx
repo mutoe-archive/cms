@@ -5,6 +5,7 @@ import StorageUtil from 'src/utils/storage.util'
 
 interface AuthState {
   profile: defs.ProfileRo | null
+  loading: boolean
   mountAuthorization: (authRo: defs.AuthRo) => void
   unmountAuthorization: () => void
 }
@@ -42,8 +43,11 @@ export const AuthorizationProvider: React.FC = props => {
     localToken && retrieveUserProfile()
   }, [])
 
+  const loading = Boolean(localToken && !profile)
+
   const value = {
     profile,
+    loading,
     mountAuthorization,
     unmountAuthorization,
   }

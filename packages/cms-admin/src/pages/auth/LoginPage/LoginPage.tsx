@@ -1,5 +1,6 @@
 import React, { useRef } from 'react'
 import { useHistory } from 'react-router-dom'
+import { Loader } from 'semantic-ui-react'
 import FormRenderer, { FormRef } from 'src/components/FormRenderer'
 import useAuthorizationContext from 'src/contexts/authorization.context'
 import { loginForm, loginFormFields } from 'src/pages/auth/LoginPage/LoginPage.form'
@@ -8,12 +9,16 @@ import { API } from 'src/services'
 const LoginPage: React.FC = () => {
   const formRef: FormRef = useRef(null)
   const history = useHistory()
-  const { profile, mountAuthorization } = useAuthorizationContext()
+  const { loading, profile, mountAuthorization } = useAuthorizationContext()
   const { submitting, onSubmit: onLogin } = API.auth.login.useSubmit(formRef)
 
   const redirectToFrom = () => {
     // TODO: redirect to from URI
     history.replace('/')
+  }
+
+  if (loading) {
+    return <Loader />
   }
 
   if (profile) {
