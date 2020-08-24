@@ -1,30 +1,18 @@
 import { noop } from 'lodash'
 import React, { useState } from 'react'
-import { Link, useHistory } from 'react-router-dom'
-import { Dropdown, Icon, Menu, SemanticICONS } from 'semantic-ui-react'
-import { DropdownItemProps } from 'semantic-ui-react/dist/commonjs/modules/Dropdown/DropdownItem'
+import { Link, useHistory, useParams } from 'react-router-dom'
+import { Dropdown, Icon, Menu } from 'semantic-ui-react'
+import { AppKey, appMenus } from 'src/appMenu'
 import useAuthorizationContext from 'src/contexts/authorization.context'
+import { routeMap } from 'src/routeConfig'
 import Notification from './Notification'
-
-interface AppMenu {
-  name: string
-  icon: SemanticICONS
-}
 
 const AppHeader: React.FC = () => {
   const { profile, unmountAuthorization } = useAuthorizationContext()
 
-  const menu: AppMenu[] = [
-    {
-      name: 'Dashboard',
-      icon: 'dashboard',
-    }, {
-      name: 'Content',
-      icon: 'newspaper',
-    },
-  ]
-
-  const [activeItem, setActiveItem] = useState(menu[0].name)
+  const { app } = useParams<{ app: AppKey }>()
+  const appMenu = appMenus.find(it => it.key === app)
+  const [activeItem, setActiveItem] = useState(appMenu?.key)
 
   const history = useHistory()
   const onLogout = () => {
@@ -36,25 +24,28 @@ const AppHeader: React.FC = () => {
     <Icon name='user' /> {profile?.username}
   </span>
 
-  return <Menu pointing secondary className='AppHeader'>
+  const onNavigate = (appKey: AppKey) => {
+    setActiveItem(appKey)
+    history.push(routeMap.app(appKey))
+  }
 
+  return <Menu pointing secondary className='AppHeader'>
     <Menu.Menu postion='left' className='menuLogo'>
       <Menu.Item>
         <Link className='logoLink' to='dashboard'>Mutoe CMS</Link>
       </Menu.Item>
     </Menu.Menu>
-
     <Menu.Menu>
-      {menu.map(item =>
+      {appMenus.map(item =>
         <Menu.Item
           className='menuItem'
-          key={item.name}
-          name={item.name}
-          active={activeItem === item.name}
-          onClick={() => setActiveItem(item.name)}
+          key={item.key}
+          name={item.appName}
+          active={activeItem === item.key}
+          onClick={() => onNavigate(item.key)}
         >
           <Icon name={item.icon} size='large' className='itemIcon' />
-          <span>{item.name}</span>
+          <span>{item.appName}</span>
         </Menu.Item>)}
     </Menu.Menu>
 
