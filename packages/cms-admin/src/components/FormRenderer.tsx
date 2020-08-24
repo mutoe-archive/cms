@@ -100,10 +100,10 @@ function FormRenderer<K extends string, F extends Form<K>> (props: FormRendererP
     return null
   })
 
-  return <Form data-testid="form" className={props.className} onSubmit={onSubmit} noValidate>
+  return <Form data-testid='form' className={props.className} onSubmit={onSubmit} noValidate>
     {renderFields}
-    <Form.Button data-testid="submit"
-      type="submit"
+    <Form.Button data-testid='submit'
+      type='submit'
       primary
       content={props.submitText ?? 'Submit'}
       loading={props.submitting} />

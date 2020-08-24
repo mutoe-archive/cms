@@ -40,7 +40,7 @@ describe('# Login page', () => {
       unmountAuthorization: jest.fn(),
     })
 
-    render(<LoginPage/>)
+    render(<LoginPage />)
 
     expect(mockReplace).toBeCalledWith('/')
   })

@@ -3,8 +3,8 @@ import React from 'react'
 import { focusErrorField, isFormError } from 'src/utils/form.util'
 
 describe('# focus error field util', () => {
-  const Wrapper: React.FC = () => (<div className="error field">
-    <input type="text" data-testid="input" />
+  const Wrapper: React.FC = () => (<div className='error field'>
+    <input type='text' data-testid='input' />
   </div>)
 
   it('should focus on first error field input', () => {

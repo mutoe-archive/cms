@@ -13,12 +13,12 @@ describe('# Authorization Context', () => {
 
   const Provider: React.FC = () => {
     return <AuthorizationProvider>
-      <Child/>
+      <Child />
     </AuthorizationProvider>
   }
 
   it('should got auth with null when init state', () => {
-    const { container } = render(<Provider/>)
+    const { container } = render(<Provider />)
 
     expect(container).toHaveTextContent('not logged')
   })
@@ -27,7 +27,7 @@ describe('# Authorization Context', () => {
     jest.spyOn(StorageUtil.prototype, 'get').mockReturnValue('token')
     jest.spyOn(axios, 'request').mockResolvedValue({ username: 'invalid' })
 
-    render(<Provider/>)
+    render(<Provider />)
 
     waitFor(() => expect(axios.request).toBeCalledWith({
       headers: {

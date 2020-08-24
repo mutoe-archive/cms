@@ -72,7 +72,7 @@ describe('# Form Renderer Component', () => {
     it('should render nothing when passed in invalid field type', () => {
       const invalidFields = [{ type: 'foo', name: 'foo' }] as unknown as Array<FieldConfig<'foo'>>
 
-      const { container } = render(<FormRenderer fields={invalidFields }/>)
+      const { container } = render(<FormRenderer fields={invalidFields } />)
 
       expect(container.querySelectorAll('.field')).toHaveLength(1)
     })

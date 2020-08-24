@@ -7,10 +7,10 @@ import AppHeader from 'src/components/AppHeader'
 const PortalPage: React.FC = () => {
   const { profile, unmountAuthorization } = useAuthorizationContext()
 
-  return <div className="App">
+  return <div className='App'>
     <AppHeader />
 
-    <header className="App-header">
+    <header className='App-header'>
       <p> {'Mutoe\'s Content Manage System'} </p>
 
       {profile
@@ -18,7 +18,7 @@ const PortalPage: React.FC = () => {
           <p>Welcome {profile.username} !</p>
           <Button onClick={unmountAuthorization}>Logout</Button>
         </>
-        : <Link className="App-link" to={'/login'}>Login</Link>}
+        : <Link className='App-link' to={'/login'}>Login</Link>}
     </header>
   </div>
 }
