@@ -1,13 +1,14 @@
 import React from 'react'
 import { Route, Switch } from 'react-router'
 import { useHistory, useParams } from 'react-router-dom'
-import { Loader } from 'semantic-ui-react'
+import { Loader, Segment } from 'semantic-ui-react'
 import { AppKey, appMenus } from 'src/appMenu'
 import AppHeader from 'src/components/AppHeader'
 import AppSidebar from 'src/components/AppSidebar'
 import useAuthorizationContext from 'src/contexts/authorization.context'
 import ContentPage from 'src/pages/content/ContentPage'
 import DashboardPage from 'src/pages/dashboard/DashboardPage'
+import { routePath } from 'src/routeConfig'
 
 const PortalPage: React.FC = () => {
   const { loading, profile } = useAuthorizationContext()
@@ -34,12 +35,12 @@ const PortalPage: React.FC = () => {
     <AppHeader />
     <div className='moduleContainer'>
       {appMenu.modules?.length && <AppSidebar moduleMenus={appMenu.modules} />}
-      <main className='moduleMain'>
+      <Segment as='main' className='moduleMain'>
         <Switch>
           <Route path='/dashboard' component={DashboardPage} />
-          <Route path='/content' component={ContentPage} />
+          <Route path={routePath.content.matcher} component={ContentPage} />
         </Switch>
-      </main>
+      </Segment>
     </div>
   </div>
 }

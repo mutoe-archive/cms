@@ -15,6 +15,7 @@ export interface ModuleMenu {
 }
 
 interface MenuItem {
+  key: string
   name: string
   icon: SemanticICONS
 }
@@ -35,20 +36,24 @@ export const appMenus: AppMenu[] = [
         moduleName: 'Content Management',
         items: [
           {
+            key: 'post',
             name: 'Posts',
             icon: 'paper plane',
           },
           {
+            key: 'category',
             name: 'Categories',
             icon: 'grid layout',
           },
           {
+            key: 'tag',
             name: 'Tags',
             icon: 'tags',
           },
           {
+            key: 'page',
             name: 'Pages',
-            icon: 'page4',
+            icon: 'newspaper',
           },
         ],
       },
@@ -56,10 +61,12 @@ export const appMenus: AppMenu[] = [
         moduleName: 'Content Approval',
         items: [
           {
+            key: 'message-board',
             name: 'Message board',
             icon: 'facebook messenger',
           },
           {
+            key: 'comment',
             name: 'Comments',
             icon: 'comments',
           },
