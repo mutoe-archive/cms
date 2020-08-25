@@ -1,6 +1,3 @@
-/**
- * @description pont内置请求单例
- */
 import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { authorizationTokenStorage } from 'src/contexts/authorization.context'
 import axios from 'src/utils/axios'
@@ -36,7 +33,6 @@ class PontCoreManager {
     const params = { ...queryParams }
 
     const url = path.replace(/{([^\\}]*(?:\\.[^\\}]*)*)}/gm, (match, key) => {
-      // eslint-disable-next-line no-param-reassign
       key = key.trim()
 
       if (params[key] !== undefined) {

@@ -1,7 +1,3 @@
-/**
- * @description 基于 swr 的取数hooks
- */
-
 import { AxiosRequestConfig, Method } from 'axios'
 import React, { useState } from 'react'
 import { FormRef } from 'src/components/FormRenderer'
@@ -10,11 +6,8 @@ import useSWR, { ConfigInterface, SWRConfig } from 'swr'
 import { PontCore } from './pontCore'
 
 const defaultOptions: ConfigInterface = {
-  /** 错误重试，默认关闭 */
   shouldRetryOnError: false,
-  /** 获取焦点时，不重新请求 */
   revalidateOnFocus: false,
-  /** 接口缓存 1 分钟 */
   dedupingInterval: 60000,
 }
 

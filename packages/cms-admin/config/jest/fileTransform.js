@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+
 const path = require('path')
 const { camelCase, upperFirst } = require('lodash')
 
@@ -5,7 +7,7 @@ const { camelCase, upperFirst } = require('lodash')
 // http://facebook.github.io/jest/docs/en/webpack.html
 
 module.exports = {
-  process(src, filename) {
+  process (src, filename) {
     const assetFilename = JSON.stringify(path.basename(filename))
 
     if (filename.match(/\.svg$/)) {
