@@ -20,7 +20,7 @@ class PontCoreManager {
   /**
    * axios 请求
    */
-  async fetch <T = any> (options: AxiosRequestConfig = {}): Promise<T> {
+  async fetch<T = any> (options: AxiosRequestConfig = {}): Promise<T> {
     const token = authorizationTokenStorage.get()
     if (token) {
       (options.headers ?? (options.headers = {})).Authorization = `Bearer ${token}`
@@ -29,8 +29,8 @@ class PontCoreManager {
     return await this.axios.request(options)
   }
 
-  getUrl (path: string, queryParams: any = {}) {
-    const params = { ...queryParams }
+  getUrl (path: string, paramVariables: any = {}) {
+    const params = { ...paramVariables }
 
     const url = path.replace(/{([^\\}]*(?:\\.[^\\}]*)*)}/gm, (match, key) => {
       key = key.trim()
@@ -41,12 +41,12 @@ class PontCoreManager {
         return value
       }
       console.warn('Please set value for template key: ', key)
-      return ''
+      return `{${key}}`
     })
 
     const paramStr = Object.keys(params)
       .map(key => {
-        return params[key] === undefined ? '' : `${key}=${params[key]}`
+        return params[key] === undefined || params[key]?.length <= 0 ? '' : `${key}=${params[key]}`
       })
       .filter(id => id)
       .join('&')
