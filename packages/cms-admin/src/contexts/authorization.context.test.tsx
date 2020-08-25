@@ -6,7 +6,8 @@ import StorageUtil from 'src/utils/storage.util'
 
 describe('# Authorization Context', () => {
   const Child: React.FC = () => {
-    const { profile } = useAuthorizationContext()
+    const { profile, loading } = useAuthorizationContext()
+    if (loading) return <span>loading</span>
     if (profile) return <span>{profile.username}</span>
     return <div>not logged</div>
   }
@@ -36,5 +37,16 @@ describe('# Authorization Context', () => {
       method: 'GET',
       url: '/api/user',
     }))
+  })
+
+  it('should return correct loading state when retrieve API', async () => {
+    jest.spyOn(StorageUtil.prototype, 'get').mockReturnValue('token')
+    jest.spyOn(axios, 'request').mockResolvedValue({ username: 'invalid' })
+
+    const { container } = render(<Provider />)
+    expect(container).toHaveTextContent('loading')
+
+    await waitFor(() => expect(axios.request).toBeCalled())
+    expect(container).not.toHaveTextContent('loading')
   })
 })

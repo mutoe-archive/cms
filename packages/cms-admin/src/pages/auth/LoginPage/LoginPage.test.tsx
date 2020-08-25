@@ -1,8 +1,9 @@
 import { fireEvent, render, waitFor } from '@testing-library/react'
 import React from 'react'
+import useAuthorizationContext from 'src/contexts/authorization.context'
+import { defs } from 'src/services'
 import axios from 'src/utils/axios'
 import LoginPage from './LoginPage'
-import useAuthorizationContext from 'src/contexts/authorization.context'
 
 const mockReplace = jest.fn()
 jest.mock('react-router-dom', () => ({
@@ -22,6 +23,7 @@ describe('# Login page', () => {
 
     mockUseAuthorizationContext.mockReturnValue({
       profile: null,
+      loading: false,
       mountAuthorization: mockMountAuthorization,
       unmountAuthorization: jest.fn(),
     })
@@ -36,6 +38,7 @@ describe('# Login page', () => {
   it('should redirect to home page when user is already logged in', () => {
     mockUseAuthorizationContext.mockReturnValue({
       profile: { username: 'admin' } as defs.ProfileRo,
+      loading: false,
       mountAuthorization: mockMountAuthorization,
       unmountAuthorization: jest.fn(),
     })
