@@ -7,5 +7,6 @@ services:
       POSTGRES_USER: ${TYPEORM_USERNAME}
       POSTGRES_PASSWORD: ${TYPEORM_PASSWORD}
       PGDATA: /data/postgres
+      POSTGRES_DB: ${TYPEORM_DATABASE}
     ports:
     - '${TYPEORM_PORT}:5432'
