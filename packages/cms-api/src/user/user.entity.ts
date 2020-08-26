@@ -27,7 +27,7 @@ export class UserEntity {
 
   @BeforeUpdate()
   @BeforeInsert()
-  hashPassword ():void {
+  hashPassword (): void {
     this.password = cryptoPassword(this.password)
   }
 
@@ -43,3 +43,5 @@ export class UserEntity {
   @UpdateDateColumn()
   updatedAt: string
 }
+
+export type UserSafeEntity = Omit<UserEntity, 'password'> & { password?: never }

@@ -41,6 +41,13 @@ describe('Auth Module Integration', () => {
         .send(requestBody)
 
       expect(response.status).toBe(201)
+      expect(response.body).toEqual(expect.objectContaining({
+        id: 1,
+        username: 'admin',
+        email: 'admin@cms.com',
+        token: expect.any(String),
+      }))
+      expect(response.body).not.toHaveProperty('password')
     })
 
     it('should return 422 given exist username', async () => {
@@ -83,6 +90,13 @@ describe('Auth Module Integration', () => {
         .send(requestBody)
 
       expect(response.status).toBe(200)
+      expect(response.body).toEqual(expect.objectContaining({
+        id: 1,
+        username: 'admin',
+        email: 'admin@cms.com',
+        token: expect.any(String),
+      }))
+      expect(response.body).not.toHaveProperty('password')
     })
 
     it('should return 422 when login given incorrect user name', async () => {

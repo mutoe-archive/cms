@@ -30,7 +30,7 @@ describe('User Controller', () => {
 
   describe('profile', () => {
     it('should get user info given a jwt token', async () => {
-      jest.spyOn(userService, 'findUser').mockResolvedValue({ id: 1, username: 'admin', password: 'hashedPassword' } as UserEntity)
+      jest.spyOn(userService, 'findUser').mockResolvedValue({ id: 1, username: 'admin' } as any)
       const user = await controller.profile({ user: { userId: 1, email: 'foo@bar.com' } })
 
       expect(user).toHaveProperty('id', 1)

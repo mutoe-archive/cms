@@ -2,24 +2,31 @@ import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { omit } from 'lodash'
 import { Repository } from 'typeorm'
-import { UserEntity } from './user.entity'
+import { UserEntity, UserSafeEntity } from './user.entity'
+
+interface FindUserQuery {
+  id?: number
+  username?: string
+  email?: string
+}
 
 @Injectable()
 export class UserService {
   constructor (
-    @InjectRepository(UserEntity)
-    private readonly userRepository: Repository<UserEntity>,
+    @InjectRepository(UserEntity) private readonly userRepository: Repository<UserEntity>,
   ) {}
 
-  async createUser (userInfo: { email: string; username: string; password: string }): Promise<Omit<UserEntity, 'password'>> {
-    const result = await this.userRepository.save(Object.assign(new UserEntity(), userInfo))
-    return omit(result, ['password'])
+  async createUser (userInfo: { email: string; username: string; password: string }): Promise<UserSafeEntity> {
+    const userEntity = await this.userRepository.save(Object.assign(new UserEntity(), userInfo))
+    return omit(userEntity, ['password'])
   }
 
-  async findUser (by: { username?: string; email?: string }, withPassword = false): Promise<UserEntity> {
-    if (!withPassword) return this.userRepository.findOne({ where: by })
+  async findUser (where: FindUserQuery, withPassword?: false): Promise<UserSafeEntity>
+  async findUser (where: FindUserQuery, withPassword: true): Promise<UserEntity>
+  async findUser (where, withPassword) {
+    if (!withPassword) return this.userRepository.findOne({ where }) as Promise<UserSafeEntity>
 
     const select = Object.keys(this.userRepository.metadata.propertiesMap) as (keyof UserEntity)[]
-    return this.userRepository.findOne({ where: by, select })
+    return await this.userRepository.findOne({ where, select })
   }
 }

@@ -5,7 +5,7 @@ import { LoginDto } from 'src/auth/dto/login.dto'
 import { RegisterDto } from 'src/auth/dto/register.dto'
 import { AuthRo } from 'src/auth/ro/auth.ro'
 import { FormException } from 'src/exception'
-import { UserEntity } from 'src/user/user.entity'
+import { UserSafeEntity } from 'src/user/user.entity'
 import { UserService } from 'src/user/user.service'
 import { cryptoPassword } from 'src/utils'
 
@@ -17,7 +17,7 @@ export class AuthService {
   ) {}
 
   async register (registerDto: RegisterDto): Promise<AuthRo> {
-    let user: UserEntity
+    let user: UserSafeEntity
     user = await this.userService.findUser({ username: registerDto.username })
     if (user?.id) {
       throw new FormException({ username: 'username is exist' })
@@ -32,12 +32,12 @@ export class AuthService {
   }
 
   async login (loginDto: LoginDto): Promise<AuthRo> {
-    const user = await this.validateUser(loginDto.username, loginDto.password)
-    const token = this.generateToken(user.id, user.email)
-    return { ...user, token }
+    const profile = await this.validateUser(loginDto.username, loginDto.password)
+    const token = this.generateToken(profile.id, profile.email)
+    return { ...profile, token }
   }
 
-  async validateUser (username: string, password: string): Promise<Omit<UserEntity, 'password'>> {
+  async validateUser (username: string, password: string): Promise<UserSafeEntity> {
     const user = await this.userService.findUser({ username }, true)
     if (!user) {
       throw new FormException({ username: 'user is not exist' })

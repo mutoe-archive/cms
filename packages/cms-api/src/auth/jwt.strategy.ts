@@ -4,6 +4,7 @@ import { ExtractJwt, Strategy } from 'passport-jwt'
 import { NEST_SECRET } from 'src/config'
 
 export interface AuthPayload { userId: number; email: string }
+export interface AuthRequest { user: AuthPayload }
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
