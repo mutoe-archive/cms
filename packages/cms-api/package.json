@@ -74,7 +74,9 @@
     "coverageDirectory": "<rootDir>/../coverage",
     "collectCoverage": true,
     "collectCoverageFrom": [
-      "src/**/*.ts"
+      "<rootDir>/**/*.ts",
+      "!<rootDir>/{main,config}.ts",
+      "!<rootDir>/**/*.{module,dto,ro,strategy,entity}.ts"
     ],
     "coverageThreshold": {
       "global": {
@@ -137,7 +139,7 @@
     "overrides": [
       {
         "files": [
-          "**/*.{spec,test}.ts"
+          "src/**/*.{spec,test}.ts"
         ],
         "env": {
           "jest": true
