@@ -13,6 +13,7 @@ function createSwagger (app: INestApplication) {
     .addTag('App', 'Application')
     .addTag('Auth', 'Authorization')
     .addTag('User', 'User')
+    .addTag('Article', 'Article')
     .build()
 
   const document = SwaggerModule.createDocument(app, options)

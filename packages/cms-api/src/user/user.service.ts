@@ -21,10 +21,8 @@ export class UserService {
     return omit(userEntity, ['password'])
   }
 
-  async findUser (where: FindUserQuery, withPassword?: false): Promise<UserSafeEntity>
-  async findUser (where: FindUserQuery, withPassword: true): Promise<UserEntity>
-  async findUser (where, withPassword) {
-    if (!withPassword) return this.userRepository.findOne({ where }) as Promise<UserSafeEntity>
+  async findUser (where: FindUserQuery, withPassword = false): Promise<UserEntity> {
+    if (!withPassword) return this.userRepository.findOne({ where })
 
     const select = Object.keys(this.userRepository.metadata.propertiesMap) as (keyof UserEntity)[]
     return await this.userRepository.findOne({ where, select })
