@@ -1,3 +1,23 @@
+export class ArticleRo {
+  /** content */
+  content = ''
+
+  /** createdAt */
+  createdAt = ''
+
+  /** id */
+  id = undefined
+
+  /** title */
+  title = ''
+
+  /** updatedAt */
+  updatedAt = ''
+
+  /** user */
+  user = new UserEntity()
+}
+
 export class AuthRo {
   /** bio */
   bio = ''
@@ -22,6 +42,14 @@ export class AuthRo {
 
   /** username */
   username = ''
+}
+
+export class CreateArticleDto {
+  /** content */
+  content = ''
+
+  /** title */
+  title = ''
 }
 
 export class LoginDto {
@@ -61,6 +89,29 @@ export class RegisterDto {
 
   /** password */
   password = ''
+
+  /** username */
+  username = ''
+}
+
+export class UserEntity {
+  /** bio */
+  bio = ''
+
+  /** createdAt */
+  createdAt = ''
+
+  /** email */
+  email = ''
+
+  /** id */
+  id = undefined
+
+  /** image */
+  image = ''
+
+  /** updatedAt */
+  updatedAt = ''
 
   /** username */
   username = ''
