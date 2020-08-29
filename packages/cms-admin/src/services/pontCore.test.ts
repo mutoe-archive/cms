@@ -1,6 +1,6 @@
 import { PontCore } from 'src/services/pontCore'
 
-describe('injectPathVariables', () => {
+describe('# injectPathVariables', () => {
   const { warn } = console
 
   beforeAll(() => {
@@ -15,7 +15,7 @@ describe('injectPathVariables', () => {
   it('should inject provided path variables', () => {
     const templateUrl = '/api/v1/content/{pageId}/{cat}'
 
-    const url = PontCore.getUrl(templateUrl, {
+    const url = PontCore.injectPathVariables(templateUrl, {
       pageId: 'verifyDocuments',
       cat: 'feedback',
     })
@@ -26,7 +26,7 @@ describe('injectPathVariables', () => {
   it('should return original url if no variables provided', () => {
     const templateUrl = '/api/v1/{answer}'
 
-    const url = PontCore.getUrl(templateUrl)
+    const url = PontCore.injectPathVariables(templateUrl)
 
     expect(url).toEqual('/api/v1/{answer}')
     expect(console.warn).toBeCalled()
@@ -35,7 +35,7 @@ describe('injectPathVariables', () => {
   it('should receive query parameters', () => {
     const templateUrl = '/api/v1/{answer}'
 
-    const url = PontCore.getUrl(templateUrl, {
+    const url = PontCore.injectPathVariables(templateUrl, {
       answer: 'foo',
       pageNumber: 1,
       pageSize: 25,

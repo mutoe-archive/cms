@@ -22,7 +22,7 @@ export function request (
   axiosOption: AxiosRequestConfig = {},
 ): Promise<defs.ArticleRo> {
   return PontCore.fetch({
-    url: PontCore.getUrl(path),
+    url: PontCore.injectPathVariables(path),
     method,
     data,
     ...axiosOption,

@@ -65,10 +65,10 @@ export default class MyGenerator extends CodeGenerator {
     requestArgs.push('axiosOption: AxiosRequestConfig  = {}')
     const requestParams: string = requestArgs.join(', ')
 
-    const getUrlArgs = []
-    getUrlArgs.push('path')
-    paramsCode && getUrlArgs.push('params')
-    const getUrlParams = getUrlArgs.join(', ')
+    const injectPathVariableArgs = []
+    injectPathVariableArgs.push('path')
+    paramsCode && injectPathVariableArgs.push('params')
+    const injectPathVariableParams = injectPathVariableArgs.join(', ')
 
     const hooksCodes: string[] = []
 
@@ -107,7 +107,7 @@ export default class MyGenerator extends CodeGenerator {
 
       export function request(${requestParams}): Promise<${responseType}> {
         return PontCore.fetch({
-          url: PontCore.getUrl(${getUrlParams}),
+          url: PontCore.injectPathVariables(${injectPathVariableParams}),
           method,
           ${bodyParamsCode ? 'data,' : ''}
           ...axiosOption,

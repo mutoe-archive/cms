@@ -19,7 +19,7 @@ export function request (
   axiosOption: AxiosRequestConfig = {},
 ): Promise<any> {
   return PontCore.fetch({
-    url: PontCore.getUrl(path, params),
+    url: PontCore.injectPathVariables(path, params),
     method,
 
     ...axiosOption,

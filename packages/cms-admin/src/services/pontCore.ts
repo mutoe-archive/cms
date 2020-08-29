@@ -29,7 +29,7 @@ class PontCoreManager {
     return await this.axios.request(options)
   }
 
-  getUrl (path: string, paramVariables: any = {}) {
+  injectPathVariables (path: string, paramVariables: any = {}) {
     const params = { ...paramVariables }
 
     const url = path.replace(/{([^\\}]*(?:\\.[^\\}]*)*)}/gm, (match, key) => {

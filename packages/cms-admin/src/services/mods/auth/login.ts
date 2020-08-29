@@ -18,7 +18,7 @@ export function request (
   axiosOption: AxiosRequestConfig = {},
 ): Promise<defs.AuthRo> {
   return PontCore.fetch({
-    url: PontCore.getUrl(path),
+    url: PontCore.injectPathVariables(path),
     method,
     data,
     ...axiosOption,
