@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
-import { AppController } from 'src/app.controller'
+import { AppController } from 'src/app/app.controller'
 import { AuthModule } from 'src/auth/auth.module'
 import { UserModule } from 'src/user/user.module'
 import { ArticleModule } from 'src/article/article.module'

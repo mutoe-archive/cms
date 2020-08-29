@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { FormExceptionKey } from 'cms-admin/src/utils/form.util'
-import { AppController } from 'src/app.controller'
+import { AppController } from 'src/app/app.controller'
 import { ArticleModule } from 'src/article/article.module'
 import { AuthModule } from 'src/auth/auth.module'
 import { LoginDto } from 'src/auth/dto/login.dto'

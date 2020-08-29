@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing'
-import { AppController } from 'src/app.controller'
+import { AppController } from 'src/app/app.controller'
 import * as request from 'supertest'
 
 describe('App Module Integration', () => {
