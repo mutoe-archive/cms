@@ -3,12 +3,12 @@ import { getRepositoryToken } from '@nestjs/typeorm'
 import { ArticleController } from 'src/article/article.controller'
 import { ArticleEntity } from 'src/article/article.entity'
 import { ArticleService } from 'src/article/article.service'
-import { AuthModule } from 'src/auth/auth.module'
+import { CreateArticleDto } from 'src/article/dto/createArticleDto'
+import { AuthPayload } from 'src/auth/jwt.strategy'
 import { UserEntity } from 'src/user/user.entity'
-import { UserModule } from 'src/user/user.module'
 import { UserService } from 'src/user/user.service'
 
-describe('Post Controller', () => {
+describe('Article Controller', () => {
   let controller: ArticleController
   let userService: UserService
   let articleService: ArticleService
@@ -34,24 +34,20 @@ describe('Post Controller', () => {
   })
 
   describe('article', () => {
-    it('should got article ro when create article given a valid article form and logged user', async () => {
-      jest.spyOn(userService, 'findUser')
-        .mockResolvedValue({ id: 1, username: 'mutoe', email: 'mutoe@foxmail.com' } as any)
-      jest.spyOn(articleService, 'createArticle')
-        .mockResolvedValue({ id: 1, content: 'bar', title: 'foo', user: { id: 1 } } as any)
+    const user: AuthPayload = { userId: 1, email: 'mutoe@foxmail.com' }
+    const articleDto = { title: 'foo', content: 'bar' }
 
-      const articleRo = await controller.createArticle({
-        user: {
-          userId: 1,
-          email: 'mutoe@foxmail.com',
-        },
-      }, { title: 'foo', content: 'bar' })
+    it('should got article ro when create article given a valid article form and logged user', async () => {
+      jest.spyOn(userService, 'findUser').mockResolvedValue(user as any)
+      jest.spyOn(articleService, 'createArticle')
+        .mockResolvedValue({ id: 1, ...articleDto, user } as any)
+
+      const articleRo = await controller.createArticle({ user }, articleDto)
 
       expect(articleRo).toEqual({
         id: 1,
-        title: 'foo',
-        content: 'bar',
-        user: { id: 1 },
+        ...articleDto,
+        user,
       })
     })
   })

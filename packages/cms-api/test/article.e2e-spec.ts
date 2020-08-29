@@ -10,7 +10,7 @@ import * as request from 'supertest'
 import { getToken, mockDate } from 'test/testUtils'
 import ormConfig from './orm-config'
 
-describe('Post Module Integration', () => {
+describe('Article Module Integration', () => {
   let app: INestApplication
   let token: string
 
@@ -45,7 +45,7 @@ describe('Post Module Integration', () => {
       }
       const response = await request(app.getHttpServer())
         .post('/article')
-        .set('Authorization', `Bearer ${token}`)
+        .auth(token, { type: 'bearer' })
         .send(requestBody)
 
       restoreMockDate()
