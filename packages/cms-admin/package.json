@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "yarn tsc && node scripts/test.js",
+    "test": "yarn tsc && node scripts/test.js --coverage",
     "lint": "eslint 'src/**/*.ts?(x)' --fix",
     "pont:sync": "rm -f src/services/api-lock.json && pont && eslint 'src/services/**/*.ts?(x)' --fix"
   },
