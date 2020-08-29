@@ -17,6 +17,14 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12.x
+
+      - uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+            */*/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+
       - run: yarn workspace cms-api install
-      - run: yarn workspace cms-api test
-      - run: yarn workspace cms-api test:e2e
+      - run: yarn workspace cms-api test:unit
+      - run: yarn workspace cms-api test:integration
