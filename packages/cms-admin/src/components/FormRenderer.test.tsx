@@ -1,7 +1,7 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import React from 'react'
 import FormRenderer, { FieldConfig } from 'src/components/FormRenderer'
-import ERROR_MESSAGE from 'src/constants/errorMessage'
+import { ERROR_MESSAGE } from 'src/constants/message'
 
 describe('# Form Renderer Component', () => {
   let fields: Array<FieldConfig<string>>

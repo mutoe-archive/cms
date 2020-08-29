@@ -56,7 +56,7 @@ describe('AuthService', () => {
       jest.spyOn(userService, 'findUser').mockResolvedValue({ id: 1, username: 'exist_user' } as UserEntity)
       const registerDto = { email: 'foo@bar.com', username: 'exist_user', password: '123456' }
 
-      await expect(authService.register(registerDto)).rejects.toThrow(new FormException({ username: 'username is exist' }))
+      await expect(authService.register(registerDto)).rejects.toThrow(new FormException({ username: ['isExist'] }))
     })
 
     it('should throw error when email is exist', async () => {
@@ -64,7 +64,7 @@ describe('AuthService', () => {
       jest.spyOn(userService, 'findUser').mockResolvedValueOnce({ id: 1, email: 'exist_email@bar.com' } as UserEntity)
       const registerDto = { email: 'exist_email@bar.com', username: 'username', password: '123456' }
 
-      await expect(authService.register(registerDto)).rejects.toThrow(new FormException({ email: 'email is exist' }))
+      await expect(authService.register(registerDto)).rejects.toThrow(new FormException({ email: ['isExist'] }))
     })
   })
 
@@ -97,7 +97,7 @@ describe('AuthService', () => {
       jest.spyOn(userService, 'findUser').mockResolvedValue(undefined)
 
       const validateUser = authService.validateUser('foo@bar.com', '')
-      await expect(validateUser).rejects.toThrow(new FormException({ username: 'user is not exist' }))
+      await expect(validateUser).rejects.toThrow(new FormException({ username: ['isNotExist'] }))
     })
 
     it('should throw bad request exception when invalid password', async () => {
@@ -105,7 +105,7 @@ describe('AuthService', () => {
       jest.spyOn(userService, 'findUser').mockResolvedValue({ email: 'foo@bar.com', password } as UserEntity)
 
       const validateUser = authService.validateUser('foo@bar.com', 'invalidPassword')
-      await expect(validateUser).rejects.toThrow(new FormException({ password: 'password is invalid' }))
+      await expect(validateUser).rejects.toThrow(new FormException({ password: ['isInvalid'] }))
     })
   })
 

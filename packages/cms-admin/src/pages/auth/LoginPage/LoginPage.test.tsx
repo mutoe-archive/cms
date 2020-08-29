@@ -3,6 +3,7 @@ import React from 'react'
 import useAuthorizationContext from 'src/contexts/authorization.context'
 import { defs } from 'src/services'
 import axios from 'src/utils/axios'
+import { FormExceptionKey } from 'src/utils/form.util'
 import LoginPage from './LoginPage'
 
 const mockReplace = jest.fn()
@@ -75,11 +76,11 @@ describe('# Login page', () => {
       response: {
         status: 422,
         data: {
-          username: 'invalid',
+          username: ['isInvalid'] as FormExceptionKey[],
         },
       },
     })
-    const { getByTestId, getByPlaceholderText } = render(<LoginPage />)
+    const { getByTestId, getByPlaceholderText, getByText } = render(<LoginPage />)
 
     fireEvent.change(getByPlaceholderText('Username'), { target: { value: 'admin' } })
     fireEvent.change(getByPlaceholderText('Password'), { target: { value: '123456' } })
@@ -88,6 +89,7 @@ describe('# Login page', () => {
     fireEvent.click(submitButton)
 
     await waitFor(() => expect(axios.request).toBeCalledTimes(1))
-    await waitFor(() => expect(document.activeElement).toBe(getByPlaceholderText('Username')))
+    await waitFor(() => expect(getByText('Username is invalid')).toBeInTheDocument())
+    expect(document.activeElement).toBe(getByPlaceholderText('Username'))
   })
 })

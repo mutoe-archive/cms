@@ -1,6 +1,6 @@
 import { render, waitFor } from '@testing-library/react'
 import React from 'react'
-import { focusErrorField, isFormError } from 'src/utils/form.util'
+import { focusErrorField, sentence } from 'src/utils/form.util'
 
 describe('# focus error field util', () => {
   const Wrapper: React.FC = () => (<div className='error field'>
@@ -15,30 +15,14 @@ describe('# focus error field util', () => {
   })
 })
 
-describe('# isFormError', () => {
-  it('should return true when error has data message and status code is 422', () => {
-    const error = {
-      response: {
-        status: 422,
-        data: {
-          message: {
-            username: 'is invalid',
-          },
-        },
-      },
-    }
-
-    expect(isFormError(error)).toBeTruthy()
+describe('# sentence', () => {
+  it('should convert camelCase text to sentence', () => {
+    const text = 'userName is Invalid'
+    expect(sentence(text)).toBe('User name is invalid')
   })
 
-  it('should return false when error is not have status code with 422', () => {
-    const error = {
-      response: {
-        status: 400,
-        data: {},
-      },
-    }
-
-    expect(isFormError(error)).toBeFalsy()
+  it('should keep special chars exist', () => {
+    const text = 'userName is invalid (max value is 5)'
+    expect(sentence(text)).toBe('User name is invalid (max value is 5)')
   })
 })

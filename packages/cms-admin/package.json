@@ -235,16 +235,14 @@
     ],
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,ts,tsx}",
-      "!src/**/*.d.ts",
-      "!src/constants/**",
-      "!src/services/**",
-      "!src/serviceWorker.ts",
-      "!src/index.tsx",
-      "!src/App.tsx",
+      "!src/**/*.{form}.ts",
+      "!src/{constants,services}/**",
+      "!src/{index,App}.tsx",
+      "!src/{appMenu,routeConfig,serviceWorker}.ts",
       "!src/utils/axios.ts"
     ],
     "coverageThreshold": {
-      "global": {
+      "src/**/*.ts": {
         "branches": 80,
         "functions": 80,
         "lines": 80,

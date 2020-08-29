@@ -20,11 +20,11 @@ export class AuthService {
     let user: UserSafeEntity
     user = await this.userService.findUser({ username: registerDto.username })
     if (user?.id) {
-      throw new FormException({ username: 'username is exist' })
+      throw new FormException({ username: ['isExist'] })
     }
     user = await this.userService.findUser({ email: registerDto.email })
     if (user?.id) {
-      throw new FormException({ email: 'email is exist' })
+      throw new FormException({ email: ['isExist'] })
     }
     const profile = await this.userService.createUser(registerDto)
     const token = this.generateToken(profile.id, profile.email)
@@ -40,10 +40,10 @@ export class AuthService {
   async validateUser (username: string, password: string): Promise<UserSafeEntity> {
     const user = await this.userService.findUser({ username }, true)
     if (!user) {
-      throw new FormException({ username: 'user is not exist' })
+      throw new FormException({ username: ['isNotExist'] })
     }
     if (user.password !== cryptoPassword(password)) {
-      throw new FormException({ password: 'password is invalid' })
+      throw new FormException({ password: ['isInvalid'] })
     }
     return omit(user, 'password')
   }

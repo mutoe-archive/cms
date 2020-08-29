@@ -1,7 +1,7 @@
-import { AxiosRequestConfig, Method } from 'axios'
+import { AxiosError, AxiosRequestConfig, Method } from 'axios'
 import React, { useState } from 'react'
 import { FormRef } from 'src/components/FormRenderer'
-import { focusErrorField, isFormError } from 'src/utils/form.util'
+import { fieldErrorDecorator, focusErrorField, FormExceptionKey } from 'src/utils/form.util'
 import useSWR, { ConfigInterface, SWRConfig } from 'swr'
 import { PontCore } from './pontCore'
 
@@ -41,6 +41,11 @@ export function useRequest<D = any> (
   }
 }
 
+export type FormErrorResponse = Record<string, FormExceptionKey[]>
+export function isFormError (error: any): error is AxiosError<FormErrorResponse> {
+  return error.response?.status === 422 && error.response.data
+}
+
 export function useSubmit<Req = any, Res = any> (formRef: FormRef, method: Method, path: string, params?: any) {
   const [submitting, setSubmitting] = useState(false)
 
@@ -52,7 +57,7 @@ export function useSubmit<Req = any, Res = any> (formRef: FormRef, method: Metho
     } catch (e) {
       if (formRef && isFormError(e)) {
         Object.entries(e.response?.data ?? {})
-          .forEach(([field, message]) => formRef.current?.setError(field, message))
+          .forEach(([field, message]) => formRef.current?.setError(field, fieldErrorDecorator(field, message)))
         focusErrorField()
       }
       throw e

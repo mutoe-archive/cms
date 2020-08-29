@@ -1,8 +1,9 @@
-import { INestApplication, ValidationPipe } from '@nestjs/common'
+import { HttpStatus, INestApplication, ValidationPipe } from '@nestjs/common'
 import { NestFactory } from '@nestjs/core'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 import { AppModule } from 'src/app.module'
 import { NEST_PORT, SWAGGER_ENABLE } from 'src/config'
+import { FormException } from 'src/exception'
 import { version } from '../package.json'
 
 function createSwagger (app: INestApplication) {
@@ -22,7 +23,14 @@ function createSwagger (app: INestApplication) {
 
 async function bootstrap () {
   const app = await NestFactory.create(AppModule)
-  app.useGlobalPipes(new ValidationPipe())
+  app.useGlobalPipes(new ValidationPipe({
+    errorHttpStatusCode: HttpStatus.UNPROCESSABLE_ENTITY,
+    exceptionFactory: errors => {
+      const errorEntries = errors.map(error => [error.property, Object.keys(error.constraints)])
+      return new FormException(Object.fromEntries(errorEntries))
+    },
+    transform: true,
+  }))
   app.setGlobalPrefix('/api')
 
   if (SWAGGER_ENABLE) {

@@ -63,5 +63,32 @@ describe('Article Module Integration', () => {
         }),
       })
     })
+
+    it('should return 401 when create article with invalid token', async () => {
+      const requestBody: CreateArticleDto = {
+        title: 'title',
+        content: '<p>I am content</p>',
+      }
+
+      const response = await request(app.getHttpServer())
+        .post('/article')
+        .send(requestBody)
+
+      expect(response.status).toBe(401)
+    })
+
+    it('should return 422 when create article given an invalid form', async () => {
+      const requestBody: CreateArticleDto = {
+        content: '<p>I am content</p>',
+      } as any
+
+      const response = await request(app.getHttpServer())
+        .post('/article')
+        .auth(token, { type: 'bearer' })
+        .send(requestBody)
+
+      expect(response.status).toBe(422)
+      expect(response.body).toEqual({})
+    })
   })
 })

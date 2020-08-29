@@ -1,8 +1,8 @@
 import { pick } from 'lodash'
 import React, { useImperativeHandle, useState } from 'react'
 import { Form } from 'semantic-ui-react'
-import ERROR_MESSAGE from 'src/constants/errorMessage'
-import { focusErrorField } from 'src/utils/form.util'
+import { ERROR_MESSAGE } from 'src/constants/message'
+import { fieldErrorSeparator, focusErrorField, sentence } from 'src/utils/form.util'
 
 interface FieldBasicConfig<T> {
   name: T
@@ -45,6 +45,12 @@ function FormRenderer<K extends string, F extends Form<K>> (props: FormRendererP
   const [errors, setErrors] = useState<Partial<Record<K, string>>>({})
 
   const setError = (fieldName: string, errorMessage?: string) => {
+    if (errorMessage) {
+      errorMessage = errorMessage
+        .split(fieldErrorSeparator)
+        .map(sentence)
+        .join(fieldErrorSeparator)
+    }
     setErrors(prev => ({ ...prev, [fieldName]: errorMessage }))
     return !errorMessage
   }
