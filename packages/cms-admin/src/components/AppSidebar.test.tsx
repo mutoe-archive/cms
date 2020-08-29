@@ -28,8 +28,8 @@ describe('# AppHeader', () => {
   it('should navigate to correct location when click item', () => {
     const { getByTestId } = render(<AppSidebar moduleMenus={contentModuleMenus} />)
 
-    fireEvent.click(getByTestId('post'))
+    fireEvent.click(getByTestId('article'))
 
-    expect(mockPush).toBeCalledWith('/content/post')
+    expect(mockPush).toBeCalledWith('/content/article')
   })
 })

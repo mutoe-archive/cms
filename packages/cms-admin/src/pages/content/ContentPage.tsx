@@ -2,12 +2,12 @@ import React, { Suspense } from 'react'
 import { useParams } from 'react-router-dom'
 import { Loader } from 'semantic-ui-react'
 
-const PostListPage = React.lazy(() => import(/* webpackChunkName: "content" */'src/pages/content/post/PostListPage'))
+const ArticleListPage = React.lazy(() => import(/* webpackChunkName: "content" */'src/pages/content/article/ArticleListPage'))
 
-type ModuleKey = 'post'
+type ModuleKey = 'article'
 
 const componentMap: Record<ModuleKey, React.LazyExoticComponent<React.FC>> = {
-  post: PostListPage,
+  article: ArticleListPage,
 }
 
 const ContentPage: React.FC = () => {

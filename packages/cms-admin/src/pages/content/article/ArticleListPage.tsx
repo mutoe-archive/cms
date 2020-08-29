@@ -1,7 +1,7 @@
 import React from 'react'
 import { Input, Menu, Placeholder, Segment } from 'semantic-ui-react'
 
-const PostListPage: React.FC = () => {
+const ArticleListPage: React.FC = () => {
   return <div>
     <Menu attached='top'>
       <Menu.Item icon='plus' content='New' />
@@ -24,4 +24,4 @@ const PostListPage: React.FC = () => {
   </div>
 }
 
-export default PostListPage
+export default ArticleListPage

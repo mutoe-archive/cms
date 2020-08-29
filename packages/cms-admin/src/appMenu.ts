@@ -36,8 +36,8 @@ export const appMenus: AppMenu[] = [
         moduleName: 'Content Management',
         items: [
           {
-            key: 'post',
-            name: 'Posts',
+            key: 'article',
+            name: 'Articles',
             icon: 'paper plane',
           },
           {

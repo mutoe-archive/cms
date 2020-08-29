@@ -8,8 +8,8 @@ export const routePath = {
 
   content: {
     root: '/content',
-    matcher: '/content/:module(post|category|tag|page|guestbook|comment)',
-    post: '/content/post',
+    matcher: '/content/:module(article|category|tag|page|guestbook|comment)',
+    article: '/content/article',
     category: '/content/category',
     tag: '/content/tag',
     page: '/content/page',
