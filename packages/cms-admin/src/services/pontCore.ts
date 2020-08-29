@@ -1,5 +1,5 @@
 import { AxiosInstance, AxiosRequestConfig } from 'axios'
-import { authorizationTokenStorage } from 'src/contexts/authorization.context'
+import { authorizationTokenStorage } from 'src/hooks/useAuthorization'
 import axios from 'src/utils/axios'
 
 class PontCoreManager {
