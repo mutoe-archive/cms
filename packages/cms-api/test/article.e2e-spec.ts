@@ -7,7 +7,7 @@ import { CreateArticleDto } from 'src/article/dto/createArticleDto'
 import { AuthModule } from 'src/auth/auth.module'
 import { UserModule } from 'src/user/user.module'
 import * as request from 'supertest'
-import { getToken } from 'test/testUtils'
+import { getToken, mockDate } from 'test/testUtils'
 import ormConfig from './orm-config'
 
 describe('Post Module Integration', () => {
@@ -36,23 +36,9 @@ describe('Post Module Integration', () => {
   })
 
   describe('/article (POST)', () => {
-    const RealDate = Date
-
-    const mockDate = (date: Date | string) => {
-      (global.Date as any) = class extends RealDate {
-        constructor () {
-          super()
-          return new RealDate(date)
-        }
-      }
-    }
-
-    afterEach(() => {
-      (global.Date as any).Date = RealDate
-    })
-
     it('should return 201 when create article given an valid form', async () => {
-      mockDate('2017-11-25T12:34:56Z')
+      const restoreMockDate = mockDate('2017-11-25T12:34:56Z')
+
       const requestBody: CreateArticleDto = {
         title: 'title',
         content: '<p>I am content</p>',
@@ -62,14 +48,19 @@ describe('Post Module Integration', () => {
         .set('Authorization', `Bearer ${token}`)
         .send(requestBody)
 
+      restoreMockDate()
+
       expect(response.status).toBe(201)
       expect(response.body).toEqual({
         id: 1,
-        author: 'admin',
         title: 'title',
         content: '<p>I am content</p>',
-        createdBy: '2017-11-25T12:34:56Z',
-        updatedBy: '2017-11-25T12:34:56Z',
+        createdAt: '2017-11-25T12:34:56.000Z',
+        updatedAt: '2017-11-25T12:34:56.000Z',
+        user: expect.objectContaining({
+          id: 1,
+          username: 'admin',
+        }),
       })
     })
   })

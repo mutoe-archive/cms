@@ -14,3 +14,19 @@ export const getToken = (app: INestApplication): Promise<string> => {
       }, reject)
   })
 }
+
+export const mockDate = (date: Date | string | number) => {
+  const { Date } = global
+
+  class MockDate extends Date {
+    constructor () {
+      super(date) // add whatever date you'll expect to get
+    }
+  }
+
+  (global.Date as any) = MockDate
+
+  return () => {
+    global.Date = Date
+  }
+}
