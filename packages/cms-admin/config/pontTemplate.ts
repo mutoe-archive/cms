@@ -2,7 +2,9 @@ import { CodeGenerator, Interface } from '@mutoe/pont-engine'
 
 export default class MyGenerator extends CodeGenerator {
   getDeclaration () {
-    return ''
+    return `
+      ${this.getBaseClassesInDeclaration()}
+    `
   }
 
   getIndex () {
