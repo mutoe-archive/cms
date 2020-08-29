@@ -254,7 +254,7 @@
         "branches": -5,
         "lines": -10,
         "functions": -5,
-        "statements": -5
+        "statements": -10
       }
     },
     "modulePaths": [],

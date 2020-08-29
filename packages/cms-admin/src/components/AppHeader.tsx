@@ -35,10 +35,11 @@ const AppHeader: React.FC = () => {
         <Link className='logoLink' to='dashboard'>Mutoe CMS</Link>
       </Menu.Item>
     </Menu.Menu>
-    <Menu.Menu>
+    <Menu.Menu as='nav'>
       {appMenus.map(item =>
         <Menu.Item
           className='menuItem'
+          data-testid={item.key}
           key={item.key}
           name={item.appName}
           active={activeItem === item.key}
@@ -59,7 +60,7 @@ const AppHeader: React.FC = () => {
           <Dropdown.Menu className='menuDropdown'>
             <Dropdown.Header icon='address card' content='Admin' />
             <Dropdown.Divider />
-            <Dropdown.Item onClick={onLogout}>
+            <Dropdown.Item data-testid='logout' onClick={onLogout}>
               <Icon name='sign-out' className='right floated' />
               Logout
             </Dropdown.Item>

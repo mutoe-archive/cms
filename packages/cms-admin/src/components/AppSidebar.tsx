@@ -22,11 +22,12 @@ const AppSidebar: React.FC<AppSidebarProps> = ({ moduleMenus }) => {
 
   return <aside className='AppSidebar'>
     {moduleMenus.map(moduleMenu => {
-      return <Menu key={moduleMenu.moduleName} className='Menu' vertical pointing>
+      return <Menu as='nav' key={moduleMenu.moduleName} className='Menu' vertical pointing>
         <Menu.Item header>{moduleMenu.moduleName}</Menu.Item>
         {moduleMenu.items.map(item => {
           return <Menu.Item
             key={item.key}
+            data-testid={item.key}
             name={item.name}
             icon={item.icon}
             active={moduleKey === item.key}
