@@ -1,4 +1,19 @@
 import { PontCore } from 'src/services/pontCore'
+import axios from 'src/utils/axios'
+import StorageUtil from 'src/utils/storage.util'
+
+describe('# fetch', () => {
+  it('should set authorization header when call fetch given localStorage has token', async () => {
+    jest.spyOn(StorageUtil.prototype, 'get').mockReturnValue('token')
+    jest.spyOn(axios, 'request').mockResolvedValue({})
+
+    await PontCore.fetch({})
+
+    expect(axios.request).toBeCalledWith({
+      headers: { Authorization: 'Bearer token' },
+    })
+  })
+})
 
 describe('# injectPathVariables', () => {
   const { warn } = console

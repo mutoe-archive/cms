@@ -165,6 +165,7 @@
       "import/named": "off",
       "import/no-unresolved": "off",
       "jest/no-disabled-tests": "off",
+      "jest/no-try-expect": "off",
       "jsx-quotes": [
         "warn",
         "prefer-single"
@@ -236,7 +237,8 @@
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,ts,tsx}",
       "!src/**/*.{form}.ts",
-      "!src/{constants,services}/**",
+      "!src/services/{baseClass.ts,mods/**}",
+      "!src/constants/**",
       "!src/{index,App}.tsx",
       "!src/{appMenu,routeConfig,serviceWorker}.ts",
       "!src/utils/axios.ts"
