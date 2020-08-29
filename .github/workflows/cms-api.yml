@@ -26,5 +26,11 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
 
       - run: yarn workspace cms-api install
-      - run: yarn workspace cms-api test:unit
+      - run: yarn workspace cms-api test:unit --coverage
+      - uses: codacy/codacy-coverage-reporter-action@master
+        with:
+          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
+          coverage-reports: packages/cms-api/coverage/lcov.info
+
       - run: yarn workspace cms-api test:integration
+      - run: yarn workspace cms-api build

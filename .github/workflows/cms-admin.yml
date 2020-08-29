@@ -24,5 +24,9 @@ jobs:
             */*/node_modules
           key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
       - run: yarn workspace cms-admin install
-      - run: yarn workspace cms-admin test
+      - run: yarn workspace cms-admin test --coverage
+      - uses: codacy/codacy-coverage-reporter-action@master
+        with:
+          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
+          coverage-reports: packages/cms-admin/coverage/lcov.info
       - run: yarn workspace cms-admin build

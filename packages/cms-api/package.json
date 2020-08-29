@@ -87,7 +87,6 @@
     },
     "testEnvironment": "node",
     "coverageDirectory": "<rootDir>/../coverage",
-    "collectCoverage": true,
     "collectCoverageFrom": [
       "<rootDir>/**/*.ts",
       "!<rootDir>/{main,config}.ts",
