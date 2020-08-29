@@ -1,5 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing'
 import { TypeOrmModule } from '@nestjs/typeorm'
+import { FormExceptionKey } from 'cms-admin/src/utils/form.util'
 import { AppController } from 'src/app.controller'
 import { ArticleModule } from 'src/article/article.module'
 import { AuthModule } from 'src/auth/auth.module'
@@ -63,7 +64,7 @@ describe('Auth Module Integration', () => {
         .send(requestBody)
 
       expect(response.status).toBe(422)
-      expect(response.body).toHaveProperty('username', 'username is exist')
+      expect(response.body).toHaveProperty('username', ['isExist'] as FormExceptionKey[])
     })
 
     it('should return 422 given exist email', async () => {
@@ -77,7 +78,7 @@ describe('Auth Module Integration', () => {
         .send(requestBody)
 
       expect(response.status).toBe(422)
-      expect(response.body).toHaveProperty('email', 'email is exist')
+      expect(response.body).toHaveProperty('email', ['isExist'] as FormExceptionKey[])
     })
   })
 
@@ -111,7 +112,7 @@ describe('Auth Module Integration', () => {
         .send(requestBody)
 
       expect(response.status).toBe(422)
-      expect(response.body).toHaveProperty('username', 'user is not exist')
+      expect(response.body).toHaveProperty('username', ['isNotExist'] as FormExceptionKey[])
     })
 
     it('should return 422 when login given incorrect password', async () => {
@@ -124,7 +125,7 @@ describe('Auth Module Integration', () => {
         .send(requestBody)
 
       expect(response.status).toBe(422)
-      expect(response.body).toHaveProperty('password', 'password is invalid')
+      expect(response.body).toHaveProperty('password', ['isInvalid'] as FormExceptionKey[])
     })
   })
 })

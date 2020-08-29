@@ -1,7 +1,9 @@
 import { INestApplication } from '@nestjs/common'
 import { Test, TestingModule } from '@nestjs/testing'
 import { TypeOrmModule } from '@nestjs/typeorm'
+import { FormExceptionKey } from 'cms-admin/src/utils/form.util'
 import { AppController } from 'src/app.controller'
+import { validationPipe } from 'src/app.pipes'
 import { ArticleModule } from 'src/article/article.module'
 import { CreateArticleDto } from 'src/article/dto/createArticleDto'
 import { AuthModule } from 'src/auth/auth.module'
@@ -26,6 +28,7 @@ describe('Article Module Integration', () => {
     }).compile()
 
     app = moduleFixture.createNestApplication()
+    app.useGlobalPipes(validationPipe)
     await app.init()
 
     token = await getToken(app)
@@ -88,7 +91,7 @@ describe('Article Module Integration', () => {
         .send(requestBody)
 
       expect(response.status).toBe(422)
-      expect(response.body).toEqual({})
+      expect(response.body).toHaveProperty('title', ['isNotEmpty'] as FormExceptionKey[])
     })
   })
 })

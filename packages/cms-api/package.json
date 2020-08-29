@@ -89,7 +89,7 @@
     "coverageDirectory": "<rootDir>/../coverage",
     "collectCoverageFrom": [
       "<rootDir>/**/*.ts",
-      "!<rootDir>/{main,config}.ts",
+      "!<rootDir>/{main,config,setup,app.pipe}.ts",
       "!<rootDir>/**/*.{module,dto,ro,strategy,entity}.ts"
     ],
     "coverageThreshold": {
