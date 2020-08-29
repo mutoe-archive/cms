@@ -2,10 +2,10 @@ name: Test CMS API
 
 on:
   push:
-    paths: [ 'packages/cms-api/*' ]
+    paths: [ '.github/**', 'package.json', 'lerna.json', 'packages/cms-api/*' ]
     branches: [ master ]
   pull_request:
-    paths: [ 'packages/cms-api/*' ]
+    paths: [ '.github/**', 'package.json', 'lerna.json', 'packages/cms-api/*' ]
     branches: [ master ]
 
 jobs:

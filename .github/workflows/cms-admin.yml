@@ -2,10 +2,10 @@ name: Test CMS admin client
 
 on:
   push:
-    paths: [ 'packages/cms-admin/*' ]
+    paths: [ '.github/**', 'package.json', 'lerna.json', 'packages/cms-admin/*' ]
     branches: [ master ]
   pull_request:
-    paths: [ 'packages/cms-admin/*' ]
+    paths: [ '.github/**', 'package.json', 'lerna.json', 'packages/cms-admin/*' ]
     branches: [ master ]
 
 jobs:
