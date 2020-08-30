@@ -1,7 +1,7 @@
 declare namespace defs {
-  export class ArticleRo {
+  export class ArticleEntity {
     /** content */
-    content: string
+    content?: string
 
     /** createdAt */
     createdAt: string
@@ -19,9 +19,17 @@ declare namespace defs {
     user: defs.UserEntity
   }
 
+  export class ArticlesRo {
+    /** items */
+    items: Array<defs.ArticleEntity>
+
+    /** meta */
+    meta: any
+  }
+
   export class AuthRo {
     /** bio */
-    bio: string
+    bio?: string
 
     /** createdAt */
     createdAt: string
@@ -33,7 +41,7 @@ declare namespace defs {
     id: number
 
     /** image */
-    image: string
+    image?: string
 
     /** token */
     token: string
@@ -61,9 +69,23 @@ declare namespace defs {
     username: string
   }
 
+  export class PaginationMeta {
+    /** currentPage */
+    currentPage: number
+
+    /** limit */
+    limit: number
+
+    /** total */
+    total: number
+
+    /** totalPages */
+    totalPages: number
+  }
+
   export class ProfileRo {
     /** bio */
-    bio: string
+    bio?: string
 
     /** createdAt */
     createdAt: string
@@ -75,7 +97,7 @@ declare namespace defs {
     id: number
 
     /** image */
-    image: string
+    image?: string
 
     /** updatedAt */
     updatedAt: string
@@ -109,7 +131,7 @@ declare namespace defs {
     id: number
 
     /** image */
-    image: string
+    image?: string
 
     /** updatedAt */
     updatedAt: string

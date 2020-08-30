@@ -1,6 +1,7 @@
 /**
  * @description Article
  */
-import * as createPost from './createPost'
+import * as createArticle from './createArticle'
+import * as retrieveArticles from './retrieveArticles'
 
-export { createPost }
+export { createArticle, retrieveArticles }

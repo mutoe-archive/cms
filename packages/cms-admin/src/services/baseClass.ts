@@ -1,4 +1,4 @@
-export class ArticleRo {
+export class ArticleEntity {
   /** content */
   content = ''
 
@@ -16,6 +16,14 @@ export class ArticleRo {
 
   /** user */
   user = new UserEntity()
+}
+
+export class ArticlesRo {
+  /** items */
+  items = []
+
+  /** meta */
+  meta = undefined
 }
 
 export class AuthRo {
@@ -58,6 +66,20 @@ export class LoginDto {
 
   /** username */
   username = ''
+}
+
+export class PaginationMeta {
+  /** currentPage */
+  currentPage = undefined
+
+  /** limit */
+  limit = undefined
+
+  /** total */
+  total = undefined
+
+  /** totalPages */
+  totalPages = undefined
 }
 
 export class ProfileRo {

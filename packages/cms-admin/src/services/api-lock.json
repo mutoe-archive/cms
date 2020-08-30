@@ -43,12 +43,12 @@
         "interfaces": [
           {
             "description": "Create article",
-            "name": "createPost",
+            "name": "createArticle",
             "method": "post",
             "path": "/api/article",
             "response": {
               "typeArgs": [],
-              "typeName": "ArticleRo",
+              "typeName": "ArticleEntity",
               "isDefsType": true,
               "templateIndex": -1,
               "compileTemplateKeyword": "#/definitions/",
@@ -64,6 +64,51 @@
                   "typeArgs": [],
                   "typeName": "CreateArticleDto",
                   "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
+          },
+          {
+            "description": "Retrieve articles",
+            "name": "retrieveArticles",
+            "method": "get",
+            "path": "/api/article",
+            "response": {
+              "typeArgs": [],
+              "typeName": "ArticlesRo",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "in": "query",
+                "name": "page",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              },
+              {
+                "in": "query",
+                "name": "limit",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "",
+                  "isDefsType": false,
                   "templateIndex": -1,
                   "compileTemplateKeyword": "#/definitions/",
                   "enum": [],
@@ -168,7 +213,7 @@
     ],
     "baseClasses": [
       {
-        "name": "ArticleRo",
+        "name": "ArticleEntity",
         "properties": [
           {
             "dataType": {
@@ -181,7 +226,7 @@
               "typeProperties": []
             },
             "name": "content",
-            "required": true
+            "required": false
           },
           {
             "dataType": {
@@ -252,6 +297,48 @@
         "templateArgs": []
       },
       {
+        "name": "ArticlesRo",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "ArticleEntity",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "Array",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "items",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "meta",
+            "required": true
+          }
+        ],
+        "templateArgs": []
+      },
+      {
         "name": "AuthRo",
         "properties": [
           {
@@ -265,7 +352,7 @@
               "typeProperties": []
             },
             "name": "bio",
-            "required": true
+            "required": false
           },
           {
             "dataType": {
@@ -317,7 +404,7 @@
               "typeProperties": []
             },
             "name": "image",
-            "required": true
+            "required": false
           },
           {
             "dataType": {
@@ -426,6 +513,64 @@
         "templateArgs": []
       },
       {
+        "name": "PaginationMeta",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "currentPage",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "limit",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "total",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "totalPages",
+            "required": true
+          }
+        ],
+        "templateArgs": []
+      },
+      {
         "name": "ProfileRo",
         "properties": [
           {
@@ -439,7 +584,7 @@
               "typeProperties": []
             },
             "name": "bio",
-            "required": true
+            "required": false
           },
           {
             "dataType": {
@@ -491,7 +636,7 @@
               "typeProperties": []
             },
             "name": "image",
-            "required": true
+            "required": false
           },
           {
             "dataType": {
@@ -633,7 +778,7 @@
               "typeProperties": []
             },
             "name": "image",
-            "required": true
+            "required": false
           },
           {
             "dataType": {

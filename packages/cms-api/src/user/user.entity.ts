@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger'
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger'
 import { Exclude } from 'class-transformer'
 import { cryptoPassword } from 'src/utils/cryptoPassword'
 import {
@@ -38,11 +38,11 @@ export class UserEntity {
   }
 
   @Column({ nullable, type: 'text' })
-  @ApiProperty({ required: false })
+  @ApiPropertyOptional()
   bio?: string
 
   @Column({ nullable, type: 'text' })
-  @ApiProperty({ nullable: true })
+  @ApiPropertyOptional()
   image?: string
 
   @CreateDateColumn()

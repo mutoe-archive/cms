@@ -10,7 +10,7 @@ export const method: Method = 'POST'
 export const path = '/api/article'
 
 export function useSubmit (formRef: FormRef = null) {
-  return Hooks.useSubmit<defs.CreateArticleDto, defs.ArticleRo>(
+  return Hooks.useSubmit<defs.CreateArticleDto, defs.ArticleEntity>(
     formRef,
     method,
     path,
@@ -20,7 +20,7 @@ export function useSubmit (formRef: FormRef = null) {
 export function request (
   data: defs.CreateArticleDto,
   axiosOption: AxiosRequestConfig = {},
-): Promise<defs.ArticleRo> {
+): Promise<defs.ArticleEntity> {
   return PontCore.fetch({
     url: PontCore.injectPathVariables(path),
     method,

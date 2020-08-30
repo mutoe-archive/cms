@@ -1,23 +1,23 @@
-import { ApiProperty } from '@nestjs/swagger'
+import { ApiResponseProperty } from '@nestjs/swagger'
 import { FindConditions, FindManyOptions, ObjectLiteral, Repository } from 'typeorm'
 
 export class PaginationMeta {
-  @ApiProperty({ example: 15, description: 'Total number of items' })
+  @ApiResponseProperty({ example: 15 })
   total: number
 
-  @ApiProperty({ example: 10, description: 'How many pieces of data are displayed per page' })
+  @ApiResponseProperty({ example: 10 })
   limit: number
 
-  @ApiProperty({ example: 2 })
+  @ApiResponseProperty({ example: 2 })
   totalPages: number
 
-  @ApiProperty({ example: 1 })
+  @ApiResponseProperty({ example: 1 })
   currentPage: number
 }
 
 export interface PaginationRo<T> {
-  readonly items: T[]
-  readonly meta: PaginationMeta
+  items: T[]
+  meta: PaginationMeta
 }
 
 type ClassType<T = any> = new (...args: any[]) => T
@@ -25,11 +25,11 @@ type ClassType<T = any> = new (...args: any[]) => T
 // istanbul ignore next
 export function PaginationRo<T extends ClassType> (ResourceClass: T) {
   class Pagination implements PaginationRo<T> {
-    @ApiProperty({ type: [ResourceClass] })
-    readonly items: T[]
+    @ApiResponseProperty({ type: [ResourceClass] })
+    items: T[]
 
-    @ApiProperty({ type: PaginationMeta, description: 'Paging data information' })
-    readonly meta: PaginationMeta
+    @ApiResponseProperty({ type: PaginationMeta })
+    meta: PaginationMeta
   }
 
   return Pagination

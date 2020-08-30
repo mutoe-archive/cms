@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger'
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger'
 
 export class ProfileRo {
   @ApiProperty({ example: 1 })
@@ -16,9 +16,9 @@ export class ProfileRo {
   @ApiProperty({ example: '2020-08-16T00:04:59.343Z' })
   updatedAt: string
 
-  @ApiProperty({ example: null })
+  @ApiPropertyOptional({ example: null })
   bio?: string
 
-  @ApiProperty({ example: 'https://picsum.photos/200' })
+  @ApiPropertyOptional({ example: 'https://picsum.photos/200' })
   image?: string
 }
