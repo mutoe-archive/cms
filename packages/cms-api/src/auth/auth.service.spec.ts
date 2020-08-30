@@ -5,7 +5,7 @@ import { LoginDto } from 'src/auth/dto/login.dto'
 import { FormException } from 'src/exception'
 import { UserEntity } from 'src/user/user.entity'
 import { UserService } from 'src/user/user.service'
-import { cryptoPassword } from 'src/utils'
+import { cryptoPassword } from 'src/utils/cryptoPassword'
 import { AuthService } from './auth.service'
 
 describe('AuthService', () => {

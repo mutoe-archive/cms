@@ -1,6 +1,6 @@
 import { Controller, Get, Request } from '@nestjs/common'
 import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger'
-import { UseJwtGuards } from 'src/app/guards'
+import { UseJwtGuards } from 'src/guards'
 import { AuthRequest } from 'src/auth/jwt.strategy'
 import { ProfileRo } from 'src/user/ro/profile.ro'
 import { UserService } from 'src/user/user.service'

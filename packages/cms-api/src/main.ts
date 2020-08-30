@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core'
 import { AppModule } from 'src/app/app.module'
-import { validationPipe } from 'src/app/app.pipes'
+import { validationPipe } from 'src/pipes'
 import { NEST_PORT, SWAGGER_ENABLE } from 'src/config'
 import { createSwagger } from 'src/setup'
 

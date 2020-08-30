@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { paginate, PaginationRo, PaginationOptions } from 'src/app/paginate'
+import { paginate, PaginationRo, PaginationOptions } from 'src/utils/paginate'
 import { ArticleEntity } from 'src/article/article.entity'
-import { CreateArticleDto } from 'src/article/dto/createArticleDto'
+import { CreateArticleDto } from 'src/article/dto/createArticle.dto'
 import { UserEntity } from 'src/user/user.entity'
 import { Repository } from 'typeorm/index'
 

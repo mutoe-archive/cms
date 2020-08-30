@@ -7,7 +7,7 @@ import { AuthRo } from 'src/auth/ro/auth.ro'
 import { FormException } from 'src/exception'
 import { UserSafeEntity } from 'src/user/user.entity'
 import { UserService } from 'src/user/user.service'
-import { cryptoPassword } from 'src/utils'
+import { cryptoPassword } from 'src/utils/cryptoPassword'
 
 @Injectable()
 export class AuthService {

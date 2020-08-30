@@ -1,4 +1,4 @@
-import { paginate, PaginationRo } from 'src/app/paginate'
+import { paginate, PaginationRo } from 'src/utils/paginate'
 import { Repository } from 'typeorm/index'
 
 describe('# Paginate', () => {

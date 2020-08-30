@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger'
 import { Exclude } from 'class-transformer'
-import { cryptoPassword } from 'src/utils'
+import { cryptoPassword } from 'src/utils/cryptoPassword'
 import {
   BeforeInsert,
   BeforeUpdate,

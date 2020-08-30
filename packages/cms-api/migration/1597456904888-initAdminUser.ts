@@ -1,5 +1,5 @@
 import { UserEntity } from 'src/user/user.entity'
-import { cryptoPassword } from 'src/utils'
+import { cryptoPassword } from 'src/utils/cryptoPassword'
 import { getRepository, MigrationInterface } from 'typeorm'
 
 export class initAdminUser1597456904888 implements MigrationInterface {
