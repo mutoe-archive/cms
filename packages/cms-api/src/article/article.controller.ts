@@ -1,9 +1,12 @@
-import { Body, Controller, Post, Request } from '@nestjs/common'
+import { Body, Controller, Get, Post, Query, Request } from '@nestjs/common'
 import { ApiCreatedResponse, ApiOperation, ApiTags, ApiUnprocessableEntityResponse } from '@nestjs/swagger'
+import { ApiListResponse } from 'src/app/decorators'
 import { UseJwtGuards } from 'src/app/guards'
+import { PaginationRo } from 'src/app/paginate'
+import { ArticleEntity } from 'src/article/article.entity'
 import { ArticleService } from 'src/article/article.service'
 import { CreateArticleDto } from 'src/article/dto/createArticleDto'
-import { ArticleRo } from 'src/article/ro/articleRo'
+import { ArticlesRo } from 'src/article/ro/articles.ro'
 import { AuthRequest } from 'src/auth/jwt.strategy'
 import { UserService } from 'src/user/user.service'
 
@@ -17,11 +20,21 @@ export class ArticleController {
 
   @UseJwtGuards()
   @Post('/')
-  @ApiOperation({ operationId: 'createPost', summary: 'Create article' })
-  @ApiCreatedResponse({ type: ArticleRo })
+  @ApiOperation({ operationId: 'createArticle', summary: 'Create article' })
+  @ApiCreatedResponse({ type: ArticleEntity })
   @ApiUnprocessableEntityResponse()
-  async createArticle (@Request() { user }: AuthRequest, @Body() createArticleDto: CreateArticleDto): Promise<ArticleRo> {
+  async createArticle (@Request() { user }: AuthRequest, @Body() createArticleDto: CreateArticleDto): Promise<ArticleEntity> {
     const userEntity = await this.userService.findUser({ id: user.userId }, true)
     return await this.articleService.createArticle(userEntity, createArticleDto)
+  }
+
+  @Get('/')
+  @ApiOperation({ operationId: 'retrieveArticles', summary: 'Retrieve articles' })
+  @ApiListResponse(ArticlesRo)
+  async retrieveArticles (
+    @Query('page') page: number,
+    @Query('limit') limit: number,
+  ): Promise<PaginationRo<ArticleEntity>> {
+    return await this.articleService.retrieveArticles({ page, limit })
   }
 }

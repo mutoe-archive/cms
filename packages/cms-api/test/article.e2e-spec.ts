@@ -94,4 +94,30 @@ describe('Article Module Integration', () => {
       expect(response.body).toHaveProperty('title', ['isNotEmpty'] as FormExceptionKey[])
     })
   })
+
+  describe('/article (GET)', () => {
+    it('should return 200 when retrieve articles', async () => {
+      const response = await request(app.getHttpServer())
+        .get('/article')
+
+      expect(response.status).toBe(200)
+      expect(response.body.meta).toEqual({
+        total: 1,
+        limit: 10,
+        totalPages: 1,
+        currentPage: 1,
+      })
+      expect(response.body.items).toHaveLength(1)
+      expect(response.body.items[0]).toEqual(expect.objectContaining({
+        id: 1,
+        title: 'title',
+        content: '<p>I am content</p>',
+        user: expect.objectContaining({
+          id: 1,
+          username: 'admin',
+          email: 'admin@cms.com',
+        }),
+      }))
+    })
+  })
 })

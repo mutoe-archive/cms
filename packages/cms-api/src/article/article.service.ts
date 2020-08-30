@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
+import { paginate, PaginationRo, PaginationOptions } from 'src/app/paginate'
 import { ArticleEntity } from 'src/article/article.entity'
 import { CreateArticleDto } from 'src/article/dto/createArticleDto'
 import { UserEntity } from 'src/user/user.entity'
@@ -12,9 +13,13 @@ export class ArticleService {
     private readonly articleRepository: Repository<ArticleEntity>,
   ) {}
 
-  async createArticle (user: UserEntity, createArticleDto: CreateArticleDto) : Promise<ArticleEntity> {
+  async createArticle (user: UserEntity, createArticleDto: CreateArticleDto): Promise<ArticleEntity> {
     const articleEntity = this.articleRepository.create(createArticleDto)
     articleEntity.user = user
     return await this.articleRepository.save(articleEntity)
+  }
+
+  async retrieveArticles (options: PaginationOptions): Promise<PaginationRo<ArticleEntity>> {
+    return paginate(this.articleRepository, options)
   }
 }
