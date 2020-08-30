@@ -90,7 +90,7 @@
     "collectCoverageFrom": [
       "<rootDir>/**/*.ts",
       "!<rootDir>/{main,config,setup,app.pipe}.ts",
-      "!<rootDir>/**/*.{module,dto,ro,strategy,entity}.ts"
+      "!<rootDir>/**/*.{module,dto,ro,strategy,entity,controller}.ts"
     ],
     "coverageThreshold": {
       "global": {
