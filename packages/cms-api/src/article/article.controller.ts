@@ -1,13 +1,6 @@
-import { Body, Controller, Post, Request, UseGuards } from '@nestjs/common'
-import { AuthGuard } from '@nestjs/passport'
-import {
-  ApiBearerAuth,
-  ApiCreatedResponse,
-  ApiOperation,
-  ApiTags,
-  ApiUnauthorizedResponse,
-  ApiUnprocessableEntityResponse,
-} from '@nestjs/swagger'
+import { Body, Controller, Post, Request } from '@nestjs/common'
+import { ApiCreatedResponse, ApiOperation, ApiTags, ApiUnprocessableEntityResponse } from '@nestjs/swagger'
+import { UseJwtGuards } from 'src/app/guards'
 import { ArticleService } from 'src/article/article.service'
 import { CreateArticleDto } from 'src/article/dto/createArticleDto'
 import { ArticleRo } from 'src/article/ro/articleRo'
@@ -22,12 +15,10 @@ export class ArticleController {
     private readonly articleService: ArticleService,
   ) {}
 
-  @UseGuards(AuthGuard('jwt'))
+  @UseJwtGuards()
   @Post('/')
   @ApiOperation({ operationId: 'createPost', summary: 'Create article' })
-  @ApiBearerAuth()
   @ApiCreatedResponse({ type: ArticleRo })
-  @ApiUnauthorizedResponse()
   @ApiUnprocessableEntityResponse()
   async createArticle (@Request() { user }: AuthRequest, @Body() createArticleDto: CreateArticleDto): Promise<ArticleRo> {
     const userEntity = await this.userService.findUser({ id: user.userId }, true)
