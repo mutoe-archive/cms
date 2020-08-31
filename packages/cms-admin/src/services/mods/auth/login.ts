@@ -4,7 +4,7 @@
 
 import { AxiosRequestConfig, Method } from 'axios'
 import { FormRef } from 'src/components/FormRenderer'
-import { defs, Hooks, PontCore, SWR } from 'src/services'
+import { defs, Hooks, PontCore } from 'src/services'
 
 export const method: Method = 'POST'
 export const path = '/api/auth/login'

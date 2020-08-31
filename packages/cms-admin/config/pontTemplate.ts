@@ -9,13 +9,12 @@ export default class MyGenerator extends CodeGenerator {
 
   getIndex () {
     return `
-      import * as SWR from 'swr'
       import * as defs from './baseClass'
       import * as Hooks from './hooks'
       import { API } from './mods/'
       import { PontCore } from './pontCore'
       
-      export { defs, API, Hooks, PontCore, SWR }
+      export { defs, API, Hooks, PontCore }
     `
   }
 
@@ -57,8 +56,6 @@ export default class MyGenerator extends CodeGenerator {
     const isEmptyParams = paramsCode.replace(/\s/g, '') === 'interfaceParams{}'
     if (isEmptyParams) {
       paramsCode = ''
-    } else {
-      // paramsCode += '\n type HooksParams = (() => Params) | Params;'
     }
 
     const requestArgs = []
@@ -98,7 +95,7 @@ export default class MyGenerator extends CodeGenerator {
 
       import { AxiosRequestConfig, Method } from 'axios'
       import { FormRef } from 'src/components/FormRenderer'
-      import { defs, Hooks, PontCore, SWR } from 'src/services'
+      import { defs, Hooks, PontCore } from 'src/services'
 
       export const method: Method = "${method}"
       export const path = "${inter.path}"
