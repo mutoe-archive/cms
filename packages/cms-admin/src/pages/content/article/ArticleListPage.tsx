@@ -1,7 +1,8 @@
 import React from 'react'
-import { Input, Menu, Table, Button } from 'semantic-ui-react'
+import { Button, Input, Menu, Table } from 'semantic-ui-react'
 import ListWrapper from 'src/components/ListWrapper'
 import { API } from 'src/services'
+import { formatDateTime } from 'src/utils/format.util'
 
 const ArticleListPage: React.FC = () => {
   const {
@@ -36,8 +37,8 @@ const ArticleListPage: React.FC = () => {
           {articles.map(article => <Table.Row key={article.id} draggable>
             <Table.Cell>{article.id}</Table.Cell>
             <Table.Cell>{article.title}</Table.Cell>
-            <Table.Cell>{article.createdAt}</Table.Cell>
-            <Table.Cell>{article.updatedAt}</Table.Cell>
+            <Table.Cell>{formatDateTime(article.createdAt)}</Table.Cell>
+            <Table.Cell>{formatDateTime(article.updatedAt)}</Table.Cell>
             <Table.Cell>
               <Button basic icon='edit' />
             </Table.Cell>
