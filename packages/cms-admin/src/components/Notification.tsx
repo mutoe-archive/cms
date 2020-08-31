@@ -9,7 +9,7 @@ interface NotificationProps {
 
 const Notification: React.FC<NotificationProps> = ({ icon, numOfNew }) => {
   const newNotification = (
-    <div className='newNotification'>
+    <div className='newNotification' role='button'>
       <span>{numOfNew}</span>
     </div>
   )
@@ -25,15 +25,15 @@ const Notification: React.FC<NotificationProps> = ({ icon, numOfNew }) => {
       <Dropdown.Menu className='menuDropdown'>
         <Dropdown.Header icon='tags' content='Filter by tag' />
         <Dropdown.Divider />
-        <Dropdown.Item>
+        <Dropdown.Item as='a'>
           <Icon name='attention' className='right floated' />
           Important
         </Dropdown.Item>
-        <Dropdown.Item>
+        <Dropdown.Item as='a'>
           <Icon name='comment' className='right floated' />
           Announcement
         </Dropdown.Item>
-        <Dropdown.Item>
+        <Dropdown.Item as='a'>
           <Icon name='conversation' className='right floated' />
           Discussion
         </Dropdown.Item>

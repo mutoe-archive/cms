@@ -4,7 +4,7 @@ import { Input, Menu, Placeholder, Segment } from 'semantic-ui-react'
 const ArticleListPage: React.FC = () => {
   return <div>
     <Menu attached='top'>
-      <Menu.Item icon='plus' content='New' />
+      <Menu.Item role='button' icon='plus' content='New' />
       <Menu.Menu position='right'>
         <Menu.Item>
           <Input icon='search' type='search' placeholder='Search' transparent />

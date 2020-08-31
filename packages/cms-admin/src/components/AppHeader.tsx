@@ -20,7 +20,7 @@ const AppHeader: React.FC = () => {
     history.push('/login')
   }
 
-  const userTrigger = <span className='userTrigger'>
+  const userTrigger = <span className='userTrigger' role='button'>
     <Icon name='user' /> {profile?.username}
   </span>
 
@@ -51,16 +51,16 @@ const AppHeader: React.FC = () => {
     </Menu.Menu>
 
     <Menu.Menu position='right'>
-      <Menu.Item className='menuItem' name='notification' onClick={noop}>
+      <Menu.Item className='menuItem' name='notification'>
         <Notification icon='bell outline' numOfNew={3} />
       </Menu.Item>
 
-      <Menu.Item className='menuItem' name='setting' onClick={noop}>
+      <Menu.Item className='menuItem' name='setting'>
         <Dropdown trigger={userTrigger} pointing='top right'>
           <Dropdown.Menu className='menuDropdown'>
             <Dropdown.Header icon='address card' content='Admin' />
             <Dropdown.Divider />
-            <Dropdown.Item data-testid='logout' onClick={onLogout}>
+            <Dropdown.Item as='a' data-testid='logout' onClick={onLogout}>
               <Icon name='sign-out' className='right floated' />
               Logout
             </Dropdown.Item>
