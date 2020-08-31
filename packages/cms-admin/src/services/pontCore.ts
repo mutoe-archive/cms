@@ -26,7 +26,7 @@ class PontCoreManager {
       (options.headers ?? (options.headers = {})).Authorization = `Bearer ${token}`
     }
 
-    return await this.axios.request(options)
+    return await this.axios.request<T, T>(options)
   }
 
   injectPathVariables (path: string, paramVariables: any = {}) {

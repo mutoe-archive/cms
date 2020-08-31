@@ -14,6 +14,10 @@ interface Params {
   name?: any
 }
 
+export function useRetrieveList<T = any> (axiosOption: AxiosRequestConfig = {}) {
+  return Hooks.useRetrieveList<T, Params>(path, axiosOption)
+}
+
 export function request (
   params: Params,
   axiosOption: AxiosRequestConfig = {},

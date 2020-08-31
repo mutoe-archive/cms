@@ -73,7 +73,11 @@ export default class MyGenerator extends CodeGenerator {
 
     switch (method) {
       case 'GET': {
-        // TODO: Add useRetrieve method
+        hooksCodes.push(`
+          export function useRetrieveList <T = any>(axiosOption: AxiosRequestConfig = {}) {
+            return Hooks.useRetrieveList<T${paramsCode && ', Params'}>(path, axiosOption)
+          }
+        `)
         break
       }
       case 'POST':
