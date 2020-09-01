@@ -22,7 +22,7 @@ const ArticleListPage: React.FC = () => {
         </Menu.Item>
       </Menu.Menu>
     </Menu>
-    <ListWrapper loading={loading} pageMeta={pageMeta} error={error} onRetry={retrieveList}>
+    <ListWrapper loading={loading} pageMeta={pageMeta} error={error} onRetrieve={retrieveList}>
       <Table attached striped singleLine>
         <Table.Header>
           <Table.Row>

@@ -49,7 +49,7 @@ export async function paginate<T extends ObjectLiteral> (
   const limit = options.limit || 10
 
   const offset = (page - 1) * limit
-  searchOptions = Object.assign({ skip: offset, take: limit }, searchOptions)
+  searchOptions = Object.assign({ skip: offset, take: limit, order: { id: 'DESC' } }, searchOptions)
   const [items, total] = await repository.findAndCount(searchOptions)
 
   const totalPages = Math.ceil(total / limit)
