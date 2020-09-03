@@ -13,7 +13,7 @@
     "axios": "^0.20.0",
     "dayjs": "^1.8.34",
     "lodash": "^4.17.19",
-    "path-to-regexp": "^3.2.0",
+    "path-to-regexp": "^1.8.0",
     "react": "^16.13.1",
     "react-app-polyfill": "^1.0.6",
     "react-dom": "^16.13.1",
