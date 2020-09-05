@@ -12,6 +12,7 @@
   "dependencies": {
     "axios": "^0.20.0",
     "dayjs": "^1.8.34",
+    "draft-js": "^0.11.7",
     "lodash": "^4.17.19",
     "path-to-regexp": "^1.8.0",
     "react": "^16.13.1",
@@ -31,6 +32,7 @@
     "@testing-library/react-hooks": "^3.4.1",
     "@testing-library/user-event": "^12.1.3",
     "@types/classnames": "^2.2.10",
+    "@types/draft-js": "^0.10.44",
     "@types/jest": "^26.0.10",
     "@types/lodash": "^4.14.160",
     "@types/node": "^12",

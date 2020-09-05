@@ -35,12 +35,13 @@ const PortalPage: React.FC = () => {
     <AppHeader />
     <div className='moduleContainer'>
       {appMenu.modules?.length && <AppSidebar moduleMenus={appMenu.modules} />}
-      <Segment as='main' className='moduleMain'>
+      <main className='moduleMain'>
         <Switch>
-          <Route path='/dashboard' component={DashboardPage} />
-          <Route path={routePath.content.matcher} component={ContentPage} />
+          <Route path={routePath.dashboard} component={DashboardPage} />
+          <Route exact path={routePath.content.matcher} component={ContentPage} />
+          <Route path={routePath.notFound} />
         </Switch>
-      </Segment>
+      </main>
     </div>
   </div>
 }

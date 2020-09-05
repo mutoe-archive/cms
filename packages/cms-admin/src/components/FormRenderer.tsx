@@ -1,6 +1,9 @@
 import { pick } from 'lodash'
+import { Editor } from 'draft-js'
+
 import React, { useImperativeHandle, useState } from 'react'
 import { Form } from 'semantic-ui-react'
+import RichEditor from 'src/components/RichEditor'
 import { ERROR_MESSAGE } from 'src/constants/message'
 import { fieldErrorSeparator, focusErrorField, sentence } from 'src/utils/form.util'
 
@@ -12,14 +15,19 @@ interface FieldBasicConfig<T> {
   disabled?: boolean
 }
 
-interface InputFieldConfig {
+interface InputFieldConfig<T> extends FieldBasicConfig<T>{
   type: 'input' | 'password'
   maxLength?: number
   minLength?: number
   regexp?: RegExp
 }
 
-export type FieldConfig<K> = InputFieldConfig & FieldBasicConfig<K>
+interface RichTextFieldConfig<T> extends FieldBasicConfig<T> {
+  type: 'rich'
+  maxLength?: number
+}
+
+export type FieldConfig<K> = InputFieldConfig<K> | RichTextFieldConfig<K>
 
 type FormValue = number | boolean | string | string[] | number[]
 
@@ -101,6 +109,9 @@ function FormRenderer<K extends string, F extends Form<K>> (props: FormRendererP
           onChange={(_, { value }) => onChange(field, value)}
           onBlur={() => validateField(field)}
         />
+      }
+      case 'rich': {
+        return <RichEditor {...fieldProps} />
       }
     }
     return null

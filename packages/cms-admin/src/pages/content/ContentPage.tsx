@@ -3,20 +3,20 @@ import { useParams } from 'react-router-dom'
 import { Loader } from 'semantic-ui-react'
 
 const ArticleListPage = React.lazy(() => import(/* webpackChunkName: "content" */'src/pages/content/article/ArticleListPage'))
+const ArticleEditPage = React.lazy(() => import(/* webpackChunkName: "content" */'src/pages/content/article/ArticleEditPage'))
 
 type ModuleKey = 'article'
 
-const componentMap: Record<ModuleKey, React.LazyExoticComponent<React.FC>> = {
-  article: ArticleListPage,
+const componentMap: Record<ModuleKey, Record<'list' | 'edit', React.LazyExoticComponent<React.FC>>> = {
+  article: { list: ArticleListPage, edit: ArticleEditPage },
 }
 
 const ContentPage: React.FC = () => {
-  const { module: moduleKey } = useParams<{ module: ModuleKey }>()
+  const { module: moduleKey, id } = useParams<{ module: ModuleKey; id: string }>()
 
-  const Component = componentMap[moduleKey] || React.Fragment
+  const Component = componentMap[moduleKey]?.[id ? 'edit' : 'list'] || React.Fragment
 
   return <div className='ContentPage'>
-    <h1>Content</h1>
     <Suspense fallback={<Loader />}>
       <Component />
     </Suspense>
