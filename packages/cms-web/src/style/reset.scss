@@ -1,0 +1,62 @@
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+}
+
+body {
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Helvetica Neue", "Helvetica", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", "Arial", sans-serif;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  line-height: 1em;
+  font-weight: 500;
+}
+
+h1 {
+  font-size: 36px;
+  margin-bottom: 28px;
+}
+
+h2 {
+  font-size: 30px;
+  margin-bottom: 24px;
+}
+
+h3 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+h4 {
+  font-size: 20px;
+  margin-bottom: 18px;
+}
+
+h5 {
+  font-size: 18px;
+  margin-bottom: 16px;
+}
+
+h6 {
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+p {
+  font-size: 100%;
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+ion-icon {
+  vertical-align: -4px;
+}

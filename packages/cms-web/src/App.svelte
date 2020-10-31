@@ -1,16 +1,11 @@
-<script>
-let count = 0
+<template>
+  <PageBuilder />
+</template>
 
-$: if (count >= 10) {
-  alert('count is dangerously high!')
-  // count = 9
-}
-
-function handleClick () {
-  // count += 1
-}
+<script lang="ts">
+import PageBuilder from './components/PageBuilder.svelte'
 </script>
 
-<button on:click={handleClick}>
-  Clicked {count} {count === 1 ? 'time' : 'times'}
-</button>
+<style type="text/scss" global>
+@import "src/style";
+</style>
